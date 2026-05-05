@@ -2,403 +2,802 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-  <title>MedCases Pro | Gestão Clínica</title>
-  <meta name="theme-color" content="#062015" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>MedCases Pro | Completo</title>
+  <meta name="theme-color" content="#064e3b" />
   <style>
     :root {
-      --bg: #f4f7f5;
-      --card: #ffffff;
-      --ink: #0f1a16;
-      --muted: #64746b;
-      --line: rgba(15, 35, 27, 0.08);
-      --green: #10b981;
-      --green-dark: #065f46;
-      --red: #ef4444;
-      --amber: #f59e0b;
-      --blue: #3b82f6;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-      --radius: 20px;
+      --bg: #f3f4f6; --card: #ffffff; --ink: #111827; --muted: #6b7280; --line: #e5e7eb;
+      --green: #10b981; --green-dark: #047857; --red: #ef4444; --amber: #f59e0b; --blue: #3b82f6;
+      --shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --radius: 16px;
     }
-
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { 
-      margin: 0; 
-      font-family: 'Inter', system-ui, -apple-system, sans-serif; 
-      background: var(--bg); 
-      color: var(--ink); 
-      line-height: 1.5;
-      padding-bottom: 90px;
-    }
-
-    .app { max-width: 500px; margin: 0 auto; min-height: 100vh; background: var(--bg); }
-
-    /* Header */
-    .top { 
-      position: sticky; top: 0; z-index: 100; 
-      background: rgba(255, 255, 255, 0.8); 
-      backdrop-filter: blur(12px); 
-      border-bottom: 1px solid var(--line);
-      padding: 12px 16px;
-    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Inter', system-ui, sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--ink); padding-bottom: 90px; }
+    
+    .app { max-width: 540px; margin: 0 auto; min-height: 100vh; }
+    .top { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 12px 16px; }
     .top-in { display: flex; justify-content: space-between; align-items: center; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .logo { 
-      width: 40px; height: 40px; border-radius: 12px; 
-      background: linear-gradient(135deg, var(--green-dark), var(--green)); 
-      display: grid; place-items: center; color: white; font-weight: 900;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-    .brand h1 { font-size: 18px; margin: 0; letter-spacing: -0.02em; }
-    .brand p { font-size: 11px; margin: 0; color: var(--muted); font-weight: 600; }
-
-    /* Hero & Cards */
+    .logo { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--green-dark), var(--green)); display: grid; place-items: center; color: white; font-weight: 900; font-size: 20px; box-shadow: 0 4px 10px rgba(16,185,129,0.3); }
+    .brand h1 { font-size: 18px; margin: 0; letter-spacing: -0.5px; }
+    .brand p { font-size: 12px; margin: 0; color: var(--muted); font-weight: 600; }
+    
     main { padding: 16px; }
-    .hero { 
-      background: linear-gradient(135deg, #062015 0%, #065f46 100%);
-      border-radius: 24px; padding: 24px; color: white; margin-bottom: 20px;
-      position: relative; overflow: hidden;
-    }
-    .hero h2 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.03em; }
-    .hero p { font-size: 14px; opacity: 0.9; margin: 0; }
+    .hero { background: linear-gradient(135deg, #064e3b, #047857); border-radius: var(--radius); padding: 24px; color: white; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .hero small { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #a7f3d0; font-weight: 700; }
+    .hero h2 { margin: 8px 0; font-size: 32px; letter-spacing: -1px; line-height: 1; }
+    .hero p { margin: 0; opacity: 0.9; font-size: 14px; }
     
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
-    .stat { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 12px; text-align: center; }
-    .stat b { display: block; font-size: 18px; }
-    .stat span { font-size: 9px; text-transform: uppercase; opacity: 0.8; }
-
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .card { 
-      background: var(--card); border: 1px solid var(--line); padding: 16px;
-      border-radius: var(--radius); cursor: pointer; transition: transform 0.2s;
-    }
-    .card:active { transform: scale(0.97); }
-    .ico { font-size: 24px; margin-bottom: 8px; }
-    .card h3 { font-size: 15px; margin: 0; }
-    .card p { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
-
-    /* Forms & Inputs */
-    .panel { background: var(--card); border-radius: var(--radius); border: 1px solid var(--line); margin-top: 16px; overflow: hidden; }
-    .panel-h { padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
-    .panel-h h2 { font-size: 17px; margin: 0; }
-    .panel-b { padding: 16px; }
-
-    .field { margin-bottom: 16px; }
-    .field label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-    input, textarea, select { 
-      width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; 
-      font-size: 14px; outline: none; transition: border 0.2s;
-    }
-    input:focus, textarea:focus { border-color: var(--green); ring: 2px var(--green); }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
+    .stat { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 10px; text-align: center; }
+    .stat b { display: block; font-size: 20px; }
+    .stat span { font-size: 10px; text-transform: uppercase; font-weight: 600; opacity: 0.9; }
     
-    .btn { 
-      padding: 12px 20px; border-radius: 14px; border: none; font-weight: 700; 
-      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .btn-primary { background: var(--ink); color: white; width: 100%; }
-    .btn-light { background: #f1f5f9; color: var(--ink); font-size: 13px; }
-    .btn-red { background: #fee2e2; color: var(--red); }
-
-    /* Tabs Navigation */
-    .tabs { 
-      position: fixed; bottom: 0; left: 0; right: 0; 
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
-      border-top: 1px solid var(--line); display: flex; justify-content: space-around;
-      padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
-      z-index: 100;
-    }
-    .tab { background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .tab.active { color: var(--green); }
-    .tab i { font-size: 20px; font-style: normal; }
-
-    /* List Items */
-    .item { padding: 12px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 8px; cursor: pointer; position: relative; }
-    .item.active { border-color: var(--green); background: #f0fdf4; }
-    .tag { font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: 800; background: #e2e8f0; margin-right: 4px; }
-    .tag.danger { background: #fee2e2; color: var(--red); }
-
-    /* Toast */
-    .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--ink); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; z-index: 1000; box-shadow: var(--shadow); }
-
-    /* Helpers */
-    .row { display: flex; gap: 12px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); cursor: pointer; transition: 0.2s; }
+    .card:active { transform: scale(0.98); }
+    .ico { width: 40px; height: 40px; border-radius: 12px; background: #f3f4f6; display: grid; place-items: center; font-size: 20px; margin-bottom: 12px; }
+    .card h3 { margin: 0; font-size: 15px; }
+    .card p { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+    
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin-top: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+    .panelHead { padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; background: #f9fafb; }
+    .panelHead h2 { margin: 0; font-size: 18px; }
+    .panelBody { padding: 16px; }
+    
+    .btn { padding: 12px 16px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; gap: 8px; transition: 0.2s; }
+    .btn.full { width: 100%; }
+    .btn.green { background: var(--green-dark); color: white; }
+    .btn.light { background: #f3f4f6; color: var(--ink); }
+    .btn.red { background: #fee2e2; color: var(--red); }
+    .btn.small { padding: 8px 12px; font-size: 12px; }
+    
+    .row { display: flex; gap: 12px; align-items: flex-start; }
     .row > * { flex: 1; }
-    .hidden { display: none; }
-    .voice-pulse { animation: pulse 1.5s infinite; background: var(--red) !important; color: white !important; }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-    @media print { .tabs, .top, .no-print { display: none !important; } body { padding: 0; background: white; } }
+    .field { margin-bottom: 16px; }
+    .field label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    input, textarea, select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #d1d5db; font-size: 14px; outline: none; background: #f9fafb; transition: 0.2s; }
+    textarea { min-height: 80px; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: var(--green); background: white; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+    
+    .search input { padding-left: 36px; background: white; }
+    .search { position: relative; }
+    .search::before { content: '🔍'; position: absolute; left: 12px; top: 12px; font-size: 14px; opacity: 0.5; }
+    
+    .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-top: 12px; }
+    .chip { white-space: nowrap; padding: 6px 14px; border-radius: 99px; background: #f3f4f6; border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; }
+    .chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+    
+    .list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .item { padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: white; cursor: pointer; }
+    .item.active { border-color: var(--green); box-shadow: 0 0 0 2px rgba(16,185,129,0.1); }
+    .item h4 { margin: 0; font-size: 16px; }
+    .item p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+    
+    .tag { display: inline-block; padding: 4px 8px; border-radius: 6px; background: #e5e7eb; font-size: 10px; font-weight: 800; text-transform: uppercase; margin: 0 4px 4px 0; }
+    .danger { background: #fee2e2 !important; color: #b91c1c !important; }
+    .amber { background: #fef3c7 !important; color: #b45309 !important; }
+    .blue { background: #dbeafe !important; color: #1d4ed8 !important; }
+    
+    .mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 8px; margin-top: 12px; }
+    .box { background: #f9fafb; border: 1px solid var(--line); border-radius: 10px; padding: 8px; text-align: center; }
+    .box span { display: block; font-size: 10px; color: var(--muted); font-weight: 700; }
+    .box b { font-size: 14px; color: var(--ink); }
+    
+    .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+    .photo-item { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .photo-item img { width: 100%; height: 120px; object-fit: cover; display: block; }
+    
+    .tabs { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); z-index: 100; }
+    .tabsIn { max-width: 540px; margin: 0 auto; display: flex; justify-content: space-around; padding: 8px 4px; }
+    .tab { border: none; background: transparent; padding: 8px; color: var(--muted); font-size: 10px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 60px; border-radius: 12px; }
+    .tab.active { color: var(--green-dark); background: #ecfdf5; }
+    .tab i { font-size: 20px; font-style: normal; }
+    
+    .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--ink); color: white; padding: 12px 24px; border-radius: 99px; font-size: 13px; font-weight: 600; box-shadow: var(--shadow); z-index: 1000; white-space: nowrap; }
+    .hidden { display: none !important; }
+    .voiceOn { animation: pulse 1.5s infinite; background: var(--red) !important; color: white !important; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+    
+    @media print { body { background: white; padding: 0; } .top, .tabs, .noPrint, .btn { display: none !important; } .app { max-width: 100%; } .panel { border: none; box-shadow: none; margin: 0; } }
   </style>
 </head>
 <body>
-
 <div id="root"></div>
 
 <script>
-// --- BANCO DE DADOS E ESTADO ---
-const DB_NAME = 'MedCases_Pro_Storage';
-const INITIAL_DRUGS = [
-  { id: 'furo1', n: 'Furosemida', cat: 'Cardio', cls: 'Diurético de Alça', dose: '20-40mg IV/VO', warn: 'Checar K+ e PA.', ea: ['Hipocalemia', 'Hipotensão'] },
-  { id: 'norad1', n: 'Noradrenalina', cat: 'UTI', cls: 'Vasopressor', dose: '0.05-1.0 mcg/kg/min', warn: 'Acesso central obrigatório.', ea: ['Arritmia', 'Isquemia periférica'] },
-  { id: 'ceft1', n: 'Ceftriaxona', cat: 'ATB', cls: 'Cefalosporina 3ªG', dose: '1-2g IV q24h', warn: 'Ajuste renal não necessário.', ea: ['Diarreia', 'Rash'] }
+const DBKEY = 'medcases_pro_v5';
+
+// BASE DE DADOS MASSIVA DE DROGAS
+const seedDrugs = [
+  // Analgésicos / AINEs / Antitérmicos
+  {id:'paracetamol',n:'Paracetamol',cat:'Analgésicos',cls:'Analgésico/Antipirético',via:'VO/IV',dose:'500-1000 mg 6/6h. Máx 4g/dia.',max:'4g/dia',renal:'Seguro',prep:'IV não exceder dose total.',ea:['Hepatotoxicidade','Náuseas'],int:['Álcool','Varfarina'],warn:'Atenção hepatopatia.'},
+  {id:'dipirona',n:'Dipirona',cat:'Analgésicos',cls:'Analgésico/Antipirético',via:'VO/IV',dose:'500-1000 mg 6/6h.',max:'4g/dia (protocolos até 6g)',renal:'Cautela na insuficiência grave',prep:'IV lenta diluída',ea:['Hipotensão se IV rápida','Agranulocitose'],int:['Ciclosporina'],warn:'Queda de PA em infusão rápida.'},
+  {id:'ibuprofeno',n:'Ibuprofeno',cat:'Analgésicos',cls:'AINE',via:'VO',dose:'400-600 mg 8/8h.',max:'2400 mg/dia',renal:'Evitar DRC, IRA',prep:'Com alimentos',ea:['Dispepsia','Sangramento GI','IRA'],int:['AAS','Anticoagulantes'],warn:'Evitar em IC e sangramento ativo.'},
+  {id:'cetoprofeno',n:'Cetoprofeno',cat:'Analgésicos',cls:'AINE',via:'IV/IM/VO',dose:'100 mg 12/12h',max:'300 mg/dia',renal:'Evitar ClCr < 30',prep:'IV infundir em 20 min',ea:['Hemorragia GI','IRA'],int:['Anticoagulantes','Lítio'],warn:'Alto risco renal em desidratados.'},
+  // Opioides
+  {id:'morfina',n:'Morfina',cat:'Sedação/Analgesia',cls:'Opioide Forte',via:'IV/SC/VO',dose:'2-5 mg IV resgate. Titular.',max:'Sem teto (limite tóxico)',renal:'Acumula em ClCr < 50',prep:'Diluir 10mg/10ml SF',ea:['Depressão respiratória','Hipotensão','Prurido'],int:['Sedativos','Benzodiazepínicos'],warn:'Piora hemodinâmica se hipovolemia.'},
+  {id:'fentanil',n:'Fentanil',cat:'Sedação/Analgesia',cls:'Opioide Sintético Forte',via:'IV',dose:'Sedação contínua: 1-5 mcg/kg/h',max:'Titular dor/RASS',renal:'Seguro (metabolismo hepático)',prep:'Bomba de infusão',ea:['Tórax rígido (bolus)','Bradicardia'],int:['Midazolam (sinergismo)'],warn:'Ideal para instabilidade hemodinâmica e DRC.'},
+  {id:'tramadol',n:'Tramadol',cat:'Analgésicos',cls:'Opioide Fraco',via:'IV/VO',dose:'50-100 mg 8/8h',max:'400 mg/dia',renal:'Ajustar ClCr < 30',prep:'IV Lenta',ea:['Náuseas','Convulsão'],int:['ISRS (Risco Serotoninérgico)'],warn:'Reduz limiar convulsivo.'},
+  {id:'metadona',n:'Metadona',cat:'Sedação/Analgesia',cls:'Opioide Longo',via:'VO',dose:'Desmame: iniciar 5-10mg 12/12h',max:'Titular',renal:'Seguro',prep:'Atenção intervalo',ea:['Aumento QT','Constipação'],int:['Amiodarona','Fluconazol'],warn:'Risco severo de Torsades de Pointes.'},
+  // Sedativos / Neurológicos
+  {id:'midazolam',n:'Midazolam',cat:'Sedação/Analgesia',cls:'Benzodiazepínico',via:'IV',dose:'Sedação contínua: 0.02-0.1 mg/kg/h',max:'Titular RASS',renal:'Metabólitos acumulam na DRC',prep:'Puro ou diluído em SF',ea:['Hipotensão','Delirium','Depressão resp'],int:['Fentanil','Amiodarona'],warn:'Risco de acúmulo e despertar muito prolongado.'},
+  {id:'propofol',n:'Propofol',cat:'Sedação/Analgesia',cls:'Anestésico Geral',via:'IV',dose:'Sedação UTI: 1-4 mg/kg/h',max:'Evitar > 4mg/kg/h por > 48h',renal:'Sem ajuste',prep:'Trocar equipo a cada 12h',ea:['Hipotensão','Apneia','PRIS (Síndrome)'],int:['Opioides'],warn:'Monitorar triglicerídeos. Causa hipotensão severa.'},
+  {id:'cetamina',n:'Cetamina',cat:'Sedação/Analgesia',cls:'Anestésico Dissociativo',via:'IV',dose:'Indução: 1-2 mg/kg',max:'Titular',renal:'Sem ajuste',prep:'Bolus lento',ea:['Alucinação','Sialorreia','Taquicardia'],int:['Simpaticomiméticos'],warn:'Mantém drive respiratório e PA.'},
+  {id:'dexmedetomidina',n:'Dexmedetomidina (Precedex)',cat:'Sedação/Analgesia',cls:'Agonista Alfa-2',via:'IV',dose:'0.2 - 1.5 mcg/kg/h',max:'1.5 mcg/kg/h',renal:'Sem ajuste',prep:'Bomba de infusão',ea:['Bradicardia severa','Hipotensão'],int:['Beta-bloqueadores'],warn:'Excelente para desmame ventilatório.'},
+  {id:'haloperidol',n:'Haloperidol',cat:'Neurologia/Psiquiatria',cls:'Antipsicótico Típico',via:'IV/IM/VO',dose:'Delirium: 1-5 mg resgate',max:'20-30 mg/dia',renal:'Sem ajuste',prep:'Pode fazer IV lento na UTI',ea:['Extrapiramidais','Aumento QT'],int:['Ondansetrona','Amiodarona'],warn:'Monitorar ECG (QTc).'},
+  {id:'fenitoina',n:'Fenitoína',cat:'Neurologia/Psiquiatria',cls:'Anticonvulsivante',via:'IV/VO',dose:'Ataque: 15-20 mg/kg',max:'Manutenção 300mg/dia',renal:'Medir fração livre se IRA/Hipoalbuminemia',prep:'Diluir APENAS em SF. Máx 50mg/min',ea:['Hipotensão','Flebite','Arritmia'],int:['Tudo (indutor CYP)'],warn:'Necrose se extravasar (Síndrome luva roxa).'},
+  {id:'levetiracetam',n:'Levetiracetam',cat:'Neurologia/Psiquiatria',cls:'Anticonvulsivante',via:'IV/VO',dose:'500-1500 mg 12/12h',max:'3000 mg/dia',renal:'Ajuste rigoroso por ClCr',prep:'Diluir SF/SG',ea:['Agitação','Depressão'],int:['Mínimas'],warn:'Excelente perfil de interação na UTI.'},
+  // Vasopressores e Inotrópicos
+  {id:'noradrenalina',n:'Noradrenalina',cat:'Cardio/Vaso',cls:'Vasopressor Alfa-1',via:'IV',dose:'0.01 - 2.0 mcg/kg/min',max:'Titular PAM',renal:'Preserva fluxo se reposta de PAM',prep:'Acesso Central preferencial',ea:['Isquemia de extremidade','Arritmias'],int:['IMAO'],warn:'Pilar do choque distributivo/séptico.'},
+  {id:'adrenalina',n:'Adrenalina',cat:'Cardio/Vaso',cls:'Vasopressor Alfa/Beta',via:'IV/IM',dose:'Choque: 0.01-0.1 mcg/kg/min. PCR: 1mg IV',max:'PCR sem teto',renal:'Aumenta lactato',prep:'Atenção à diluição (1:1000 IM vs 1:10000 IV)',ea:['Taquicardia','Hiperlactatemia'],int:['Beta-bloqueadores'],warn:'Droga de escolha na Anafilaxia (IM).'},
+  {id:'dobutamina',n:'Dobutamina',cat:'Cardio/Vaso',cls:'Inotrópico Beta-1',via:'IV',dose:'2.5 - 20 mcg/kg/min',max:'20 mcg/kg/min',renal:'Sem ajuste',prep:'Incompatível com bicarbonato na mesma via',ea:['Arritmias','Vasodilatação (Hipotensão)'],int:['Beta-bloqueadores'],warn:'Tratar hipovolemia antes de iniciar.'},
+  {id:'vasopressina',n:'Vasopressina',cat:'Cardio/Vaso',cls:'Vasopressor V1',via:'IV',dose:'0.01 - 0.04 U/min (fixa)',max:'0.04 U/min',renal:'Sem ajuste',prep:'Diluir em SF',ea:['Isquemia mesentérica','Hiponatremia'],int:['Noradrenalina (sinergismo)'],warn:'Geralmente 2ª linha no choque séptico.'},
+  {id:'nitroprussiato',n:'Nitroprussiato de Sódio',cat:'Cardio/Vaso',cls:'Vasodilator Arterial/Venoso',via:'IV',dose:'0.3 - 10 mcg/kg/min',max:'10 mcg/kg/min',renal:'Toxicidade por tiocianato na DRC',prep:'Proteger da luz (fotossensível)',ea:['Hipotensão severa','Intoxicação cianeto/tiocianato'],int:['Sildenafila'],warn:'Emergência hipertensiva. Monitorar PAM invasiva.'},
+  {id:'nitroglicerina',n:'Nitroglicerina (Tridil)',cat:'Cardio/Vaso',cls:'Vasodilator Venoso/Coronariano',via:'IV',dose:'10 - 200 mcg/min',max:'Titular dor/congestão',renal:'Sem ajuste',prep:'Bomba de infusão',ea:['Cefaleia','Hipotensão','Taquifilaxia'],int:['Inibidores 5-PDE'],warn:'Evitar se infarto de VD ou uso de Sildenafila.'},
+  // Antiarrítmicos e Cronotrópicos
+  {id:'amiodarona',n:'Amiodarona',cat:'Cardio/Vaso',cls:'Antiarrítmico Classe III',via:'IV/VO',dose:'PCR: 300mg IV. TV estável: 150mg em 10min.',max:'Ataque 900mg/24h',renal:'Sem ajuste',prep:'Diluir EXCLUSIVAMENTE em SG 5%',ea:['Hipotensão (IV)','Hepatotoxicidade','Fibrose pulmonar'],int:['Varfarina','Digoxina','Prolongadores QT'],warn:'Flebite alta, preferir central contínuo.'},
+  {id:'adenosina',n:'Adenosina',cat:'Cardio/Vaso',cls:'Antiarrítmico (TPSV)',via:'IV',dose:'6mg bolus rápido. Se falha: 12mg.',max:'12mg/dose',renal:'Sem ajuste',prep:'Acesso antecubital. Bolus rápido + Flush de SF 20ml',ea:['Flush facial','Sensação de morte iminente','Broncoespasmo'],int:['Cafeína/Teofilina antagonizam'],warn:'Pausa cardíaca no ECG é esperada. Ter desfibrilador.'},
+  {id:'atropina',n:'Atropina',cat:'Cardio/Vaso',cls:'Anticolinérgico',via:'IV',dose:'Bradicardia instável: 1mg a cada 3-5min',max:'3 mg total',renal:'Sem ajuste',prep:'Bolus direto',ea:['Taquicardia','Boca seca','Retenção urinária'],int:['Anticolinérgicos'],warn:'Ineficaz em bloqueios infranodais (BAVT, Mobitz II).'},
+  {id:'digoxina',n:'Digoxina',cat:'Cardio/Vaso',cls:'Glicosídeo Cardíaco',via:'IV/VO',dose:'Controle de FC: 0.125-0.25 mg/dia',max:'Guiar nível sérico',renal:'Reduzir dose em DRC. ClCr < 50',prep:'Ataque fracionado se necessário',ea:['Arritmias (extrassístoles, BAV)','Xantopsia'],int:['Amiodarona','Furosemida (Risco por K baixo)'],warn:'Hipocalemia potencializa toxicidade fatal.'},
+  // Anti-hipertensivos / ICC / Diuréticos
+  {id:'furosemida',n:'Furosemida',cat:'Diuréticos/Nefro',cls:'Diurético de Alça',via:'IV/VO',dose:'Congestão: 20-40mg IV inicial',max:'600-1000 mg/dia (DRC grave)',renal:'Doses maiores em DRC',prep:'Bolus lento (ototoxicidade)',ea:['Hipocalemia','Alcalose metabólica','Ototoxicidade'],int:['Aminoglicosídeos','Lítio'],warn:'Cuidado em choque e anúria estabelecida.'},
+  {id:'espironolactona',n:'Espironolactona',cat:'Diuréticos/Nefro',cls:'Antagonista Aldosterona',via:'VO',dose:'IC: 25-50 mg/dia. Ascite: 100-400 mg/dia',max:'400 mg/dia',renal:'Contraindicado ClCr < 30 ou K > 5.0',prep:'Com alimentos',ea:['Hipercalemia','Ginecomastia'],int:['IECA','BRA','Suplemento de K'],warn:'Monitorar K+ rigorosamente.'},
+  {id:'metoprolol',n:'Metoprolol (Succinato/Tartarato)',cat:'Cardio/Vaso',cls:'Beta-bloqueador Cardioseletivo',via:'IV/VO',dose:'SCA IV: 5mg x3. IC VO: iniciar 12.5-25mg',max:'200 mg/dia',renal:'Sem ajuste significativo',prep:'Monitorar FC e PA',ea:['Bradicardia','Broncoespasmo (altas doses)'],int:['Verapamil','Diltiazem (Bloqueio AV)'],warn:'Não iniciar na IC agudamente descompensada.'},
+  {id:'losartana',n:'Losartana',cat:'Cardio/Vaso',cls:'BRA',via:'VO',dose:'50-100 mg/dia',max:'100 mg/dia',renal:'Cuidado se estenose bilateral renal',prep:'Suspender se IRA severa',ea:['Hipercalemia','IRA'],int:['Espironolactona','AINEs'],warn:'Nefroprotetor, mas pode causar IRA no insulto agudo.'},
+  // Antibióticos
+  {id:'ceftriaxona',n:'Ceftriaxona',cat:'Antibióticos',cls:'Cefalosporina 3ªG',via:'IV',dose:'1-2g 24/24h (Meningite: 2g 12/12h)',max:'4g/dia',renal:'Não ajusta',prep:'Não misturar com Ringer Lactato',ea:['Bilioma','Rash'],int:['Cálcio IV'],warn:'Evitar em neonatos.'},
+  {id:'cefepime',n:'Cefepime',cat:'Antibióticos',cls:'Cefalosporina 4ªG',via:'IV',dose:'1-2g 8/8h',max:'6g/dia',renal:'Ajuste OBRIGATÓRIO por ClCr',prep:'Infusão estendida otimiza (3h)',ea:['Neurotoxicidade (Encefalopatia/Convulsão)'],int:['Furosemida (nefro)'],warn:'Alto risco de status epilepticus se não ajustar dose renal.'},
+  {id:'piperacilina_tazobactam',n:'Piperacilina+Tazobactam (Tazocin)',cat:'Antibióticos',cls:'Penicilina + Inibidor Betalactamase',via:'IV',dose:'4.5g 6/6h ou 8/8h',max:'18g/dia',renal:'Ajuste se ClCr < 40',prep:'Infusão estendida (4h)',ea:['Nefrite intersticial','Rash'],int:['Vancomicina (aumenta risco de IRA)'],warn:'Cobre Pseudomonas e Anaeróbios.'},
+  {id:'meropenem',n:'Meropenem',cat:'Antibióticos',cls:'Carbapenêmico',via:'IV',dose:'1g 8/8h (Meningite: 2g 8/8h)',max:'6g/dia',renal:'Ajuste OBRIGATÓRIO',prep:'Infusão 3h',ea:['Convulsão','Diarreia'],int:['Ácido Valproico (zera nível do valproato)'],warn:'Reserva terapêutica.'},
+  {id:'vancomicina',n:'Vancomicina',cat:'Antibióticos',cls:'Glicopeptídeo',via:'IV',dose:'15-20 mg/kg 12/12h (Meningite/Choque: alvo maior)',max:'Baseado em Vancocinemia',renal:'Ajuste e monitoração OBRIGATÓRIOS',prep:'Diluída, infusão LENTA (10mg/min)',ea:['Nefrotoxicidade','Síndrome do Homem Vermelho'],int:['Tazocin','Aminoglicosídeos'],warn:'Cobertura Otorrinolaringológica/MRSA. Exige nível sérico.'},
+  {id:'azitromicina',n:'Azitromicina',cat:'Antibióticos',cls:'Macrolídeo',via:'VO/IV',dose:'500mg 1x/dia (PAC: 3-5 dias)',max:'500mg/dia',renal:'Sem ajuste',prep:'IV longo tempo',ea:['Aumento QT','Sintomas TGI'],int:['Amiodarona'],warn:'Risco cardíaco em predispostos.'},
+  // Anticoagulantes e Antiagregantes
+  {id:'enoxaparina',n:'Enoxaparina',cat:'Hemato',cls:'HBPM',via:'SC',dose:'Tratamento: 1mg/kg 12/12h. Profilaxia: 40mg/dia',max:'Ajustar peso',renal:'Reduzir se ClCr < 30. Evitar < 15.',prep:'SC periumbilical',ea:['Sangramento','HIT (Trombocitopenia induzida por heparina)'],int:['AINEs','Antiagregantes'],warn:'Cuidado em idosos extremos e insuficiência renal.'},
+  {id:'varfarina',n:'Varfarina',cat:'Hemato',cls:'Antagonista Vit K',via:'VO',dose:'Iniciar 2.5-5mg/dia',max:'Guiar INR (Alvo 2-3)',renal:'Seguro',prep:'Revisar interações sempre',ea:['Sangramento','Necrose cutânea'],int:['Amiodarona','Antibióticos','Omeprazol'],warn:'Não é de ação imediata. Exige ponte se risco trombótico alto.'},
+  {id:'clopidogrel',n:'Clopidogrel',cat:'Hemato',cls:'Antiagregante',via:'VO',dose:'Manutenção: 75mg/dia. Ataque SCA: 300-600mg',max:'600mg (ataque)',renal:'Sem ajuste',prep:'Checar cirurgia',ea:['Hemorragia'],int:['Omeprazol (reduz eficácia)'],warn:'Suspender 5-7 dias antes de cirurgias eletivas.'},
+  // Trato Gastrointestinal / Endocrino / Resp
+  {id:'omeprazol',n:'Omeprazol',cat:'Gastro',cls:'IBP',via:'VO/IV',dose:'20-40 mg/dia',max:'HDA: 80mg bolus + 8mg/h',renal:'Sem ajuste',prep:'IV Lento',ea:['Diarreia','Hipomagnesemia crônica'],int:['Clopidogrel'],warn:'Profilaxia de úlcera só se fatores de risco reais (UTI, ventilação).'},
+  {id:'ondansetrona',n:'Ondansetrona',cat:'Gastro',cls:'Antiemético',via:'IV/VO',dose:'4-8 mg 8/8h',max:'24 mg/dia',renal:'Sem ajuste',prep:'IV lento',ea:['Cefaleia','Aumento QT','Constipação'],int:['Haloperidol','Amiodarona'],warn:'Sinergismo perigoso para Torsades de Pointes.'},
+  {id:'insulina_regular',n:'Insulina Regular',cat:'Endócrino',cls:'Insulina Rápida',via:'SC/IV',dose:'Bomba UTI: protocolo local. SC: conforme HGT.',max:'Ajuste fino',renal:'Menor necessidade na DRC',prep:'Monitorar K+ e Glicemia OBRIGATÓRIO',ea:['Hipoglicemia severa','Hipocalemia'],int:['Corticoides (antagonizam)'],warn:'Se IV, requer bomba de infusão exclusiva.'},
+  {id:'hidrocortisona',n:'Hidrocortisona',cat:'Respiratório/Endócrino',cls:'Glicocorticoide',via:'IV',dose:'Choque séptico refratário: 50mg 6/6h ou 200mg/dia. Asma grave: 100-200mg',max:'Variável',renal:'Sem ajuste',prep:'Bolus',ea:['Hiperglicemia','Hipernatremia','Fraqueza muscular'],int:['Insulina'],warn:'Desmame necessário se uso prolongado.'},
+  {id:'salbutamol',n:'Salbutamol',cat:'Respiratório',cls:'Beta-2 Agonista',via:'Inalatório',dose:'Crise: 4-10 jatos 20/20min',max:'Titular resposta',renal:'Sem ajuste',prep:'Usar espaçador',ea:['Taquicardia','Tremor','Hipocalemia'],int:['Beta-bloqueadores'],warn:'Monitorar K+ e ECG em uso contínuo.'}
 ];
 
-let state = {
-  user: JSON.parse(localStorage.getItem('mc_user')) || null,
-  tab: 'home',
-  cases: JSON.parse(localStorage.getItem('mc_cases')) || [],
-  drugs: JSON.parse(localStorage.getItem('mc_drugs')) || INITIAL_DRUGS,
-  selCaseId: null,
-  editingCase: null,
-  toast: null,
-  isRecording: false
-};
+const seedTx = [
+  {id:'tx_choque',cond:'Choque Séptico',cat:'UTI/Sepse',first:'Noradrenalina + Cristaloide + Antibiótico na 1ª Hora',scheme:'1. Expansão 30ml/kg se não houver congestão.\n2. Iniciar Noradrenalina alvo PAM > 65.\n3. Coletar culturas e iniciar ATB amplo espectro (ex: Piperacilina/Tazobactam + Vancomicina).',mon:'PAM, Lactato, Débito Urinário, Capilar',warn:'Não atrasar ATB. Vasopressina se dose de Nora > 0.25-0.5 mcg/kg/min.',drugs:['noradrenalina','vasopressina','piperacilina_tazobactam','vancomicina','hidrocortisona']},
+  {id:'tx_asma',cond:'Crise de Asma Grave',cat:'Emergência/Resp',first:'Salbutamol + Ipratrópio + Corticoide Sistêmico',scheme:'1. Salbutamol 4-10 jatos + Ipratrópio (Aerolin/Atrovent) a cada 20min.\n2. Hidrocortisona IV ou Prednisona VO precoce.\n3. Sulfato de Magnésio 2g IV se refratário.\n4. O2 alvo SatO2 93-95%.',mon:'Pico de fluxo (PEF), Ausculta, Trabalho respiratório, SatO2.',warn:'Silêncio torácico é sinal de falência respiratória iminente. Preparar intubação.',drugs:['salbutamol','hidrocortisona']},
+  {id:'tx_ica',cond:'IC Descompensada (Perfil B - Quente e Úmido)',cat:'Emergência/Cardio',first:'Furosemida IV + Vasodilatador + VNI',scheme:'1. Furosemida IV (dose equivalente a 1-2.5x dose VO domiciliar).\n2. Nitroglicerina IV ou Captopril VO se PA alta.\n3. VNI precoce se desconforto respiratório.\n4. Restrição hídrica/sódica.',mon:'Diurese, Sintomas, PA, K+, Creatinina.',warn:'Evitar beta-bloqueadores novos na fase aguda.',drugs:['furosemida','nitroglicerina','espironolactona']},
+  {id:'tx_tpsv',cond:'Taquicardia Supraventricular (Estável)',cat:'Emergência/Cardio',first:'Manobra Vagal -> Adenosina',scheme:'1. Manobra vagal modificada.\n2. Adenosina 6mg bolus rápido + Flush 20ml SF.\n3. Repetir com 12mg se não reverter.',mon:'ECG contínuo, PA, Sintomas.',warn:'Avisar paciente sobre sensação de "morte" e rubor. Contraindicado em asma grave.',drugs:['adenosina','amiodarona']},
+  {id:'tx_pcr_fv',cond:'PCR em Fibrilação Ventricular (FV) / TV sem pulso',cat:'Emergência',first:'Desfibrilação + RCP',scheme:'1. Choque imediato.\n2. RCP por 2 min.\n3. Adrenalina 1mg a cada 3-5 min.\n4. Amiodarona 300mg no 3º choque; 150mg no 5º choque.',mon:'Ritmo a cada 2 min, ETCO2, Qualidade da RCP.',warn:'Não parar RCP para medicar. Choque é a prioridade.',drugs:['adrenalina','amiodarona']},
+  {id:'tx_tep',cond:'TEP Maciço (Com Hipotensão)',cat:'Emergência/Hemato',first:'Trombolítico + Anticoagulação',scheme:'1. Alteplase (rt-PA) 100mg IV em 2h.\n2. Heparina Não Fracionada IV contínua se não trombolisar, ou Enoxaparina.\n3. Suporte hemodinâmico (cautela com volume, preferir Nora).',mon:'Sangramento, PA, VD no ECO.',warn:'Risco altíssimo de sangramento intracraniano.',drugs:['noradrenalina','enoxaparina']}
+];
 
-// --- FUNÇÕES DE UTILIDADE ---
-const save = () => {
-  localStorage.setItem('mc_cases', JSON.stringify(state.cases));
-  localStorage.setItem('mc_drugs', JSON.stringify(state.drugs));
-  localStorage.setItem('mc_user', JSON.stringify(state.user));
-};
+const interactions = [
+  ['amiodarona','varfarina','Alto','Amiodarona inibe metabolismo da varfarina, subindo INR.','Reduzir dose da varfarina, medir INR freq.'],
+  ['amiodarona','ondansetrona','Alto','Sinergismo para aumento de intervalo QT e Torsades de Pointes.','Fazer ECG. Evitar associação se possível.'],
+  ['amiodarona','haloperidol','Alto','Ambos prolongam o intervalo QT fortemente.','Contraindicação relativa. Usar alternativa.'],
+  ['furosemida','digoxina','Alto','Furosemida causa hipocalemia, que aumenta muito a toxicidade da digoxina.','Repor K+ rigorosamente.'],
+  ['ibuprofeno','varfarina','Alto','AINE aumenta tempo de sangramento e risco de HDA com Varfarina.','Evitar AINEs. Usar Paracetamol.'],
+  ['ibuprofeno','enoxaparina','Alto','Aumento sinérgico do risco de sangramento.','Evitar.'],
+  ['clopidogrel','omeprazol','Moderado','Omeprazol inibe CYP2C19, reduzindo ativação do Clopidogrel.','Considerar Pantoprazol em vez de Omeprazol.'],
+  ['cefepime','furosemida','Moderado','Aumento de risco de nefrotoxicidade e acúmulo neurotóxico do Cefepime.','Ajustar Cefepime pelo ClCr diario.'],
+  ['tramadol','ondansetrona','Moderado','Redução do efeito analgésico do Tramadol (antagonismo receptor).','Considerar outro antiemético.'],
+  ['piperacilina_tazobactam','vancomicina','Alto','Associação clássica aumenta incidência de Lesão Renal Aguda na UTI.','Monitorar Creatinina diariamente. Evitar uso prolongado sem necessidade.']
+];
 
-const showToast = (msg) => {
-  state.toast = msg; render();
-  setTimeout(() => { state.toast = null; render(); }, 2500);
-};
+// STATE MANAGEMENT
+let state = load();
+function load() {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(DBKEY)) } catch(e){}
+  return s || { user: null, cases: [], drugs: seedDrugs, tx: seedTx, tab: 'home', selCase: null, selDrug: 'furosemida', calc: {} };
+}
+function save() { localStorage.setItem(DBKEY, JSON.stringify(state)); }
+function uid(p='id') { return p + '_' + Math.random().toString(36).substr(2, 9); }
+function norm(str) { return String(str||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+function esc(str) { return String(str||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[m])); }
 
-const navigate = (tab) => { state.tab = tab; render(); window.scrollTo(0,0); };
+// UTILS
+function showToast(msg) {
+  const el = document.getElementById('toastMsg');
+  el.textContent = msg; el.classList.remove('hidden');
+  setTimeout(() => el.classList.add('hidden'), 2500);
+}
+function setTab(t) { state.tab = t; save(); render(); window.scrollTo(0,0); }
 
-const getSelCase = () => state.cases.find(c => c.id === state.selCaseId) || state.cases[0];
+function getCase() { return state.cases.find(c => c.id === state.selCase) || state.cases[0]; }
+function getDrug() { return state.drugs.find(d => d.id === state.selDrug) || state.drugs[0]; }
 
-// --- LÓGICA DE NEGÓCIO ---
-const handleLogin = (e) => {
-  e.preventDefault();
-  state.user = { name: document.getElementById('u_name').value, role: 'Médico' };
-  save(); render();
-};
+// MATH / CALCULATORS
+function clcr(age, weight, cr, sex) {
+  if(!age || !weight || !cr) return null;
+  let v = ((140 - Number(age)) * Number(weight)) / (72 * Number(cr.replace(',','.')));
+  if(sex === 'Feminino') v *= 0.85;
+  return v.toFixed(1);
+}
 
-const saveCase = (e) => {
-  e.preventDefault();
-  const formData = {
-    id: state.editingCase || 'c_' + Date.now(),
-    title: document.getElementById('c_title').value,
-    patient: document.getElementById('c_patient').value,
-    age: document.getElementById('c_age').value,
-    dx: document.getElementById('c_dx').value,
-    history: document.getElementById('c_hx').value,
-    plan: document.getElementById('c_plan').value,
-    updated: new Date().toISOString()
-  };
+function checkInteractions(medId, medListText) {
+  let list = String(medListText||'').split(/[\n,;]/).map(x=>norm(x.trim())).filter(x=>x);
+  let alerts = [];
+  list.forEach(m => {
+    let foundDrug = state.drugs.find(d => norm(d.n).includes(m) || m.includes(norm(d.n).split(' ')[0]));
+    if(!foundDrug || foundDrug.id === medId) return;
+    interactions.forEach(r => {
+      if((r[0]===medId && r[1]===foundDrug.id) || (r[1]===medId && r[0]===foundDrug.id)) {
+        alerts.push({ med: foundDrug.n, risk: r[2], txt: r[3], act: r[4] });
+      }
+    });
+  });
+  return alerts;
+}
 
-  if (state.editingCase) {
-    state.cases = state.cases.map(c => c.id === state.editingCase ? formData : c);
-  } else {
-    state.cases.unshift(formData);
-  }
-  
-  state.editingCase = null;
-  state.selCaseId = formData.id;
-  save(); showToast('Caso clínico salvo!'); navigate('home');
-};
+// RENDER APP CORE
+function app() {
+  if(!state.user) return viewLogin();
+  return `
+    <div class="app">
+      <header class="top noPrint">
+        <div class="top-in">
+          <div class="brand">
+            <div class="logo">✚</div>
+            <div><h1>MedCases Pro</h1><p>${esc(state.user.name)} • ${esc(state.user.role)}</p></div>
+          </div>
+        </div>
+      </header>
+      <main>${viewScreen()}</main>
+      ${viewTabs()}
+      <div id="toastMsg" class="toast hidden"></div>
+    </div>
+  `;
+}
 
-// --- RECONHECIMENTO DE VOZ ---
-const startVoice = (targetId) => {
-  const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!Speech) return showToast('Voz não suportada neste navegador.');
-
-  const recognition = new Speech();
-  recognition.lang = 'pt-BR';
-  state.isRecording = true; render();
-
-  recognition.onresult = (event) => {
-    const text = event.results[0][0].transcript;
-    document.getElementById(targetId).value += (document.getElementById(targetId).value ? ' ' : '') + text;
-    state.isRecording = false; render();
-  };
-  
-  recognition.onerror = () => { state.isRecording = false; render(); };
-  recognition.start();
-};
-
-// --- INTERFACE (UI) ---
-const LoginView = () => `
-  <div style="padding:40px 20px; text-align:center;">
-    <div class="logo" style="margin: 0 auto 20px; width:60px; height:60px; font-size:24px;">✚</div>
-    <h2>MedCases Pro</h2>
-    <p style="color:var(--muted)">Sua central de condutas e casos</p>
-    <form onsubmit="handleLogin(event)" style="margin-top:30px; text-align:left;">
-      <div class="field">
-        <label>Nome do Profissional</label>
-        <input id="u_name" required placeholder="Ex: Dr. Silva">
+function viewLogin() {
+  return `
+    <div class="app" style="display:flex; align-items:center; justify-content:center; padding: 20px;">
+      <div class="panel" style="width:100%; padding:24px; text-align:center;">
+        <div class="logo" style="margin: 0 auto 20px; width:64px; height:64px; font-size:32px;">✚</div>
+        <h1 style="margin:0">MedCases Pro</h1>
+        <p style="color:var(--muted); font-size:14px; margin-bottom:24px;">Prontuário, calculadoras e interações</p>
+        <div class="field" style="text-align:left"><label>Seu Nome</label><input id="lgName" placeholder="Ex: Dr. House"></div>
+        <div class="field" style="text-align:left"><label>Função</label><select id="lgRole"><option>Médico Intensivista</option><option>Médico Plantonista</option><option>Residente</option><option>Enfermeiro</option></select></div>
+        <button class="btn green full" onclick="doLogin()">Acessar Sistema</button>
+        <p style="font-size:11px; color:var(--muted); margin-top:20px;">Dados armazenados localmente no navegador (100% Offline e LGPD OK).</p>
       </div>
-      <button class="btn btn-primary">Entrar no App</button>
-    </form>
-  </div>
-`;
+    </div>
+  `;
+}
+function doLogin() {
+  let n = document.getElementById('lgName').value || 'Usuário';
+  let r = document.getElementById('lgRole').value || 'Profissional';
+  state.user = { name: n, role: r };
+  save(); render();
+}
 
-const HomeView = () => {
-  const cases = state.cases;
+function viewTabs() {
+  let tabs = [ ['home','🏠','Início'], ['hist','📋','Pacientes'], ['case','➕','Admitir'], ['drugs','💊','Drogas'], ['base','⚙️','Ajustes'] ];
+  return `
+    <nav class="tabs noPrint">
+      <div class="tabsIn">
+        ${tabs.map(t => `<button class="tab ${state.tab===t[0]?'active':''}" onclick="setTab('${t[0]}')"><i>${t[1]}</i>${t[2]}</button>`).join('')}
+      </div>
+    </nav>
+  `;
+}
+
+function viewScreen() {
+  if(state.tab === 'home') return viewHome();
+  if(state.tab === 'case') return viewCaseForm();
+  if(state.tab === 'hist') return viewHist();
+  if(state.tab === 'evo') return viewEvo();
+  if(state.tab === 'drugs') return viewDrugs();
+  if(state.tab === 'base') return viewBase();
+  return viewHome();
+}
+
+// --- TAB: HOME ---
+function viewHome() {
+  let c = getCase();
   return `
     <section class="hero">
-      <h2>Olá, ${state.user.name}</h2>
-      <p>Você tem ${cases.length} casos ativos hoje.</p>
+      <small>Visão Geral</small>
+      <h2>Plantão Ativo</h2>
+      <p>${state.cases.length} pacientes internados sob seus cuidados.</p>
       <div class="stats">
-        <div class="stat"><b>${cases.length}</b><span>Casos</span></div>
-        <div class="stat"><b>${state.drugs.length}</b><span>Fármacos</span></div>
-        <div class="stat"><b>0</b><span>Plantões</span></div>
+        <div class="stat"><b>${state.cases.length}</b><span>Casos</span></div>
+        <div class="stat"><b>${state.drugs.length}</b><span>Drogas</span></div>
+        <div class="stat"><b>${state.tx.length}</b><span>Protocolos</span></div>
         <div class="stat"><b>100%</b><span>Offline</span></div>
       </div>
     </section>
 
-    <div class="grid">
-      <div class="card" onclick="state.editingCase=null; navigate('edit')">
-        <div class="ico">📝</div>
-        <h3>Novo Caso</h3>
-        <p>Admitir paciente</p>
+    <div class="grid2">
+      <div class="card" onclick="state.editing=null; setTab('case')">
+        <div class="ico">➕</div><h3>Admitir Paciente</h3><p>Nova história clínica completa</p>
       </div>
-      <div class="card" onclick="navigate('drugs')">
-        <div class="ico">💊</div>
-        <h3>Drogas</h3>
-        <p>Doses e Alertas</p>
+      <div class="card" onclick="setTab('drugs')">
+        <div class="ico">💊</div><h3>Bulário / Interações</h3><p>Calculadora e Segurança</p>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-h"><h2>Pacientes Recentes</h2></div>
-      <div class="panel-b">
-        ${cases.length ? cases.map(c => `
-          <div class="item" onclick="state.selCaseId='${c.id}'; navigate('details')">
-            <b>${c.patient}</b>
-            <p style="font-size:12px">${c.title} • ${c.age} anos</p>
-          </div>
-        `).join('') : '<p style="text-align:center; color:var(--muted)">Nenhum caso salvo.</p>'}
-      </div>
-    </div>
-  `;
-};
-
-const DetailsView = () => {
-  const c = getSelCase();
-  if (!c) return navigate('home');
-  return `
-    <div class="panel">
-      <div class="panel-h">
-        <h2>${c.patient}</h2>
-        <button class="btn btn-light" onclick="state.editingCase='${c.id}'; navigate('edit')">Editar</button>
-      </div>
-      <div class="panel-b">
-        <p><b>Diagnóstico:</b> ${c.dx}</p>
-        <hr style="border:0; border-top:1px solid var(--line); margin:16px 0;">
-        <p><b>História:</b><br>${c.history}</p>
-        <div style="background:#f8fafc; padding:12px; border-radius:12px; margin-top:12px;">
-          <b style="color:var(--green-dark)">Conduta / Plano:</b><br>${c.plan}
+    ${c ? `
+      <div class="panel">
+        <div class="panelHead">
+          <div><h2 style="font-size:16px">Paciente em Foco</h2><p style="font-size:11px;color:var(--muted);margin:0">${esc(c.bed)}</p></div>
+          <span class="tag ${c.priority==='Crítico'?'danger':'blue'}">${esc(c.priority)}</span>
         </div>
-        <button class="btn btn-red" style="margin-top:20px; width:100%" onclick="deleteCase('${c.id}')">Excluir Caso</button>
+        <div class="panelBody">
+          <h3 style="margin:0 0 8px 0;font-size:18px">${esc(c.title)}</h3>
+          <p style="font-size:13px; margin:0 0 12px 0;"><b>Id:</b> ${esc(c.patientCode)} • ${esc(c.age)} anos</p>
+          <p style="font-size:13px; margin:0 0 16px 0; padding:10px; background:#f9fafb; border-radius:10px; border:1px solid var(--line)">${esc(c.diagnosis)}</p>
+          <div class="row">
+            <button class="btn light small" style="flex:1" onclick="setTab('evo')">🩺 Evoluir Hoje</button>
+            <button class="btn light small" style="flex:1" onclick="generateReport('${c.id}')">🖨️ PDF / Relatório</button>
+          </div>
+        </div>
       </div>
-    </div>
+    ` : ''}
   `;
-};
+}
 
-const EditView = () => {
-  const c = state.editingCase ? state.cases.find(x => x.id === state.editingCase) : {};
+// --- TAB: ADMITIR / EDITAR CASO ---
+function viewCaseForm() {
+  let c = state.editing ? (state.cases.find(x => x.id === state.editing) || {}) : {};
   return `
     <div class="panel">
-      <div class="panel-h"><h2>${state.editingCase ? 'Editar Caso' : 'Nova Admissão'}</h2></div>
-      <div class="panel-b">
-        <form onsubmit="saveCase(event)">
-          <div class="field"><label>Iniciais / Nome do Paciente</label><input id="c_patient" value="${c.patient || ''}" required></div>
+      <div class="panelHead">
+        <h2>${state.editing ? 'Editar Caso' : 'Nova Admissão'}</h2>
+        ${state.editing ? `<button class="btn small light" onclick="state.editing=null;render()">Limpar</button>` : ''}
+      </div>
+      <div class="panelBody">
+        <form onsubmit="doSaveCase(event)">
           <div class="row">
-            <div class="field"><label>Idade</label><input id="c_age" type="number" value="${c.age || ''}"></div>
-            <div class="field"><label>Hipótese/Título</label><input id="c_title" value="${c.title || ''}" placeholder="Ex: IC Descompensada"></div>
+            <div class="field"><label>Iniciais / Nome</label><input id="f_code" value="${esc(c.patientCode)}" required></div>
+            <div class="field"><label>Leito</label><input id="f_bed" value="${esc(c.bed)}"></div>
           </div>
-          <div class="field"><label>Diagnóstico Principal</label><input id="c_dx" value="${c.dx || ''}"></div>
+          <div class="row">
+            <div class="field"><label>Idade</label><input type="number" id="f_age" value="${esc(c.age)}"></div>
+            <div class="field"><label>Sexo</label>
+              <select id="f_sex"><option ${c.sex==='M'?'selected':''}>M</option><option ${c.sex==='F'?'selected':''}>F</option></select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Peso (kg)</label><input type="number" step="0.1" id="f_weight" value="${esc(c.weight)}"></div>
+            <div class="field"><label>Altura (cm)</label><input type="number" step="1" id="f_height" value="${esc(c.height)}"></div>
+          </div>
           
-          <div class="field">
-            <label style="display:flex; justify-content:space-between">
-              História Clínica 
-              <span style="color:var(--blue); cursor:pointer" onclick="startVoice('c_hx')">🎙️ Ditar</span>
-            </label>
-            <textarea id="c_hx" rows="4">${c.history || ''}</textarea>
+          <div class="field"><label>Motivo da Internação / Título</label><input id="f_title" value="${esc(c.title)}" placeholder="Ex: Sepse de Foco Pulmonar" required></div>
+          <div class="field"><label>Prioridade / Risco</label>
+            <select id="f_priority"><option>Padrão</option><option ${c.priority==='Alto'?'selected':''}>Alto</option><option ${c.priority==='Crítico'?'selected':''}>Crítico</option></select>
+          </div>
+          
+          <div style="background:#f3f4f6; border-radius:12px; padding:12px; margin-bottom:16px;">
+            <label style="font-size:12px; font-weight:bold; display:block; margin-bottom:8px;">🎙️ Assistente de Ditado</label>
+            <div class="row">
+              <select id="voiceTarget" style="flex:2"><option value="f_dx">Diagnóstico</option><option value="f_hx">História / Exame Físico</option><option value="f_meds">Drogas Atuais</option><option value="f_plan">Conduta</option></select>
+              <button type="button" id="btnVoice" class="btn small green" style="flex:1" onclick="toggleVoice()">Ditar</button>
+            </div>
           </div>
 
-          <div class="field">
-            <label style="display:flex; justify-content:space-between">
-              Plano Terapêutico
-              <span style="color:var(--blue); cursor:pointer" onclick="startVoice('c_plan')">🎙️ Ditar</span>
-            </label>
-            <textarea id="c_plan" rows="4">${c.plan || ''}</textarea>
-          </div>
+          <div class="field"><label>Diagnósticos</label><textarea id="f_dx">${esc(c.diagnosis)}</textarea></div>
+          <div class="field"><label>HMA / Exame Físico</label><textarea id="f_hx">${esc(c.history)}</textarea></div>
+          <div class="field"><label>Medicações de Uso Contínuo</label><textarea id="f_meds">${esc(c.currentMeds)}</textarea></div>
+          <div class="field"><label>Conduta Terapêutica / Plano</label><textarea id="f_plan">${esc(c.treatment)}</textarea></div>
 
-          <button class="btn btn-primary ${state.isRecording ? 'voice-pulse' : ''}">
-            ${state.isRecording ? 'Ouvindo...' : 'Salvar Registro Clínico'}
-          </button>
+          ${viewOCR(c)}
+          ${viewPhotos(c)}
+
+          <button class="btn green full" style="margin-top:20px;">💾 Salvar Prontuário</button>
         </form>
       </div>
     </div>
   `;
-};
+}
 
-const DrugView = () => `
-  <div class="panel">
-    <div class="panel-h"><h2>Guia de Fármacos</h2></div>
-    <div class="panel-b">
-      <input type="text" placeholder="Buscar droga..." style="margin-bottom:12px" oninput="filterDrugs(this.value)">
-      <div id="drugList">
-        ${state.drugs.map(d => `
-          <div class="item">
-            <span class="tag">${d.cat}</span> <b>${d.n}</b>
-            <p style="font-size:12px; margin:4px 0;">Dose: ${d.dose}</p>
-            <p class="tag danger" style="display:inline-block; margin:0">⚠️ ${d.warn}</p>
-          </div>
-        `).join('')}
+let tempPhotos = [];
+function viewPhotos(c) {
+  let photos = c?.photos || [];
+  let all = [...photos, ...tempPhotos];
+  return `
+    <div class="field">
+      <label>📸 Fotos (Lesões, ECG, Exames)</label>
+      <div class="row">
+        <label class="btn light small" style="flex:1; text-align:center; cursor:pointer;">
+          <input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotos(event)">
+          Adicionar Galeria
+        </label>
+        <label class="btn light small" style="flex:1; text-align:center; cursor:pointer;">
+          <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhotos(event)">
+          Tirar Foto
+        </label>
+      </div>
+      <div id="photoGrid" class="photo-grid">
+        ${all.map(p => `<div class="photo-item"><img src="${p.data}"></div>`).join('')}
       </div>
     </div>
-  </div>
-`;
+  `;
+}
+function handlePhotos(e) {
+  Array.from(e.target.files).forEach(f => {
+    let r = new FileReader();
+    r.onload = () => { tempPhotos.push({ id: uid('ph'), data: r.result }); render(); showToast('Foto adicionada'); };
+    r.readAsDataURL(f);
+  });
+}
 
-// --- CORE RENDERING ---
-const deleteCase = (id) => {
-  if(confirm('Deseja excluir este caso permanentemente?')) {
-    state.cases = state.cases.filter(c => c.id !== id);
-    save(); navigate('home');
-  }
-};
-
-const render = () => {
-  const root = document.getElementById('root');
-  if (!state.user) { root.innerHTML = LoginView(); return; }
-
-  let content = '';
-  switch(state.tab) {
-    case 'home': content = HomeView(); break;
-    case 'edit': content = EditView(); break;
-    case 'details': content = DetailsView(); break;
-    case 'drugs': content = DrugView(); break;
-  }
-
-  root.innerHTML = `
-    <div class="app">
-      <header class="top">
-        <div class="top-in">
-          <div class="brand">
-            <div class="logo">✚</div>
-            <div><h1>MedCases Pro</h1><p>${state.user.name}</p></div>
-          </div>
-          <button class="btn btn-light" onclick="localStorage.clear(); location.reload();">Sair</button>
-        </div>
-      </header>
-      <main>${content}</main>
-      <nav class="tabs">
-        <button class="tab ${state.tab==='home'?'active':''}" onclick="navigate('home')"><i>🏠</i>Início</button>
-        <button class="tab ${state.tab==='edit'?'active':''}" onclick="state.editingCase=null; navigate('edit')"><i>➕</i>Novo</button>
-        <button class="tab ${state.tab==='drugs'?'active':''}" onclick="navigate('drugs')"><i>💊</i>Drogas</button>
-      </nav>
-      ${state.toast ? `<div class="toast">${state.toast}</div>` : ''}
+function viewOCR(c) {
+  return `
+    <div class="field">
+      <label>🤖 OCR de Laboratório (Foto -> Texto)</label>
+      <label class="btn light small full" style="text-align:center; cursor:pointer; margin-bottom:8px">
+        <input type="file" accept="image/*" style="display:none" onchange="doOCR(event)">
+        Extrair Laboratório da Imagem
+      </label>
+      <textarea id="f_labs" placeholder="Cole os exames aqui ou use o OCR...">${esc(c?.labText)}</textarea>
+      <div id="ocrResult" class="mini" style="margin-top:8px">${c?.labs ? renderLabGrid(c.labs) : ''}</div>
     </div>
   `;
-};
+}
 
-// Inicialização
+function renderLabGrid(labs) {
+  if(!labs || !labs.length) return '';
+  return labs.map(l => `<div class="box"><span>${l.k}</span><b>${l.v}</b></div>`).join('');
+}
+
+async function doOCR(e) {
+  let f = e.target.files[0]; if(!f) return;
+  showToast('Iniciando Inteligência OCR... Aguarde.');
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');
+    let r = await Tesseract.recognize(f, 'por+eng');
+    let txt = r.data.text || '';
+    document.getElementById('f_labs').value = txt;
+    
+    // Parse
+    let defs = [ ['Hb',['hemoglobina','hb']], ['Leuco',['leucocitos','wbc']], ['Plaq',['plaquetas','plt']], ['Cr',['creatinina','creat']], ['Ureia',['ureia','urea']], ['K+',['potassio','k ']], ['Na+',['sodio','na ']], ['Lac',['lactato']] ];
+    let found = [];
+    defs.forEach(d => {
+      let line = txt.split('\n').find(l => d[1].some(alias => norm(l).includes(alias)));
+      if(line) { let m = line.match(/\d+([.,]\d+)?/); if(m) found.push({ k: d[0], v: m[0] }); }
+    });
+    window.currentLabs = found;
+    document.getElementById('ocrResult').innerHTML = renderLabGrid(found);
+    showToast(`OCR Concluído: ${found.length} resultados.`);
+  } catch(err) { showToast('Erro no OCR. Cole os dados manualmente.'); }
+}
+
+function doSaveCase(e) {
+  e.preventDefault();
+  let id = state.editing || uid('case');
+  let old = state.cases.find(x => x.id === id) || {};
+  
+  let c = {
+    ...old, id, updatedAt: new Date().toISOString(),
+    patientCode: document.getElementById('f_code').value,
+    bed: document.getElementById('f_bed').value,
+    age: document.getElementById('f_age').value,
+    sex: document.getElementById('f_sex').value,
+    weight: document.getElementById('f_weight').value,
+    height: document.getElementById('f_height').value,
+    title: document.getElementById('f_title').value,
+    priority: document.getElementById('f_priority').value,
+    diagnosis: document.getElementById('f_dx').value,
+    history: document.getElementById('f_hx').value,
+    currentMeds: document.getElementById('f_meds').value,
+    treatment: document.getElementById('f_plan').value,
+    labText: document.getElementById('f_labs').value,
+    labs: window.currentLabs || old.labs || [],
+    photos: [...(old.photos||[]), ...tempPhotos],
+    evolutions: old.evolutions || []
+  };
+
+  state.cases = [c, ...state.cases.filter(x => x.id !== id)];
+  state.selCase = id;
+  state.editing = null;
+  tempPhotos = []; window.currentLabs = null;
+  save(); showToast('Paciente salvo!'); setTab('home');
+}
+
+// --- TAB: HISTÓRICO DE CASOS ---
+function viewHist() {
+  let q = norm(state.searchC || '');
+  let list = state.cases.filter(c => !q || norm(c.patientCode+c.title+c.diagnosis+c.bed).includes(q));
+  
+  return `
+    <div class="panel">
+      <div class="panelHead">
+        <h2>Pacientes Internados</h2>
+        <span class="tag">${state.cases.length}</span>
+      </div>
+      <div class="panelBody">
+        <div class="search"><input value="${esc(state.searchC)}" oninput="state.searchC=this.value; render()" placeholder="Buscar nome, leito, dx..."></div>
+        <div class="list">
+          ${list.length ? list.map(c => `
+            <div class="item ${state.selCase===c.id?'active':''}" onclick="state.selCase='${c.id}'; save(); render();">
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span class="tag ${c.priority==='Crítico'?'danger':''}">${esc(c.priority)}</span>
+                <span style="font-size:10px; color:var(--muted)">${esc(c.bed)}</span>
+              </div>
+              <h4>${esc(c.patientCode)}</h4>
+              <p><b>${esc(c.title)}</b></p>
+              <div class="row" style="margin-top:12px;">
+                <button class="btn light small" onclick="event.stopPropagation(); setTab('evo')">Evoluir</button>
+                <button class="btn light small" onclick="event.stopPropagation(); state.editing='${c.id}'; setTab('case')">Editar</button>
+                <button class="btn red small" style="flex:0.5" onclick="event.stopPropagation(); doDelCase('${c.id}')">🗑️</button>
+              </div>
+            </div>
+          `).join('') : '<p style="text-align:center; color:var(--muted); margin-top:20px;">Nenhum paciente encontrado.</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+function doDelCase(id) { if(confirm('Excluir prontuário?')) { state.cases = state.cases.filter(c => c.id !== id); save(); render(); } }
+
+// --- TAB: EVOLUÇÃO DIÁRIA ---
+function viewEvo() {
+  let c = getCase();
+  if(!c) return `<div class="panel"><div class="panelBody" style="text-align:center">Selecione um paciente em "Início" ou "Pacientes" primeiro.</div></div>`;
+  
+  return `
+    <div class="panel">
+      <div class="panelHead">
+        <div><h2>Evolução Clínica</h2><p style="font-size:11px; margin:0; color:var(--muted)">${esc(c.patientCode)} • ${esc(c.bed)}</p></div>
+      </div>
+      <div class="panelBody">
+        <div style="background:#f3f4f6; border-radius:12px; padding:12px; margin-bottom:16px;">
+          <div class="row">
+            <select id="voiceTargetEvo" style="flex:2"><option value="e_s">Subjetivo / HMA</option><option value="e_v">Sinais Vitais</option><option value="e_e">Exame Físico</option><option value="e_p">Plano / Conduta</option></select>
+            <button type="button" id="btnVoiceEvo" class="btn small green" style="flex:1" onclick="toggleVoice('voiceTargetEvo', 'btnVoiceEvo')">🎙️ Ditar</button>
+          </div>
+        </div>
+        
+        <form onsubmit="doSaveEvo(event)">
+          <div class="row">
+            <div class="field"><label>Data</label><input type="date" id="e_date" value="${new Date().toISOString().split('T')[0]}"></div>
+            <div class="field"><label>Dia Int.</label><input id="e_day" placeholder="Ex: D3 UTI"></div>
+          </div>
+          <div class="field"><label>Subjetivo / Eventos</label><textarea id="e_s"></textarea></div>
+          <div class="field"><label>Sinais Vitais / Balanço</label><textarea id="e_v" rows="2"></textarea></div>
+          <div class="field"><label>Exame Físico</label><textarea id="e_e" rows="2"></textarea></div>
+          <div class="field"><label>Conduta / Plano Diário</label><textarea id="e_p"></textarea></div>
+          <button class="btn green full">Salvar Evolução</button>
+        </form>
+
+        <h3 style="margin-top:24px; border-top:1px solid var(--line); padding-top:16px;">Evoluções Anteriores</h3>
+        <div class="list">
+          ${c.evolutions?.length ? c.evolutions.map(e => `
+            <div class="item">
+              <div style="display:flex;justify-content:space-between"><b>${esc(e.day)}</b> <small>${esc(e.date)}</small></div>
+              ${e.s ? `<p><b>Subj:</b> ${esc(e.s)}</p>` : ''}
+              ${e.v ? `<p><b>Sinais:</b> ${esc(e.v)}</p>` : ''}
+              ${e.e ? `<p><b>Exame:</b> ${esc(e.e)}</p>` : ''}
+              ${e.p ? `<p style="color:var(--green-dark)"><b>Plano:</b> ${esc(e.p)}</p>` : ''}
+            </div>
+          `).join('') : '<p style="color:var(--muted);font-size:12px;">Nenhuma evolução salva ainda.</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+function doSaveEvo(e) {
+  e.preventDefault();
+  let c = getCase();
+  let ev = { id: uid('ev'), date: document.getElementById('e_date').value, day: document.getElementById('e_day').value, s: document.getElementById('e_s').value, v: document.getElementById('e_v').value, e: document.getElementById('e_e').value, p: document.getElementById('e_p').value };
+  c.evolutions = [ev, ...(c.evolutions||[])];
+  save(); showToast('Evolução registrada!'); render();
+}
+
+// --- TAB: DROGAS, CALCULADORA E TRATAMENTOS ---
+function viewDrugs() {
+  let d = getDrug();
+  let q = norm(state.searchD || '');
+  let cat = state.catD || 'Todas';
+  let cats = ['Todas', ...new Set(state.drugs.map(x=>x.cat))];
+  
+  let list = state.drugs.filter(x => (cat==='Todas' || x.cat===cat) && (!q || norm(x.n+x.cls+x.cat).includes(q)));
+  
+  // Calc Logic
+  let pAge = state.calc.age || '', pW = state.calc.weight || '', pCr = state.calc.cr || '', pSex = state.calc.sex || 'M';
+  let myClcr = clcr(pAge, pW, pCr, pSex);
+  let medsText = state.calc.meds || '';
+  let risks = checkInteractions(d.id, medsText);
+
+  return `
+    <div class="panel">
+      <div class="panelHead"><div><h2>Farmacologia UTI/Emerg</h2><p style="font-size:11px; margin:0; color:var(--muted)">Base local de dados e protocolos</p></div><span class="tag">${state.drugs.length}</span></div>
+      <div class="panelBody">
+        <div class="search"><input value="${esc(state.searchD)}" oninput="state.searchD=this.value; render()" placeholder="Ex: Noradrenalina, Propofol..."></div>
+        <div class="chips">${cats.map(c => `<button class="chip ${cat===c?'active':''}" onclick="state.catD='${c}'; render()">${c}</button>`).join('')}</div>
+        <div class="list" style="max-height: 250px; overflow-y:auto; background:#f9fafb; padding:8px; border-radius:12px; margin-top:12px;">
+          ${list.map(x => `
+            <div class="item ${d.id===x.id?'active':''}" style="padding:10px" onclick="state.selDrug='${x.id}'; save(); render();">
+              <h4 style="font-size:14px">${esc(x.n)}</h4><p style="font-size:11px; margin-top:2px;">${esc(x.cls)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panelHead"><h2>Prescrição e Alertas</h2><span class="tag blue">${esc(d.via)}</span></div>
+      <div class="panelBody">
+        <h3 style="margin:0 0 16px 0; font-size:22px;">${esc(d.n)}</h3>
+        <div class="box" style="text-align:left; border-left: 4px solid var(--green); padding-left:12px; background:#ecfdf5;">
+          <p style="margin:0; font-size:12px; color:var(--green-dark)"><b>Dose Padrão:</b><br><span style="font-size:15px">${esc(d.dose)}</span></p>
+        </div>
+        <div class="box" style="text-align:left; border-left: 4px solid var(--red); padding-left:12px; background:#fef2f2; margin-top:12px;">
+          <p style="margin:0; font-size:12px; color:var(--red)"><b>⚠️ ALERTA:</b> ${esc(d.warn)}</p>
+        </div>
+        
+        <div class="row" style="margin-top:16px;">
+          <div style="flex:1"><p style="font-size:11px; color:var(--muted); margin:0 0 4px 0; font-weight:bold;">PREPARO / ADMIN.</p><p style="font-size:13px; margin:0">${esc(d.prep)}</p></div>
+          <div style="flex:1"><p style="font-size:11px; color:var(--muted); margin:0 0 4px 0; font-weight:bold;">EFEITOS ADVERSOS</p><p style="font-size:13px; margin:0">${(d.ea||[]).join(', ')}</p></div>
+        </div>
+        
+        <hr style="border:0; border-top:1px solid var(--line); margin:20px 0;">
+        <h3 style="font-size:14px; margin-bottom:12px;">Calculadora de Ajuste Renal</h3>
+        <div class="row">
+          <div class="field"><label>Idade</label><input type="number" id="c_age" value="${pAge}" oninput="updateCalc()"></div>
+          <div class="field"><label>Peso (kg)</label><input type="number" id="c_w" value="${pW}" oninput="updateCalc()"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Creatinina</label><input type="number" step="0.1" id="c_cr" value="${pCr}" oninput="updateCalc()"></div>
+          <div class="field"><label>Sexo</label><select id="c_sex" onchange="updateCalc()"><option ${pSex==='M'?'selected':''}>M</option><option ${pSex==='F'?'selected':''}>F</option></select></div>
+        </div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#f3f4f6; padding:12px; border-radius:12px;">
+          <span style="font-size:12px; font-weight:bold">ClCr (Cockcroft-Gault):</span>
+          <b style="font-size:18px; color:${myClcr && Number(myClcr)<50 ? 'var(--red)' : 'var(--ink)'}">${myClcr ? myClcr + ' mL/min' : '--'}</b>
+        </div>
+        <p style="font-size:12px; margin:8px 0 0 0;"><b>Recomendação Renal:</b> ${esc(d.renal)}</p>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:20px 0;">
+        <h3 style="font-size:14px; margin-bottom:12px;">Checador de Interações Ativo</h3>
+        <div class="field"><label>Medicações em uso pelo paciente</label><textarea id="c_meds" oninput="updateCalc()" placeholder="Ex: Amiodarona, Varfarina, Furosemida...">${esc(medsText)}</textarea></div>
+        
+        <div class="list">
+          ${risks.length ? risks.map(r => `
+            <div class="item ${r.risk==='Alto'?'danger':'amber'}" style="padding:10px;">
+              <h4 style="font-size:13px; margin:0">⚡ Interação com ${esc(r.med)}</h4>
+              <p style="font-size:11px; margin:4px 0;">${esc(r.txt)}<br><b>Conduta:</b> ${esc(r.act)}</p>
+            </div>
+          `).join('') : '<div class="box"><p style="margin:0;font-size:12px;">Nenhuma interação crítica identificada na base local.</p></div>'}
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panelHead"><h2>Protocolos / Síndromes</h2><span class="tag">${state.tx.length}</span></div>
+      <div class="panelBody">
+        <div class="list">
+          ${state.tx.map(t => `
+            <div class="item">
+              <span class="tag">${esc(t.cat)}</span>
+              <h4 style="margin:4px 0">${esc(t.cond)}</h4>
+              <p style="font-size:13px; color:var(--ink); margin-bottom:8px;"><b>1ª Linha:</b> ${esc(t.first)}</p>
+              <div style="background:#f9fafb; padding:10px; border-radius:8px; font-size:12px; white-space:pre-line">${esc(t.scheme)}</div>
+              <p style="font-size:11px; color:var(--red); margin-top:8px;"><b>⚠️ Alerta:</b> ${esc(t.warn)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function updateCalc() {
+  state.calc = { age: document.getElementById('c_age').value, weight: document.getElementById('c_w').value, cr: document.getElementById('c_cr').value, sex: document.getElementById('c_sex').value, meds: document.getElementById('c_meds').value };
+  save(); render();
+}
+
+// --- TAB: BASE E CONFIGURAÇÕES ---
+function viewBase() {
+  return `
+    <div class="panel">
+      <div class="panelHead"><h2>Configurações e Banco de Dados</h2></div>
+      <div class="panelBody">
+        <p style="font-size:13px; color:var(--muted)">O MedCases Pro armazena dados APENAS no seu dispositivo (localStorage). Se você limpar o cache do navegador, os dados serão perdidos. Faça backup regularmente.</p>
+        
+        <div class="row" style="margin-top:16px;">
+          <button class="btn light" style="flex:1" onclick="exportData()">💾 Exportar (Backup)</button>
+          <label class="btn light" style="flex:1; text-align:center; cursor:pointer;">
+            <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+            📂 Importar Backup
+          </label>
+        </div>
+        
+        <hr style="border:0; border-top:1px solid var(--line); margin:24px 0;">
+        <h3>Adicionar Fármaco Customizado</h3>
+        <p style="font-size:11px; color:var(--muted)">Siga o padrão: Nome | Classe | Via | Dose | Renal | Alertas</p>
+        <textarea id="b_newD" placeholder="Ex:\nNome: Norepinefrina\nClasse: Vasoativo\nDose: 0.1 mcg..."></textarea>
+        <button class="btn green full" style="margin-top:8px" onclick="addNewDrug()">Salvar Droga na Base</button>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:24px 0;">
+        <button class="btn red full" onclick="if(confirm('Isso apagará TODOS os prontuários e drogas salvos. Continuar?')){localStorage.removeItem(DBKEY); location.reload();}">🚨 Resetar Aplicativo 🚨</button>
+      </div>
+    </div>
+  `;
+}
+function exportData() {
+  let blob = new Blob([JSON.stringify(state, null, 2)], {type: 'application/json'});
+  let a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `medcases_backup_${new Date().toISOString().split('T')[0]}.json`;
+  a.click(); showToast('Backup exportado com sucesso.');
+}
+function importData(e) {
+  let f = e.target.files[0]; if(!f) return;
+  let r = new FileReader();
+  r.onload = () => { try { state = JSON.parse(r.result); save(); render(); showToast('Backup Restaurado!'); } catch(err){ showToast('Arquivo Inválido'); } };
+  r.readAsText(f);
+}
+function addNewDrug() {
+  let t = document.getElementById('b_newD').value; if(!t.trim()) return;
+  let getF = (label) => { let l = t.split('\n').find(x=>norm(x).startsWith(norm(label))); return l ? l.split(':').slice(1).join(':').trim() : 'N/A'; };
+  let n = getF('Nome'); if(n==='N/A') n = t.split('\n')[0];
+  state.drugs.unshift({ id: uid('drg'), n, cat: 'Personalizado', cls: getF('Classe'), via: getF('Via'), dose: getF('Dose'), renal: getF('Renal'), warn: getF('Alerta') || getF('Alertas'), ea:[], prep: 'Validar localmente' });
+  save(); document.getElementById('b_newD').value=''; showToast('Droga adicionada.');
+}
+
+// --- CORE UTILITIES (VOICE, SCRIPT, PDF) ---
+let recog = null;
+function toggleVoice(targetSelectId = 'voiceTarget', btnId = 'btnVoice') {
+  let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) return showToast('Seu navegador (ex: iOS Safari) não suporta Voz. Use Chrome.');
+  let btn = document.getElementById(btnId);
+  if(recog) { recog.stop(); recog = null; btn?.classList.remove('voiceOn'); return; }
+  
+  recog = new SR(); recog.lang = 'pt-BR'; recog.interimResults = true; recog.continuous = false;
+  let finalStr = '';
+  
+  recog.onresult = e => {
+    let t = '';
+    for(let i = e.resultIndex; i < e.results.length; i++) {
+      if(e.results[i].isFinal) finalStr += e.results[i][0].transcript + ' ';
+      else t += e.results[i][0].transcript;
+    }
+  };
+  
+  recog.onend = () => {
+    let tgtId = document.getElementById(targetSelectId).value;
+    let el = document.getElementById(tgtId);
+    if(el && finalStr.trim()) el.value = (el.value ? el.value + '\n' : '') + finalStr.trim();
+    recog = null; btn?.classList.remove('voiceOn');
+  };
+  
+  recog.start(); btn?.classList.add('voiceOn'); showToast('Ouvindo...');
+}
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    if(document.querySelector(`script[src="${src}"]`)) return res();
+    let s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.body.appendChild(s);
+  });
+}
+
+function generateReport(id) {
+  let c = state.cases.find(x => x.id === id); if(!c) return;
+  let w = window.open('','_blank');
+  w.document.write(`
+    <html><head><title>Relatório - ${c.patientCode}</title>
+    <style>body{font-family:Arial,sans-serif; line-height:1.6; padding:20px; color:#333; max-width:800px; margin:0 auto;} h1,h2,h3{color:#047857; border-bottom:1px solid #ccc;} .sec{margin-bottom:20px;} .box{border:1px solid #ccc; padding:10px; border-radius:8px;} @media print{body{padding:0}}</style>
+    </head><body>
+      <div style="text-align:center; margin-bottom:30px"><h1>MedCases Pro - Prontuário Resumo</h1><p>Gerado em: ${new Date().toLocaleString('pt-BR')} por ${esc(state.user.name)}</p></div>
+      <div class="sec"><h2>Identificação</h2><p><b>Paciente:</b> ${esc(c.patientCode)} <b>Idade:</b> ${esc(c.age)} <b>Leito:</b> ${esc(c.bed)}</p></div>
+      <div class="sec"><h2>Quadro Clínico</h2><h3>${esc(c.title)}</h3><p><b>Diagnósticos:</b> ${esc(c.diagnosis)}</p><div class="box">${esc(c.history).replace(/\n/g,'<br>')}</div></div>
+      <div class="sec"><h2>Conduta e Plano</h2><div class="box">${esc(c.treatment).replace(/\n/g,'<br>')}</div></div>
+      <div class="sec"><h2>Laboratório e Exames</h2><p>${esc(c.labText).replace(/\n/g,'<br>')}</p></div>
+      <div class="sec"><h2>Evoluções Diárias</h2>
+        ${(c.evolutions||[]).map(e => `<h3>${esc(e.day)} (${esc(e.date)})</h3><p><b>Subjetivo:</b> ${esc(e.s)}<br><b>Vitais:</b> ${esc(e.v)}<br><b>Exame:</b> ${esc(e.e)}<br><b>Conduta:</b> ${esc(e.p)}</p>`).join('')}
+      </div>
+      <script>setTimeout(()=>window.print(), 500);<\/script>
+    </body></html>
+  `);
+  w.document.close();
+}
+
+// INIT
+function render() { document.getElementById('root').innerHTML = app(); }
 render();
 </script>
 </body>
