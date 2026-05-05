@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 function AppIcon({ label, size = 18, className = "" }) {
   return (
@@ -39,14 +39,35 @@ const X = (props) => <span className={cx("inline-flex items-center justify-cente
 function BrandMark({ size = 24, className = "" }) {
   return (
     <span
-      className={cx("relative inline-flex items-center justify-center rounded-[1.15rem] text-white shadow-[0_18px_44px_rgba(0,120,72,.28)] overflow-hidden border border-white/45", className)}
-      style={{ width: size + 18, height: size + 18, background: "linear-gradient(145deg,#006b3f,#00a86b 48%,#047857)" }}
+      className={cx(
+        "relative inline-flex items-center justify-center rounded-[1.25rem] overflow-hidden border border-white/70 shadow-[0_18px_48px_rgba(0,95,70,.22)]",
+        className
+      )}
+      style={{
+        width: size + 18,
+        height: size + 18,
+        background: "linear-gradient(145deg,#ffffff 0%,#ecfdf5 42%,#dff8ec 100%)",
+      }}
       aria-hidden="true"
     >
-      <span className="absolute inset-[1px] rounded-[1rem] bg-[radial-gradient(circle_at_25%_16%,rgba(255,255,255,.72),transparent_30%)]" />
-      <span className="absolute inset-x-[22%] top-[25%] h-[3px] rounded-full bg-white/95" />
-      <span className="relative h-[44%] w-[44%] rounded-full border-[3px] border-white border-r-white/35" />
-      <span className="absolute bottom-[25%] right-[27%] h-[18%] w-[18%] rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,.85)]" />
+      <span className="absolute inset-0 bg-[radial-gradient(circle_at_25%_18%,rgba(255,255,255,.95),transparent_32%),radial-gradient(circle_at_78%_86%,rgba(16,185,129,.22),transparent_36%)]" />
+      <span className="absolute inset-[3px] rounded-[1.05rem] border border-emerald-900/10" />
+
+      {/* Símbolo premium: banco de dados clínico + cruz médica */}
+      <span
+        className="relative grid place-items-center rounded-[0.95rem] bg-gradient-to-br from-emerald-950 via-emerald-800 to-emerald-600 text-white shadow-[0_14px_34px_rgba(0,105,75,.30)]"
+        style={{ width: size + 4, height: size + 4 }}
+      >
+        <span className="absolute left-[22%] right-[22%] top-[25%] h-[2px] rounded-full bg-white/90" />
+        <span className="absolute left-[22%] right-[22%] top-[42%] h-[2px] rounded-full bg-white/70" />
+        <span className="absolute left-[22%] right-[22%] top-[59%] h-[2px] rounded-full bg-white/55" />
+        <span className="absolute bottom-[18%] left-[23%] h-[4px] w-[4px] rounded-full bg-emerald-200" />
+        <span className="absolute bottom-[18%] right-[23%] h-[4px] w-[4px] rounded-full bg-emerald-200/85" />
+        <span className="absolute -right-[10%] -top-[10%] grid h-[42%] w-[42%] place-items-center rounded-full border border-white/55 bg-white text-emerald-800 shadow-[0_8px_20px_rgba(15,23,42,.18)]">
+          <span className="absolute h-[52%] w-[18%] rounded-full bg-emerald-700" />
+          <span className="absolute h-[18%] w-[52%] rounded-full bg-emerald-700" />
+        </span>
+      </span>
     </span>
   );
 }
@@ -55,49 +76,126 @@ function LuxuryMedicalTheme() {
   return (
     <style>{`
       :root{
-        --lux-bg:#f2fff8;
+        --lux-bg:#f7faf8;
         --lux-card:#ffffff;
-        --lux-ink:#052e1f;
-        --lux-line:rgba(0,128,88,.14);
-        --lux-green:#00a86b;
-        --lux-green-deep:#006b3f;
-        --lux-green-dark:#052e1f;
-        --lux-green-soft:#dcfce7;
+        --lux-ink:#10201a;
+        --lux-muted:#6b7a72;
+        --lux-line:rgba(15,35,27,.08);
+        --lux-green:#0f8f61;
+        --lux-green-deep:#0b6b49;
+        --lux-green-dark:#10201a;
+        --lux-green-soft:#ecfdf5;
         --lux-white:#ffffff;
       }
       body{background:var(--lux-bg)!important;}
-      .med-lux-soft{background:radial-gradient(circle_at_50%_-10%,rgba(16,185,129,.16),transparent_38%),linear-gradient(180deg,#f5fff9,#eafff3)!important;color:var(--lux-ink)!important;}
-      .med-lux-soft .shadow-xl,.med-lux-soft .shadow-2xl{box-shadow:0 24px 60px rgba(0,88,58,.14)!important;}
-      .med-lux-soft .shadow-lg{box-shadow:0 18px 42px rgba(0,88,58,.12)!important;}
-      .med-lux-soft .shadow-sm{box-shadow:0 12px 28px rgba(0,88,58,.075)!important;}
-      .med-lux-soft section,.med-lux-soft article,.med-lux-soft .bg-white,.med-lux-soft .bg-white\/95{background:rgba(255,255,255,.96)!important;border-color:var(--lux-line)!important;}
-      .med-lux-soft .bg-slate-950,.med-lux-soft .bg-emerald-950,.med-lux-soft .bg-red-950{background:linear-gradient(145deg,#052e1f,#006b3f 52%,#00a86b)!important;color:#fff!important;}
-      .med-lux-soft .bg-red-600,.med-lux-soft .bg-emerald-600,.med-lux-soft .bg-blue-600,.med-lux-soft .bg-emerald-700,.med-lux-soft .bg-red-700{background:linear-gradient(145deg,#00a86b,#008f5a 55%,#006b3f)!important;color:#fff!important;box-shadow:0 16px 34px rgba(0,120,72,.24)!important;}
-      .med-lux-soft .text-red-700,.med-lux-soft .text-emerald-700,.med-lux-soft .text-blue-700,.med-lux-soft .text-red-600,.med-lux-soft .text-red-400,.med-lux-soft .text-amber-700{color:#008f5a!important;}
-      .med-lux-soft .text-red-100,.med-lux-soft .text-red-100\/70,.med-lux-soft .text-red-100\/75,.med-lux-soft .text-red-100\/80{color:rgba(255,255,255,.82)!important;}
-      .med-lux-soft .bg-red-50,.med-lux-soft .bg-emerald-50,.med-lux-soft .bg-blue-50,.med-lux-soft .bg-amber-50,.med-lux-soft .bg-\[\#fff1f2\]{background:#f0fff7!important;border-color:#bff4d8!important;color:#052e1f!important;}
-      .med-lux-soft .border-red-100,.med-lux-soft .border-emerald-100,.med-lux-soft .border-blue-100,.med-lux-soft .border-amber-100,.med-lux-soft .border-red-200,.med-lux-soft .border-red-400{border-color:#bff4d8!important;}
-      .med-lux-soft .ring-red-100,.med-lux-soft .ring-emerald-100,.med-lux-soft .ring-blue-100{--tw-ring-color:rgba(16,185,129,.18)!important;}
-      .med-lux-soft input,.med-lux-soft textarea,.med-lux-soft select{background:#ffffff!important;border-color:#bff4d8!important;color:#052e1f!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 22px rgba(0,120,72,.04)!important;}
-      .med-lux-soft input::placeholder,.med-lux-soft textarea::placeholder{color:#6ee7b7!important;}
-      .med-lux-soft input:focus,.med-lux-soft textarea:focus,.med-lux-soft select:focus{--tw-ring-color:rgba(16,185,129,.18)!important;border-color:#00a86b!important;}
-      .med-lux-soft .bg-gradient-to-br{background:linear-gradient(145deg,#052e1f,#007f50 54%,#00bf7a)!important;}
-      .med-lux-soft .bg-slate-50,.med-lux-soft .bg-slate-100{background:#f3fff8!important;border-color:#d8fbe8!important;}
-      .med-lux-soft .text-slate-950,.med-lux-soft .text-slate-900,.med-lux-soft .text-slate-800,.med-lux-soft .text-slate-700{color:#052e1f!important;}
-      .med-lux-soft .text-slate-600,.med-lux-soft .text-slate-500,.med-lux-soft .text-slate-400{color:#43846c!important;}
-      .med-lux-soft .bg-\[\#f8f5ee\],.med-lux-soft .bg-\[\#f7f8fb\]\/86,.med-lux-soft .bg-\[\#f4f1ea\],.med-lux-soft .bg-\[\#efe5cf\]{background:#f3fff8!important;border-color:#d8fbe8!important;}
-      .med-lux-soft .text-\[\#8b6f33\],.med-lux-soft .text-\[\#d8c59b\]{color:#00a86b!important;}
-      .med-lux-soft .bg-\[\#d8c59b\]{background:#ffffff!important;color:#006b3f!important;border:1px solid rgba(255,255,255,.65)!important;box-shadow:0 14px 30px rgba(0,120,72,.18)!important;}
+
+      .med-lux-soft{
+        background:linear-gradient(180deg,#f8fbf9,#f3f8f5)!important;
+        color:var(--lux-ink)!important;
+      }
+
+      .med-lux-soft .shadow-xl,.med-lux-soft .shadow-2xl{box-shadow:0 18px 44px rgba(15,35,27,.10)!important;}
+      .med-lux-soft .shadow-lg{box-shadow:0 14px 34px rgba(15,35,27,.09)!important;}
+      .med-lux-soft .shadow-sm{box-shadow:0 8px 22px rgba(15,35,27,.055)!important;}
+
+      .med-lux-soft section,
+      .med-lux-soft article,
+      .med-lux-soft .bg-white,
+      .med-lux-soft .bg-white\/95{
+        background:rgba(255,255,255,.96)!important;
+        border-color:var(--lux-line)!important;
+      }
+
+      .med-lux-soft .bg-slate-950,
+      .med-lux-soft .bg-emerald-950,
+      .med-lux-soft .bg-red-950{
+        background:#10201a!important;
+        color:#fff!important;
+      }
+
+      .med-lux-soft .bg-red-600,
+      .med-lux-soft .bg-emerald-600,
+      .med-lux-soft .bg-blue-600,
+      .med-lux-soft .bg-emerald-700,
+      .med-lux-soft .bg-red-700{
+        background:#0f8f61!important;
+        color:#fff!important;
+        box-shadow:0 10px 24px rgba(15,143,97,.18)!important;
+      }
+
+      .med-lux-soft .bg-gradient-to-br:not(.text-white){
+        background:#ffffff!important;
+        color:var(--lux-ink)!important;
+        border-color:var(--lux-line)!important;
+      }
+
+      .med-lux-soft section.text-white,
+      .med-lux-soft article.text-white,
+      .med-lux-soft .text-white.bg-slate-950,
+      .med-lux-soft .text-white.bg-emerald-950,
+      .med-lux-soft .text-white.bg-red-950{
+        color:#ffffff!important;
+      }
+
+      .med-lux-soft .text-red-700,
+      .med-lux-soft .text-emerald-700,
+      .med-lux-soft .text-blue-700,
+      .med-lux-soft .text-red-600,
+      .med-lux-soft .text-red-400,
+      .med-lux-soft .text-amber-700{color:#0f8f61!important;}
+
+      .med-lux-soft .bg-red-50,
+      .med-lux-soft .bg-emerald-50,
+      .med-lux-soft .bg-blue-50,
+      .med-lux-soft .bg-amber-50,
+      .med-lux-soft .bg-\[\#fff1f2\]{
+        background:#f1fbf6!important;
+        border-color:#d9f2e6!important;
+        color:#10201a!important;
+      }
+
+      .med-lux-soft .border-red-100,
+      .med-lux-soft .border-emerald-100,
+      .med-lux-soft .border-blue-100,
+      .med-lux-soft .border-amber-100,
+      .med-lux-soft .border-red-200,
+      .med-lux-soft .border-red-400{border-color:#d9f2e6!important;}
+
+      .med-lux-soft input,
+      .med-lux-soft textarea,
+      .med-lux-soft select{
+        background:#ffffff!important;
+        border-color:#dfe8e2!important;
+        color:#10201a!important;
+        box-shadow:none!important;
+      }
+      .med-lux-soft input::placeholder,.med-lux-soft textarea::placeholder{color:#9aa8a0!important;}
+      .med-lux-soft input:focus,.med-lux-soft textarea:focus,.med-lux-soft select:focus{
+        --tw-ring-color:rgba(15,143,97,.13)!important;
+        border-color:#0f8f61!important;
+      }
+
+      .med-lux-soft .bg-slate-50,.med-lux-soft .bg-slate-100{
+        background:#f6faf7!important;
+        border-color:#e4ece7!important;
+      }
+      .med-lux-soft .text-slate-950,.med-lux-soft .text-slate-900,.med-lux-soft .text-slate-800,.med-lux-soft .text-slate-700{color:#10201a!important;}
+      .med-lux-soft .text-slate-600,.med-lux-soft .text-slate-500,.med-lux-soft .text-slate-400{color:#6b7a72!important;}
+
       .med-lux-soft .animate-pulse{animation:none!important;}
-      .med-lux-soft .blur-3xl{opacity:.34!important;}
-      .login-lux{background:radial-gradient(circle at 50% 0%,rgba(16,185,129,.26),transparent 34%),linear-gradient(145deg,#f5fff9,#dfffee)!important;color:#052e1f!important;}
-      .login-lux .login-card-lux{background:rgba(255,255,255,.88)!important;color:#052e1f!important;border-color:rgba(0,128,88,.16)!important;box-shadow:0 34px 90px rgba(0,88,58,.20)!important;}
-      .login-lux input{background:#ffffff!important;color:#052e1f!important;border-color:#bff4d8!important;}
-      .login-lux input::placeholder{color:#56c99b!important;}
-      .login-lux .bg-emerald-900\/70{background:#eafff3!important;border-color:#bff4d8!important;color:#052e1f!important;}
-      .login-lux .text-slate-300,.login-lux .text-emerald-100\/45,.login-lux .text-emerald-50\/80{color:#43846c!important;}
-      .login-lux .text-white{color:#052e1f!important;}
-      .login-lux button.bg-white,.login-lux .bg-white{background:linear-gradient(145deg,#00a86b,#006b3f)!important;color:#fff!important;}
+      .med-lux-soft .blur-3xl{opacity:.18!important;}
+      .med-lux-soft .rounded-\[1\.9rem\],
+      .med-lux-soft .rounded-\[1\.8rem\],
+      .med-lux-soft .rounded-\[1\.7rem\]{border-radius:1.35rem!important;}
+
+      .login-lux{background:linear-gradient(180deg,#f8fbf9,#edf7f1)!important;color:#10201a!important;}
+      .login-lux .login-card-lux{background:rgba(255,255,255,.92)!important;color:#10201a!important;border-color:rgba(15,35,27,.08)!important;box-shadow:0 24px 70px rgba(15,35,27,.14)!important;}
+      .login-lux input{background:#ffffff!important;color:#10201a!important;border-color:#dfe8e2!important;}
+      .login-lux input::placeholder{color:#8da096!important;}
+      .login-lux .bg-emerald-900\/70{background:#f1fbf6!important;border-color:#d9f2e6!important;color:#10201a!important;}
+      .login-lux .text-slate-300,.login-lux .text-emerald-100\/45,.login-lux .text-emerald-50\/80{color:#6b7a72!important;}
+      .login-lux .text-white{color:#10201a!important;}
+      .login-lux button.bg-white,.login-lux .bg-white{background:#10201a!important;color:#fff!important;}
     `}</style>
   );
 }
@@ -3443,6 +3541,45 @@ function getStorageStatus() {
   return window.localStorage?.getItem("medcases_pwa_status") || "local";
 }
 
+async function forceReloadApp() {
+  if (typeof window === "undefined") return;
+
+  const stamp = Date.now();
+
+  try {
+    window.localStorage?.setItem("medcases_last_manual_reload", String(stamp));
+    window.localStorage?.setItem("medcases_pwa_status", "manual-reload");
+  } catch {}
+
+  try {
+    if ("serviceWorker" in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map((registration) => registration.unregister()));
+    }
+  } catch (error) {
+    console.warn("Não foi possível desativar o service worker antes do reload:", error);
+  }
+
+  try {
+    if (window.caches?.keys) {
+      const cacheNames = await window.caches.keys();
+      await Promise.all(cacheNames.map((name) => window.caches.delete(name)));
+    }
+  } catch (error) {
+    console.warn("Não foi possível limpar cache antes do reload:", error);
+  }
+
+  const cleanPath = window.location.pathname || "/";
+  const nextUrl = `${cleanPath}?appReload=${stamp}`;
+  window.location.assign(nextUrl);
+
+  window.setTimeout(() => {
+    try {
+      window.location.reload();
+    } catch {}
+  }, 450);
+}
+
 function registerOfflineMode() {
   if (typeof window === "undefined") return;
 
@@ -4314,7 +4451,7 @@ function VoiceDictationBox({ title = "Preenchimento por voz", subtitle = "Fale e
   const [target, setTarget] = useState(defaultField || fields[0]?.value || "");
   const [listening, setListening] = useState(false);
   const [preview, setPreview] = useState("");
-  const recognitionRef = React.useRef(null);
+  const recognitionRef = useRef(null);
   const supported = Boolean(getSpeechRecognitionEngine());
 
   function startVoice() {
@@ -4583,11 +4720,21 @@ function markTranslationFallback(active = true) {
 
 function LanguageSelector({ language, setLanguage, t }) {
   const fallbackMode = isTranslationFallbackMode();
+
+  function changeLanguage(nextLanguage) {
+    const normalizedLanguage = nextLanguage === "es" ? "es" : "pt";
+    setLanguage(normalizedLanguage);
+    if (typeof window !== "undefined") {
+      window.localStorage?.setItem?.("medcases_language", JSON.stringify(normalizedLanguage));
+      window.dispatchEvent(new CustomEvent("medcases:language-change", { detail: normalizedLanguage }));
+    }
+  }
+
   return (
     <div className="relative inline-flex items-center gap-1 rounded-2xl bg-white border border-slate-200 p-1 shadow-sm">
       <button
         type="button"
-        onClick={() => setLanguage("pt")}
+        onClick={() => changeLanguage("pt")}
         className={cx("h-8 px-3 rounded-xl text-[11px] font-black transition", language === "pt" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100")}
         aria-label={t("portuguese")}
       >
@@ -4595,7 +4742,7 @@ function LanguageSelector({ language, setLanguage, t }) {
       </button>
       <button
         type="button"
-        onClick={() => setLanguage("es")}
+        onClick={() => changeLanguage("es")}
         className={cx("h-8 px-3 rounded-xl text-[11px] font-black transition", language === "es" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100")}
         aria-label={t("spanish")}
       >
@@ -4649,14 +4796,54 @@ function TranslationStatus({ active, language }) {
   return (
     <div className="mb-3 rounded-[1.2rem] border border-emerald-100 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-900 shadow-sm">
       <div className="flex items-center justify-between gap-3">
-        <span>Traduzindo base visível para {language === "es" ? "espanhol" : language.toUpperCase()}...</span>
+        <span>Traduciendo la base visible al español...</span>
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
       </div>
     </div>
   );
 }
 
-export default function App() {
+function translateVisibleDomText(root, language) {
+  if (typeof document === "undefined" || language !== "es" || !root) return;
+  const blockedTags = new Set(["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "SELECT", "CODE", "PRE"]);
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      if (!parent || blockedTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
+      const raw = node.nodeValue || "";
+      if (!raw.trim() || raw.trim().length < 2) return NodeFilter.FILTER_REJECT;
+      if (parent.closest("[data-no-auto-translate='true']")) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const raw = node.nodeValue || "";
+    const translated = translateTextLocal(raw, language);
+    if (translated !== raw) node.nodeValue = translated;
+  });
+
+  translateDomAttributes(root, language);
+}
+
+function translateDomAttributes(root, language) {
+  if (typeof document === "undefined" || language !== "es" || !root) return;
+  const attrs = ["placeholder", "title", "aria-label", "alt"];
+  const elements = root.querySelectorAll("[placeholder], [title], [aria-label], [alt]");
+  elements.forEach((element) => {
+    if (element.closest("[data-no-auto-translate='true']")) return;
+    attrs.forEach((attr) => {
+      const raw = element.getAttribute(attr);
+      if (!raw || !raw.trim()) return;
+      const translated = translateTextLocal(raw, language);
+      if (translated !== raw) element.setAttribute(attr, translated);
+    });
+  });
+}
+
+function App() {
   const [users, setUsers] = useState(seedUsers);
   const [currentUser, setCurrentUser] = useState(null);
   const [cases, setCases] = useState(seedCases);
@@ -4681,7 +4868,16 @@ export default function App() {
   const [drugCategory, setDrugCategory] = useState("Todos");
   const [treatmentSearch, setTreatmentSearch] = useState("");
   const [treatmentCategory, setTreatmentCategory] = useState("Todos");
-  const [language, setLanguage] = useState("pt");
+  const [language, setLanguageState] = useState(() => appDataAdapter.read("medcases_language", "pt"));
+  const setLanguage = (nextLanguage) => {
+    const normalizedLanguage = nextLanguage === "es" ? "es" : "pt";
+    setLanguageState(normalizedLanguage);
+    appDataAdapter.write("medcases_language", normalizedLanguage);
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = normalizedLanguage === "es" ? "es" : "pt-BR";
+      document.body?.setAttribute?.("data-medcases-lang", normalizedLanguage);
+    }
+  };
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [translatedItemsCache, setTranslatedItemsCache] = useState(() => appDataAdapter.read("medcases_translated_items_cache", {}));
   const [isTranslatingBase, setIsTranslatingBase] = useState(false);
@@ -4693,9 +4889,18 @@ export default function App() {
   const rawAllDrugs = useMemo(() => [...customDrugs, ...drugDatabase], [customDrugs]);
   const rawAllTreatments = useMemo(() => [...customTreatments, ...treatmentDatabase], [customTreatments]);
   const translateCache = translatedItemsCache?.[language] || {};
-  const allDrugs = language === "pt" ? rawAllDrugs : rawAllDrugs.map((item) => translateCache[`drug:${item.id}`] || item);
-  const allTreatments = language === "pt" ? rawAllTreatments : rawAllTreatments.map((item) => translateCache[`tx:${item.id}`] || item);
-  const displayedCases = language === "pt" ? cases : cases.map((item) => translateCache[`case:${item.id}`] || item);
+  const allDrugs = useMemo(() => {
+    if (language === "pt") return rawAllDrugs;
+    return rawAllDrugs.map((item) => translateCache[`drug:${item.id}`] || translateAnyValueSync(item, language));
+  }, [language, rawAllDrugs, translateCache]);
+  const allTreatments = useMemo(() => {
+    if (language === "pt") return rawAllTreatments;
+    return rawAllTreatments.map((item) => translateCache[`tx:${item.id}`] || translateAnyValueSync(item, language));
+  }, [language, rawAllTreatments, translateCache]);
+  const displayedCases = useMemo(() => {
+    if (language === "pt") return cases;
+    return cases.map((item) => translateCache[`case:${item.id}`] || translateAnyValueSync(item, language));
+  }, [language, cases, translateCache]);
 
   useEffect(() => {
     appDataAdapter.write("medcases_custom_drugs", customDrugs);
@@ -4712,6 +4917,35 @@ export default function App() {
   useEffect(() => {
     appDataAdapter.write("medcases_dark_mode", darkMode);
   }, [darkMode]);
+
+  useEffect(() => {
+    const nextLanguage = language === "es" ? "es" : "pt";
+    appDataAdapter.write("medcases_language", nextLanguage);
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = nextLanguage === "es" ? "es" : "pt-BR";
+      document.body?.setAttribute?.("data-medcases-lang", nextLanguage);
+    }
+  }, [language]);
+
+  useEffect(() => {
+    function syncExternalLanguage(event) {
+      const nextLanguage = event?.detail === "es" ? "es" : "pt";
+      setLanguageState(nextLanguage);
+    }
+
+    window.addEventListener("medcases:language-change", syncExternalLanguage);
+    return () => window.removeEventListener("medcases:language-change", syncExternalLanguage);
+  }, []);
+
+  useEffect(() => {
+    window.setTimeout(() => {
+      translateVisibleDomText(document.querySelector("main"), language);
+      translateVisibleDomText(document.querySelector("aside"), language);
+      translateVisibleDomText(document.querySelector("header"), language);
+      translateVisibleDomText(document.querySelector("nav"), language);
+      translateVisibleDomText(document.body, language);
+    }, 0);
+  }, [language, activeTab, drugSearch, drugCategory, treatmentSearch, treatmentCategory, selectedDrugId, selectedCaseId, isTranslatingBase]);
 
   useEffect(() => {
     if (language === "pt") {
@@ -5248,54 +5482,104 @@ export default function App() {
 
   if (!currentUser) {
     return (
-      <div className="login-lux min-h-screen overflow-hidden font-sans antialiased">
+      <div className="min-h-screen overflow-hidden font-sans antialiased relative bg-[#f6faf8] text-slate-950">
         <LuxuryMedicalTheme />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,.28),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(6,78,59,.95),transparent_45%)]" />
-        <div className="relative min-h-screen flex items-center justify-center p-5">
-          <div className="login-card-lux w-full max-w-sm rounded-[1.75rem] border backdrop-blur-2xl shadow-2xl p-5">
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-[74px]" />
-              <BrandMark size={34} />
-              <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
+        <style>{`
+          .premium-auth-shell, .premium-auth-shell *{box-sizing:border-box;}
+          .premium-auth-input input{background:#fff!important;color:#07152f!important;border-color:rgba(15,23,42,.10)!important;box-shadow:0 16px 34px rgba(15,23,42,.055)!important;}
+          .premium-auth-input input::placeholder{color:#8a9a93!important;}
+          .premium-auth-primary{background:linear-gradient(135deg,#07152f,#0f2f27 52%,#006b47)!important;color:#fff!important;}
+          .premium-auth-tab-active{background:#07152f!important;color:#fff!important;}
+          .premium-auth-tab-idle{background:rgba(255,255,255,.72)!important;color:#526174!important;}
+        `}</style>
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-12%,rgba(0,168,107,.20),transparent_34%),radial-gradient(circle_at_10%_80%,rgba(0,107,71,.10),transparent_30%),linear-gradient(180deg,#fbfffd_0%,#effaf5_54%,#e7f6ef_100%)]" />
+        <div className="absolute left-1/2 top-6 h-52 w-52 -translate-x-1/2 rounded-full bg-white/80 blur-3xl" />
+        <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-emerald-500/12 blur-3xl" />
+
+        <div className="premium-auth-shell relative min-h-screen flex items-center justify-center px-5 py-8">
+          <div className="w-full max-w-[390px]">
+            <div className="mb-5 flex justify-center">
+              <div className="flex items-center gap-3 rounded-[1.55rem] border border-white/80 bg-white/86 px-4 py-3 shadow-[0_22px_65px_rgba(0,74,48,.14)] backdrop-blur-2xl">
+                <BrandMark size={30} />
+                <div>
+                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[.18em] text-emerald-800">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    Clinical Workspace
+                  </div>
+                  <p className="mt-0.5 text-[11px] font-bold text-slate-500">Acesso clínico seguro</p>
+                </div>
+              </div>
             </div>
 
-            <div className="text-center mb-6">
-              <h1 className="text-3xl font-black tracking-[-.04em]">MedCases</h1>
-              <p className="text-sm text-slate-300 mt-1">{t("appSubtitle")}</p>
+            <div className="overflow-hidden rounded-[1.9rem] border border-white/90 bg-white/90 shadow-[0_34px_90px_rgba(15,23,42,.14)] backdrop-blur-2xl">
+              <div className="p-5 pb-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-black uppercase tracking-[.18em] text-emerald-700">Acesso seguro</p>
+                    <h2 className="mt-1 text-[1.45rem] font-black leading-tight tracking-[-.055em] text-slate-950">
+                      {authMode === "login" ? "" : "Criar conta"}
+                    </h2>
+                    <p className="mt-1 text-xs font-semibold text-slate-500">
+                      {authMode === "login" ? "" : "Crie seu perfil clínico em segundos."}
+                    </p>
+                  </div>
+                  <LanguageSelector language={language} setLanguage={setLanguage} t={t} />
+                </div>
+
+                <div className="mt-5 grid grid-cols-2 gap-2 rounded-[1.35rem] bg-slate-100/80 p-1.5 ring-1 ring-slate-200/70">
+                  <button
+                    type="button"
+                    onClick={() => setAuthMode("login")}
+                    className={cx("h-11 rounded-2xl text-sm font-black transition shadow-sm", authMode === "login" ? "premium-auth-tab-active shadow-slate-950/20" : "premium-auth-tab-idle hover:bg-white")}
+                  >
+                    {t("login")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAuthMode("register")}
+                    className={cx("h-11 rounded-2xl text-sm font-black transition shadow-sm", authMode === "register" ? "premium-auth-tab-active shadow-slate-950/20" : "premium-auth-tab-idle hover:bg-white")}
+                  >
+                    {t("register")}
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-100 bg-gradient-to-b from-white to-slate-50/80 p-5">
+                <form onSubmit={handleAuthSubmit} className="space-y-3">
+                  {authMode === "register" && (
+                    <div className="premium-auth-input">
+                      <AuthInput icon={<User size={18} />} placeholder={t("fullName")} value={authForm.name} onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })} />
+                    </div>
+                  )}
+                  <div className="premium-auth-input">
+                    <AuthInput icon={<User size={18} />} placeholder={t("email")} type="email" value={authForm.email} onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })} />
+                  </div>
+                  <div className="premium-auth-input">
+                    <AuthInput icon={<Lock size={18} />} placeholder={t("password")} type="password" value={authForm.password} onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })} />
+                  </div>
+
+                  <button className="premium-auth-primary group relative mt-2 w-full overflow-hidden rounded-[1.35rem] shadow-[0_22px_50px_rgba(0,80,55,.26)] transition active:scale-[.99]">
+                    <span className="absolute inset-0 bg-[radial-gradient(circle_at_28%_0%,rgba(255,255,255,.24),transparent_34%)]" />
+                    <span className="relative flex h-13 items-center justify-center gap-2 text-[15px] font-black text-white">
+                      {authMode === "login" ? t("login") : t("createAccount")}
+                      <ChevronRight size={22} className="text-white transition group-hover:translate-x-0.5" />
+                    </span>
+                  </button>
+                </form>
+
+                <div className="mt-4 rounded-[1.35rem] border border-slate-200 bg-white p-3 text-xs text-slate-600 shadow-sm">
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="font-black text-slate-950">{t("quickTest")}</p>
+                    <span className="rounded-full bg-emerald-950 px-2.5 py-1 text-[10px] font-black text-white">Demo</span>
+                  </div>
+                  <p className="leading-relaxed"><b className="text-slate-800">Admin:</b> admin@medcases.com / admin123</p>
+                  <p className="leading-relaxed"><b className="text-slate-800">Usuário:</b> demo@medcases.com / 123456</p>
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-emerald-900/70 p-1 mb-5">
-              <button
-                onClick={() => setAuthMode("login")}
-                className={cx("h-10 rounded-xl text-sm font-black transition", authMode === "login" ? "bg-white text-emerald-950" : "text-emerald-100/70")}
-              >
-                {t("login")}
-              </button>
-              <button
-                onClick={() => setAuthMode("register")}
-                className={cx("h-10 rounded-xl text-sm font-black transition", authMode === "register" ? "bg-white text-emerald-950" : "text-emerald-100/70")}
-              >
-                {t("register")}
-              </button>
-            </div>
-
-            <form onSubmit={handleAuthSubmit} className="space-y-3">
-              {authMode === "register" && (
-                <AuthInput icon={<User size={18} />} placeholder={t("fullName")} value={authForm.name} onChange={(e) => setAuthForm({ ...authForm, name: e.target.value })} />
-              )}
-              <AuthInput icon={<User size={18} />} placeholder={t("email")} type="email" value={authForm.email} onChange={(e) => setAuthForm({ ...authForm, email: e.target.value })} />
-              <AuthInput icon={<Lock size={18} />} placeholder={t("password")} type="password" value={authForm.password} onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })} />
-              <button className="w-full h-13 rounded-2xl bg-white text-emerald-950 hover:bg-emerald-50 transition font-black shadow-xl flex items-center justify-center gap-2">
-                {authMode === "login" ? t("enterApp") : t("createAccount")}
-                <ChevronRight size={22} />
-              </button>
-            </form>
-
-            <div className="mt-4 rounded-2xl bg-emerald-900/70 border border-white/10 p-3 text-xs text-emerald-50/80">
-              <p className="font-bold text-white mb-1">{t("quickTest")}</p>
-              <p>Admin: admin@medcases.com / admin123</p>
-              <p>Usuário: demo@medcases.com / 123456</p>
-            </div>
+            <p className="mt-4 text-center text-[11px] font-bold leading-relaxed text-slate-500">Protótipo educacional premium • dados locais no navegador</p>
           </div>
         </div>
         <Toast message={toast} />
@@ -5304,7 +5588,7 @@ export default function App() {
   }
 
   return (
-    <div className={cx("med-lux-soft min-h-screen font-sans antialiased tracking-[-.01em] transition-colors", darkMode ? "dark bg-slate-950 text-slate-50" : "bg-[#f4f1ea] text-slate-950")}>
+    <div key={language} className={cx("med-lux-soft min-h-screen font-sans antialiased tracking-[-.01em] transition-colors", darkMode ? "dark bg-slate-950 text-slate-50" : "bg-[#f4f1ea] text-slate-950")}>
       <LuxuryMedicalTheme />
       <div className={cx("fixed inset-x-0 top-0 z-30 backdrop-blur-2xl border-b transition-colors", darkMode ? "bg-slate-950/82 border-white/10" : "bg-white/72 border-emerald-950/10")}>
         <div className="max-w-md mx-auto px-4 h-[62px] flex items-center justify-between gap-3">
@@ -5334,14 +5618,6 @@ export default function App() {
               )}
             >
               {isOnline ? "ON" : "OFF"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setDarkMode((prev) => !prev)}
-              className={cx("h-9 w-9 rounded-2xl border grid place-items-center shadow-sm text-[12px] font-black transition", darkMode ? "bg-slate-800 border-white/10 text-amber-200" : "bg-white/90 border-emerald-100 text-slate-700")}
-              aria-label="Alternar tema"
-            >
-              {darkMode ? "☀" : "☾"}
             </button>
             <button
               onClick={() => setSideMenuOpen((prev) => !prev)}
@@ -5502,7 +5778,6 @@ export default function App() {
         )}
       </main>
       </div>
-
       <SideActionMenu
         open={sideMenuOpen}
         activeTab={activeTab}
@@ -5521,6 +5796,273 @@ export default function App() {
       <Toast message={toast} />
     </div>
   );
+}
+
+function translateTextLocal(value, targetLang = "pt") {
+  const original = String(value ?? "");
+  if (targetLang === "pt" || !original) return original;
+
+  const pairs = [
+    ["Plataforma clínica", "Plataforma clínica"], ["Painel clínico", "Panel clínico"], ["Calculadora rápida", "Calculadora rápida"],
+    ["Dose, peso e função renal", "Dosis, peso y función renal"], ["sem ocupar a tela inteira", "sin ocupar toda la pantalla"],
+    ["Completa", "Completa"], ["Fármaco", "Fármaco"], ["Fármacos", "Fármacos"], ["Tratamentos", "Tratamientos"],
+    ["Tratamento", "Tratamiento"], ["Base completa", "Base completa"], ["Protocolos prontos", "Protocolos listos"],
+    ["cadastrados", "registrados"], ["modelos", "modelos"], ["Novo caso", "Nuevo caso"], ["Histórico", "Historial"],
+    ["Paciente em foco", "Paciente en foco"], ["Evoluir hoje", "Evolucionar hoy"], ["Últimos pacientes", "Últimos pacientes"],
+    ["Acesso rápido", "Acceso rápido"], ["sem poluir o início", "sin saturar el inicio"], ["Sem código", "Sin código"],
+    ["Sem leito", "Sin cama"], ["Aguardando cálculo", "Esperando cálculo"], ["Resultado", "Resultado"],
+    ["Calcular dose", "Calcular dosis"], ["Usar dados de um paciente", "Usar datos de un paciente"],
+    ["Seleciona o paciente", "Selecciona el paciente"], ["não preenche", "no completa"], ["automaticamente", "automáticamente"],
+    ["Nenhum fármaco encontrado", "No se encontró ningún fármaco"], ["Nenhum paciente encontrado", "No se encontró ningún paciente"],
+    ["Dados alterados", "Datos modificados"], ["Toque em Calcular dose", "Toca Calcular dosis"],
+    ["Preencha", "Completa"], ["escolha", "elige"], ["Escolha", "Elige"], ["Digite", "Escribe"],
+    ["Digite ou escolha", "Escribe o elige"], ["Peso kg", "Peso kg"], ["Idade", "Edad"], ["anos", "años"],
+    ["Creatinina opcional", "Creatinina opcional"], ["opcional", "opcional"], ["Paciente selecionado", "Paciente seleccionado"],
+    ["como referência", "como referencia"], ["Feminino", "Femenino"], ["Masculino", "Masculino"],
+    ["Outro / Não informado", "Otro / No informado"], ["Selecionar", "Seleccionar"], ["Nenhuma interação", "Ninguna interacción"],
+    ["importante encontrada", "importante encontrada"], ["base local", "base local"], ["Preparo", "Preparación"], ["Diluição", "Dilución"],
+    ["Segurança farmacológica", "Seguridad farmacológica"], ["Observação importante", "Observación importante"],
+
+    ["Insuficiência", "Insuficiencia"], ["insuficiência", "insuficiencia"], ["fração de ejeção", "fracción de eyección"],
+    ["ejeção", "eyección"], ["Dispneia", "Disnea"], ["dispneia", "disnea"], ["ortopneia", "ortopnea"],
+    ["função renal", "función renal"], ["Função renal", "Función renal"], ["eletrólitos", "electrolitos"],
+    ["conduta", "conducta"], ["Conduta", "Conducta"], ["Evolução", "Evolución"], ["evolução", "evolución"],
+    ["Laboratório", "Laboratorio"], ["laboratório", "laboratorio"], ["exames", "estudios"], ["Exames", "Estudios"],
+    ["Sangramento", "Sangrado"], ["sangramento", "sangrado"], ["hipocalemia", "hipopotasemia"],
+    ["hipercalemia", "hiperpotasemia"], ["hipotensão", "hipotensión"], ["hipertensão", "hipertensión"],
+    ["monitorar", "monitorizar"], ["Monitorar", "Monitorizar"], ["dose", "dosis"], ["Dose", "Dosis"],
+    ["em adultos", "en adultos"], ["conforme", "según"], ["Idoso", "Adulto mayor"], ["idoso", "adulto mayor"],
+    ["vômitos", "vómitos"], ["sonolência", "somnolencia"], ["constipação", "estreñimiento"],
+    ["Vasopressor", "Vasopresor"], ["vasopressor", "vasopresor"], ["Glicosídeo", "Glucósido"],
+    ["Antidepressivo", "Antidepresivo"], ["Imunossupressor", "Inmunosupresor"], ["Hospitalar", "Hospitalario"],
+    ["Ambulatório", "Ambulatorio"], ["Emergência", "Emergencia"], ["emergência", "emergencia"],
+    ["Leito", "Cama"], ["leito", "cama"], ["Sem", "Sin"], ["sem", "sin"],
+    ["Neurologia", "Neurología"], ["Psiquiatria", "Psiquiatría"], ["Endócrino", "Endocrino"], ["Outros", "Otros"],
+    ["Antivirais", "Antivirales"], ["Efeitos adversos", "Efectos adversos"], ["Interações", "Interacciones"],
+    ["Frequência", "Frecuencia"], ["Duração", "Duración"], ["doença", "enfermedad"], ["Doença", "Enfermedad"],
+    ["risco", "riesgo"], ["Risco", "Riesgo"], ["segurança", "seguridad"], ["Segurança", "Seguridad"],
+    ["medicações", "medicaciones"], ["Medicações", "Medicaciones"], ["medicação", "medicación"], ["Medicação", "Medicación"],
+    ["atual", "actual"], ["Atual", "Actual"], ["após", "después"], ["Após", "Después"], ["a cada", "cada"],
+    ["por dose", "por dosis"], ["principal", "principal"], ["principais", "principales"], ["Buscar", "Buscar"],
+    ["busca", "búsqueda"], ["salvo", "guardado"], ["salvos", "guardados"], ["usuário", "usuario"], ["Usuário", "Usuario"],
+    ["Médico", "Médico"], ["Português", "Portugués"], ["Espanhol", "Español"]
+  ];
+
+  pairs.push(
+    ["Acesso seguro", "Acceso seguro"], ["Acesso clínico seguro", "Acceso clínico seguro"], ["Clinical Workspace", "Espacio clínico"],
+    ["Entrar no app", "Ingresar al app"], ["Criar conta", "Crear cuenta"], ["Criar cadastro", "Crear cuenta"],
+    ["Crie seu perfil clínico em segundos.", "Crea tu perfil clínico en segundos."], ["Protótipo educacional premium", "Prototipo educativo premium"],
+    ["dados locais no navegador", "datos locales en el navegador"], ["Teste rápido", "Prueba rápida"], ["Senha", "Contraseña"],
+    ["Nome completo", "Nombre completo"], ["E-mail", "E-mail"], ["Entrar", "Ingresar"], ["Criar", "Crear"],
+    ["Início", "Inicio"], ["Casos", "Casos"], ["Tx", "Tx"], ["Menu lateral", "Menú lateral"], ["Ações do app", "Acciones del app"],
+    ["Clínica", "Clínica"], ["Cadastrar caso", "Registrar caso"], ["Casos salvos", "Casos guardados"], ["Seguimento diário", "Seguimiento diario"],
+    ["Farmacologia", "Farmacología"], ["Doses e segurança", "Dosis y seguridad"], ["Protocolos clínicos", "Protocolos clínicos"],
+    ["Base editável", "Base editable"], ["Adicionar dados", "Agregar datos"], ["Recarregar app", "Recargar app"],
+    ["Modo offline", "Modo offline"], ["Salvamento local", "Guardado local"], ["Sincronização local ativa", "Sincronización local activa"],
+    ["Sem internet", "Sin internet"], ["Idioma", "Idioma"], ["Traduciendo", "Traduciendo"], ["Tradução", "Traducción"],
+    ["Dose clínica", "Dosis clínica"], ["Escolha o fármaco, informe paciente e calcule sem abrir a tela completa.", "Elige el fármaco, informa el paciente y calcula sin abrir la pantalla completa."],
+    ["Passo 1", "Paso 1"], ["Passo 2", "Paso 2"], ["Obrigatório", "Obligatorio"], ["Manual", "Manual"],
+    ["Digite ou selecione", "Escribe o selecciona"], ["Dados do paciente", "Datos del paciente"], ["Fármaco selecionado", "Fármaco seleccionado"],
+    ["Resultado clínico", "Resultado clínico"], ["ClCr", "ClCr"], ["Sexo", "Sexo"], ["Mulher", "Mujer"], ["Homem", "Hombre"],
+    ["Usar dados de um paciente salvo", "Usar datos de un paciente guardado"], ["Buscar por nome, código ou data...", "Buscar por nombre, código o fecha..."],
+    ["Paciente salvo / caso clínico", "Paciente guardado / caso clínico"], ["Calcular sem paciente salvo", "Calcular sin paciente guardado"],
+    ["Usar paciente atual", "Usar paciente actual"], ["Calcular manual", "Calcular manual"], ["Creatinina mg/dL", "Creatinina mg/dL"],
+    ["Sugestão de posologia", "Sugerencia de posología"], ["Status renal Cockcroft-Gault", "Estado renal Cockcroft-Gault"],
+    ["Não calculado", "No calculado"], ["Máximo adulto", "Máximo adulto"], ["Via", "Vía"], ["Via:", "Vía:"],
+    ["Medicações atuais", "Medicaciones actuales"], ["Digite uma por linha ou separada por vírgula", "Escribe una por línea o separada por coma"],
+    ["Nenhuma medicação atual informada.", "No se informó ninguna medicación actual."], ["Interações com medicações atuais", "Interacciones con medicaciones actuales"],
+    ["Comparando com", "Comparando con"], ["Isso não exclui interações reais.", "Esto no excluye interacciones reales."],
+    ["Conferir sempre com fonte institucional/bula antes de prescrever.", "Confirmar siempre con fuente institucional/prospecto antes de prescribir."],
+    ["Interação:", "Interacción:"], ["Conduta:", "Conducta:"], ["Preparo e diluição", "Preparación y dilución"],
+    ["Guia operacional do fármaco", "Guía operativa del fármaco"], ["Diluição / compatibilidade", "Dilución / compatibilidad"],
+    ["Função renal", "Función renal"], ["Dose máxima / controle", "Dosis máxima / control"], ["Efeitos adversos principais", "Efectos adversos principales"],
+    ["Interações relevantes", "Interacciones relevantes"], ["Buscar paciente, diagnóstico, leito...", "Buscar paciente, diagnóstico, cama..."],
+    ["Buscar por texto, data de envio e responsável", "Buscar por texto, fecha de envío y responsable"], ["Data inicial", "Fecha inicial"], ["Data final", "Fecha final"],
+    ["Quem subiu", "Quién subió"], ["Limpar", "Limpiar"], ["Registro do envio", "Registro del envío"], ["Subido por", "Subido por"],
+    ["Data/hora", "Fecha/hora"], ["Enviado em", "Enviado el"], ["Responsável", "Responsable"], ["Nada por aqui", "Nada por aquí"],
+    ["Salve um novo registro ou ajuste sua busca.", "Guarda un nuevo registro o ajusta tu búsqueda."], ["Editar caso", "Editar caso"],
+    ["Atualize os dados do paciente", "Actualiza los datos del paciente"], ["Cadastro clínico compacto", "Registro clínico compacto"], ["Cancelar", "Cancelar"],
+    ["Salvar caso", "Guardar caso"], ["Salvar alterações", "Guardar cambios"], ["Código", "Código"], ["Altura cm", "Altura cm"],
+    ["Prioridade", "Prioridad"], ["Especialidade", "Especialidad"], ["Título do caso", "Título del caso"], ["Diagnóstico / hipótese", "Diagnóstico / hipótesis"],
+    ["História clínica do paciente", "Historia clínica del paciente"], ["Tratamento / conduta geral", "Tratamiento / conducta general"],
+    ["Medicamentos usados", "Medicamentos usados"], ["Registro da conduta. A calculadora fica na aba Fármacos.", "Registro de la conducta. La calculadora queda en la pestaña Fármacos."],
+    ["Medicamento", "Medicamento"], ["Duração", "Duración"], ["Exames e dados complementares", "Estudios y datos complementarios"],
+    ["Evolução geral / resumo da internação", "Evolución general / resumen de la internación"], ["Dúvida clínica / discussão com preceptor", "Duda clínica / discusión con preceptor"],
+    ["Observações", "Observaciones"], ["Fotos, exames ou documentos", "Fotos, estudios o documentos"], ["Upload visual local neste protótipo", "Carga visual local en este prototipo"],
+    ["Imagem", "Imagen"], ["Arquivo", "Archivo"], ["Laboratório por imagem", "Laboratorio por imagen"], ["Envie imagem ou use a câmera, revise o OCR e aplique ao caso.", "Envía una imagen o usa la cámara, revisa el OCR y aplícalo al caso."],
+    ["Enviar imagem", "Enviar imagen"], ["Abrir câmera", "Abrir cámara"], ["Lendo imagem...", "Leyendo imagen..."], ["Extrair OCR", "Extraer OCR"],
+    ["Extrair do texto", "Extraer del texto"], ["Texto reconhecido / colar laboratório", "Texto reconocido / pegar laboratorio"], ["Dados extraídos", "Datos extraídos"],
+    ["Nenhum exame reconhecido ainda.", "Ningún estudio reconocido todavía."], ["Aplicar laboratório ao caso", "Aplicar laboratorio al caso"],
+    ["Evolução diária", "Evolución diaria"], ["Seguimento da internação", "Seguimiento de la internación"], ["Paciente / caso", "Paciente / caso"],
+    ["Adicionar evolução", "Agregar evolución"], ["Modelo diário tipo internação", "Modelo diario tipo internación"], ["Ditado da evolução", "Dictado de la evolución"],
+    ["Escolha onde inserir a fala dentro da evolução diária", "Elige dónde insertar la voz dentro de la evolución diaria"], ["Subjetivo / queixa", "Subjetivo / queja"],
+    ["Sinais vitais / balanço", "Signos vitales / balance"], ["Exame físico", "Examen físico"], ["Conduta", "Conducta"], ["Resposta / plano", "Respuesta / plan"],
+    ["Data", "Fecha"], ["Dia", "Día"], ["Salvar evolução do dia", "Guardar evolución del día"], ["Linha do tempo", "Línea de tiempo"],
+    ["Evoluções salvas", "Evoluciones guardadas"], ["Tendência clínica", "Tendencia clínica"], ["Leitura rápida da evolução do paciente", "Lectura rápida de la evolución del paciente"],
+    ["Creatinina", "Creatinina"], ["PA sistólica", "PA sistólica"], ["Sinais vitais", "Signos vitales"], ["Subjetivo", "Subjetivo"], ["Resposta", "Respuesta"],
+    ["Importar por texto", "Importar por texto"], ["Campos aceitos", "Campos aceptados"], ["Síndrome / tratamento", "Síndrome / tratamiento"],
+    ["Texto para organizar automaticamente", "Texto para organizar automáticamente"], ["Prévia antes de salvar", "Vista previa antes de guardar"],
+    ["Confirmar e adicionar na base", "Confirmar y agregar a la base"], ["Salvamento local ativo", "Guardado local activo"], ["Criar caso por texto", "Crear caso por texto"],
+    ["Texto do caso clínico", "Texto del caso clínico"], ["Organizar no formulário de caso", "Organizar en el formulario del caso"],
+    ["Validação da base personalizada", "Validación de la base personalizada"], ["Check-up automático dos dados adicionados", "Chequeo automático de los datos agregados"],
+    ["Itens personalizados", "Ítems personalizados"], ["Excluir", "Eliminar"], ["Backup e restauração", "Backup y restauración"], ["Proteção da base local antes do Firebase", "Protección de la base local antes de Firebase"],
+    ["Cofre local do app", "Cofre local del app"], ["Exportar backup", "Exportar backup"], ["Importar backup", "Importar backup"],
+    ["Buscar tratamento", "Buscar tratamiento"], ["Pesquise por doença, síndrome, fármaco ou categoria", "Busca por enfermedad, síndrome, fármaco o categoría"],
+    ["Base clínica inicial", "Base clínica inicial"], ["Protocolos por doença ou síndrome", "Protocolos por enfermedad o síndrome"], ["Primeira linha", "Primera línea"],
+    ["1ª linha", "1ª línea"], ["Cenário", "Escenario"], ["Objetivo", "Objetivo"], ["Esquema essencial", "Esquema esencial"],
+    ["Monitorização", "Monitorización"], ["Alerta crítico", "Alerta crítico"], ["Fármacos vinculados", "Fármacos vinculados"], ["Sem fármaco vinculado na base atual.", "Sin fármaco vinculado en la base actual."],
+    ["Baixo", "Bajo"], ["Moderado", "Moderado"], ["Alto", "Alto"], ["Crítico", "Crítico"], ["Selecionado", "Seleccionado"],
+    ["Admin", "Admin"], ["Doutor", "Médico"], ["Dr.", "Dr."], ["Local", "Local"], ["Paciente", "Paciente"], ["Clínica / Uro", "Clínica / Uro"],
+    ["Analgésicos", "Analgésicos"], ["Antibióticos", "Antibióticos"], ["Antifúngicos", "Antifúngicos"], ["Antitrombóticos", "Antitrombóticos"],
+    ["Cardiovascular", "Cardiovascular"], ["Antieméticos / Anti-H1", "Antieméticos / Anti-H1"], ["Anestesia / Sedação", "Anestesia / Sedación"],
+    ["Antídotos / Eletrólitos", "Antídotos / Electrolitos"], ["Hemoterapia / Expansores", "Hemoterapia / Expansores"], ["Hematologia", "Hematología"],
+    ["Gastro", "Gastro"], ["Reumato / Imuno", "Reumato / Inmuno"], ["Vitaminas / Minerais", "Vitaminas / Minerales"], ["Endócrino / Metabolismo", "Endocrino / Metabolismo"]
+  );
+
+  let out = original;
+  pairs.forEach(([from, to]) => { out = out.split(from).join(to); });
+  return out;
+}
+
+function translateAnyValue(value, targetLang = "pt") {
+  return Promise.resolve(translateAnyValueSync(value, targetLang));
+}
+
+function translateAnyValueSync(value, targetLang = "pt") {
+  if (targetLang === "pt") return value;
+  if (typeof value === "string") return translateTextLocal(value, targetLang);
+  if (Array.isArray(value)) return value.map((item) => translateAnyValueSync(item, targetLang));
+  if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([key, val]) => [key, translateAnyValueSync(val, targetLang)]));
+  return value;
+}
+
+function getTextField(rawText, labels = []) {
+  const lines = String(rawText || "").split(String.fromCharCode(10)).map((line) => line.trim()).filter(Boolean);
+  const normalizedLabels = labels.map((label) => normalizeText(label));
+  for (const line of lines) {
+    const normalizedLine = normalizeText(line);
+    const found = normalizedLabels.find((label) => normalizedLine.startsWith(label + ":") || normalizedLine.startsWith(label + " -") || normalizedLine.startsWith(label + "="));
+    if (found) {
+      const colon = line.indexOf(":");
+      const eq = line.indexOf("=");
+      const dash = line.indexOf("-");
+      const indexes = [colon, eq, dash].filter((n) => n >= 0);
+      const cut = indexes.length ? Math.min(...indexes) : -1;
+      return cut >= 0 ? line.slice(cut + 1).trim() : "";
+    }
+  }
+  return "";
+}
+
+function splitListField(value) {
+  return String(value || "").replaceAll(";", ",").replaceAll(String.fromCharCode(10), ",").split(",").map((item) => item.trim()).filter(Boolean);
+}
+
+function slugifyId(prefix, value) {
+  const plain = String(value || "personalizado").normalize("NFD").split("").filter((char) => {
+    const code = char.charCodeAt(0);
+    return code < 768 || code > 879;
+  }).join("");
+  const base = plain.toLowerCase().split("").map((char) => /[a-z0-9]/.test(char) ? char : "-").join("").split("-").filter(Boolean).join("-").slice(0, 48);
+  return `${prefix}_${base || makeId("item")}`;
+}
+
+function parseDrugFromSingleText(rawText) {
+  const text = String(rawText || "").trim();
+  const firstLine = text.split(String.fromCharCode(10)).find(Boolean) || "Fármaco personalizado";
+  const name = getTextField(text, ["Nome", "Nombre", "Fármaco", "Farmaco", "Medicamento", "Drug"]) || firstLine.replace("Nome:", "").replace("Nombre:", "").trim() || "Fármaco personalizado";
+  const className = getTextField(text, ["Classe", "Clase", "Class", "Classificação", "Clasificación"]) || "Classe personalizada";
+  const adverseRaw = getTextField(text, ["Efeitos adversos", "Efectos adversos", "EA", "Adversos", "Reações adversas"]);
+  const interactionsRaw = getTextField(text, ["Interações", "Interacciones", "Interações medicamentosas", "Interacciones medicamentosas"]);
+  return {
+    id: slugifyId("custom_drug", name),
+    name,
+    className,
+    category: getTextField(text, ["Categoria", "Categoría"]) || "Personalizado",
+    defaultRoute: getTextField(text, ["Via", "Vía", "Route", "Administração", "Administración"]) || "—",
+    unit: getTextField(text, ["Unidade", "Unidad", "Unit"]) || "",
+    doseType: "fixedRange",
+    fixedDose: getTextField(text, ["Dose", "Dosis", "Posologia", "Dosagem"]) || "Individualizar conforme protocolo.",
+    pediatricFormula: getTextField(text, ["Pediatria", "Pediatría", "Pediatric"]),
+    adultMax: getTextField(text, ["Máximo", "Maximo", "Máximo adulto", "Max adulto"]) || "Revisar dose máxima conforme protocolo.",
+    renalNote: getTextField(text, ["Renal", "Rim", "Riñón", "Função renal", "Función renal"]) || "Revisar função renal conforme protocolo.",
+    elderlyNote: getTextField(text, ["Idoso", "Adulto mayor", "Anciano", "Geriatria"]) || "Atenção em idosos/frágeis.",
+    adverse: adverseRaw ? splitListField(adverseRaw) : ["Revisar efeitos adversos principais."],
+    interactions: interactionsRaw ? splitListField(interactionsRaw) : ["Revisar interações medicamentosas."],
+    warning: getTextField(text, ["Alerta", "Warning", "Atenção", "Precaución", "Precaução"]) || "Validar indicação, contraindicações e segurança antes do uso.",
+    prep: getTextField(text, ["Preparo", "Preparación", "Administração", "Administración"]) || "Conferir apresentação, concentração e compatibilidade.",
+    dilution: getTextField(text, ["Diluição", "Dilución", "Diluicao", "Compatibilidade", "Compatibilidad"]) || "Diluição conforme apresentação e protocolo institucional.",
+    custom: true,
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function parseTreatmentFromSingleText(rawText) {
+  const text = String(rawText || "").trim();
+  const firstLine = text.split(String.fromCharCode(10)).find(Boolean) || "Tratamento personalizado";
+  const condition = getTextField(text, ["Síndrome", "Sindrome", "Doença", "Doenca", "Condición", "Condicion", "Condição", "Tratamento", "Tratamiento"]) || firstLine.replace("Síndrome:", "").replace("Sindrome:", "").trim() || "Tratamento personalizado";
+  const drugField = getTextField(text, ["Fármacos", "Farmacos", "Medicamentos", "Drugs"]);
+  return {
+    id: slugifyId("custom_tx", condition),
+    category: getTextField(text, ["Categoria", "Categoría", "Área", "Area"]) || "Personalizado",
+    condition,
+    type: getTextField(text, ["Tipo", "Type"]) || "Protocolo personalizado",
+    firstLine: getTextField(text, ["Primeira linha", "1ª linha", "Primera línea", "Primera linea", "First line", "Tratamento inicial"]) || "Revisar protocolo.",
+    essentialDrugs: splitListField(drugField).map((item) => slugifyId("custom_drug", item)).filter(Boolean),
+    setting: getTextField(text, ["Cenário", "Cenario", "Escenario", "Setting"]) || "Conforme contexto clínico",
+    goal: getTextField(text, ["Objetivo", "Goal"]) || "Organizar tratamento e monitorização.",
+    scheme: getTextField(text, ["Esquema", "Scheme", "Plano", "Plan"]) || text,
+    monitoring: getTextField(text, ["Monitorização", "Monitorizacion", "Monitorización", "Monitoring"]) || "Monitorar resposta clínica, segurança e exames necessários.",
+    warning: getTextField(text, ["Alerta", "Warning", "Atenção", "Precaución", "Precaução"]) || "Validar com protocolo institucional.",
+    custom: true,
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function parseCaseFromSingleText(rawText) {
+  const text = String(rawText || "").trim();
+  const firstLine = text.split(String.fromCharCode(10)).find(Boolean) || "Caso clínico importado";
+  const ageToken = (text.match(/[0-9]{1,3}/) || [""])[0];
+  const sex = /feminino|femenino|mulher|mujer/i.test(text) ? "Feminino" : /masculino|hombre|homem/i.test(text) ? "Masculino" : "";
+  return {
+    patientCode: getTextField(text, ["Código", "Codigo", "Paciente", "Patient"]),
+    age: getTextField(text, ["Idade", "Edad"]) || ageToken,
+    sex,
+    weight: getTextField(text, ["Peso"]),
+    height: getTextField(text, ["Altura", "Talla"]),
+    currentMedications: getTextField(text, ["Medicações atuais", "Medicaciones actuales", "Medicação atual", "Medicación actual"]),
+    title: getTextField(text, ["Título", "Titulo", "Title", "Caso"]) || firstLine,
+    specialty: getTextField(text, ["Especialidade", "Especialidad"]),
+    bed: getTextField(text, ["Leito", "Cama"]),
+    priority: getTextField(text, ["Prioridade", "Prioridad"]) || "Moderado",
+    diagnosis: getTextField(text, ["Diagnóstico", "Diagnostico", "Dx", "Hipótese", "Hipotesis"]) || "",
+    caseDetails: getTextField(text, ["História", "Historia", "HDA", "Quadro", "Caso clínico", "Caso clinico"]) || text,
+    treatment: getTextField(text, ["Tratamento", "Tratamiento", "Conduta", "Conducta"]) || "",
+    medication: getTextField(text, ["Medicamento", "Fármaco", "Farmaco"]),
+    dose: getTextField(text, ["Dose", "Dosis"]),
+    route: getTextField(text, ["Via", "Vía"]),
+    frequency: getTextField(text, ["Frequência", "Frecuencia"]),
+    duration: getTextField(text, ["Duração", "Duración"]),
+    exams: getTextField(text, ["Exames", "Estudios", "Laboratório", "Laboratorio"]),
+    observations: getTextField(text, ["Observações", "Observaciones", "Alerta"]),
+  };
+}
+
+function validateCustomBase(customDrugs = [], customTreatments = []) {
+  const issues = [];
+  customDrugs.forEach((drug) => {
+    if (!drug.name) issues.push("Fármaco personalizado sem nome.");
+    if (!drug.className) issues.push(`${drug.name || "Fármaco"}: falta classe.`);
+    if (!drug.fixedDose) issues.push(`${drug.name || "Fármaco"}: falta dose/posologia.`);
+    if (!drug.warning) issues.push(`${drug.name || "Fármaco"}: falta alerta principal.`);
+  });
+  customTreatments.forEach((tx) => {
+    if (!tx.condition) issues.push("Tratamento personalizado sem síndrome/doença.");
+    if (!tx.firstLine) issues.push(`${tx.condition || "Tratamento"}: falta primeira linha.`);
+    if (!tx.scheme) issues.push(`${tx.condition || "Tratamento"}: falta esquema.`);
+    if (!tx.warning) issues.push(`${tx.condition || "Tratamento"}: falta alerta.`);
+  });
+  return issues;
 }
 
 function CaseExportActions({ item, compact = false }) {
@@ -5707,32 +6249,41 @@ function HomeScreen({ stats, selectedCase, visibleCases, setActiveTab, setSelect
 
   return (
     <div className="space-y-4">
-      <section className="rounded-[1.6rem] bg-white/95 border border-emerald-950/10 p-4 shadow-sm overflow-hidden relative">
-        <div className="absolute right-[-80px] top-[-90px] h-44 w-44 rounded-full bg-emerald-200/38 blur-3xl" />
-        <div className="relative">
-          <div className="flex items-center justify-between gap-3 mb-4">
+      <section className="rounded-[1.65rem] bg-white/95 border border-emerald-950/10 shadow-sm overflow-hidden relative">
+        <div className="absolute right-[-90px] top-[-90px] h-44 w-44 rounded-full bg-emerald-200/34 blur-3xl" />
+        <div className="relative p-4 border-b border-emerald-950/10 bg-gradient-to-br from-white via-emerald-50/70 to-white">
+          <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-[10px] text-emerald-700 font-black uppercase tracking-[.18em]">Painel clínico</p>
-              <h2 className="text-[1.55rem] leading-none font-black tracking-[-.055em] text-slate-950 mt-1">Calculadora rápida</h2>
-              <p className="text-xs text-slate-500 mt-1">Dose, peso e função renal sem ocupar a tela inteira.</p>
+              <p className="text-[10px] text-emerald-700 font-black uppercase tracking-[.18em]">Calculadora rápida</p>
+              <h2 className="text-[1.55rem] leading-none font-black tracking-[-.055em] text-slate-950 mt-1">Dose clínica</h2>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">Escolha o fármaco, informe paciente e calcule sem abrir a tela completa.</p>
             </div>
             <button
               type="button"
               onClick={() => setActiveTab("drugs")}
-              className="h-10 px-3 rounded-2xl bg-slate-950 text-white text-xs font-black shadow-sm"
+              className="h-10 px-3 rounded-2xl bg-slate-950 text-white text-xs font-black shadow-sm shrink-0"
             >
               Completa
             </button>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <Field label="Fármaco">
+        <div className="relative p-4 space-y-3">
+          <div className="rounded-[1.35rem] bg-slate-50 border border-slate-200 p-3 space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[.14em] text-slate-500">Passo 1</p>
+                <p className="text-sm font-black text-slate-950">Fármaco</p>
+              </div>
+              <span className="rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[10px] font-black text-slate-500">Obrigatório</span>
+            </div>
+            <Field label="Digite ou selecione">
               <div className="relative">
                 <Input
                   value={homeDrugInput}
                   onFocus={() => setShowHomeDrugPicker(true)}
                   onChange={(e) => handleQuickDrugInput(e.target.value)}
-                  placeholder="Digite ou escolha"
+                  placeholder="Ex: furosemida, morfina, ceftriaxona..."
                 />
                 {showHomeDrugPicker && (
                   <div className="absolute z-40 mt-2 w-full overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-2xl max-h-64 overflow-y-auto">
@@ -5753,48 +6304,91 @@ function HomeScreen({ stats, selectedCase, visibleCases, setActiveTab, setSelect
                 )}
               </div>
             </Field>
-            <Field label="Peso kg">
-              <Input type="number" inputMode="decimal" value={homeCalc.weight} onChange={(e) => { setHomeCalc({ ...homeCalc, weight: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="kg" />
+          </div>
+
+          <div className="rounded-[1.35rem] bg-slate-50 border border-slate-200 p-3 space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[.14em] text-slate-500">Passo 2</p>
+                <p className="text-sm font-black text-slate-950">Dados do paciente</p>
+              </div>
+              <span className="rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[10px] font-black text-slate-500">Manual</span>
+            </div>
+
+            <Field label="Sexo">
+              <GenderVisualSelector
+                compact
+                value={homeCalc.sex}
+                onChange={(sex) => {
+                  setHomeCalc({ ...homeCalc, sex });
+                  setHomeCalcResult(null);
+                  setHomeCalcClcr(null);
+                  setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado.");
+                }}
+              />
             </Field>
-            <Field label="Idade">
-              <Input type="number" inputMode="numeric" value={homeCalc.age} onChange={(e) => { setHomeCalc({ ...homeCalc, age: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="anos" />
-            </Field>
+
+            <div className="grid grid-cols-2 gap-2">
+              <Field label="Idade">
+                <Input type="number" inputMode="numeric" value={homeCalc.age} onChange={(e) => { setHomeCalc({ ...homeCalc, age: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="anos" />
+              </Field>
+              <Field label="Peso kg">
+                <Input type="number" inputMode="decimal" value={homeCalc.weight} onChange={(e) => { setHomeCalc({ ...homeCalc, weight: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="kg" />
+              </Field>
+            </div>
+
             <Field label="Creatinina opcional">
-              <Input type="number" inputMode="decimal" step="0.1" value={homeCalc.creatinine} onChange={(e) => { setHomeCalc({ ...homeCalc, creatinine: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="Opcional" />
+              <Input type="number" inputMode="decimal" step="0.1" value={homeCalc.creatinine} onChange={(e) => { setHomeCalc({ ...homeCalc, creatinine: e.target.value }); setHomeCalcResult(null); setHomeCalcClcr(null); setHomeCalcMessage("Dados alterados. Toque em Calcular dose para atualizar o resultado."); }} placeholder="Ex: 1.0" />
             </Field>
           </div>
 
           <button
             type="button"
             onClick={calculateHomeQuickDose}
-            className="mt-3 w-full h-12 rounded-2xl bg-emerald-600 text-white text-sm font-black shadow-lg active:scale-[.99] transition"
+            className="w-full h-12 rounded-2xl bg-emerald-600 text-white text-sm font-black shadow-lg active:scale-[.99] transition"
           >
             Calcular dose
           </button>
 
-          <div className="mt-3 rounded-[1.35rem] bg-slate-950 text-white p-4 shadow-sm">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-[10px] font-black uppercase tracking-[.16em] text-emerald-200">Resultado</p>
-                <p className="text-xl font-black tracking-[-.045em] leading-tight mt-1">{homeDose?.main || "Aguardando cálculo"}</p>
-                <p className="text-xs text-slate-300 mt-1 line-clamp-2">{homeCalcMessage}</p>
-                <p className="text-[11px] text-slate-400 mt-1 line-clamp-1">{selectedHomeDrug?.name} • {selectedHomeDrug?.defaultRoute}</p>
+          <div className="rounded-[1.45rem] bg-slate-950 text-white p-4 shadow-sm overflow-hidden relative">
+            <div className="absolute right-[-42px] bottom-[-46px] h-28 w-28 rounded-full bg-emerald-400/20 blur-2xl" />
+            <div className="relative space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[10px] font-black uppercase tracking-[.16em] text-emerald-200">Resultado clínico</p>
+                <span className="rounded-full bg-white/10 border border-white/10 px-2.5 py-1 text-[10px] font-black text-slate-200">{selectedHomeDrug?.defaultRoute || "Via"}</span>
               </div>
-              <div className="text-right shrink-0">
-                <p className="text-[10px] text-slate-400 font-black uppercase">ClCr</p>
-                <p className="text-base font-black">{homeClcr ? `${homeClcr}` : "Opc."}</p>
-                <p className="text-[10px] text-slate-400">{homeClcr ? "mL/min" : "opcional"}</p>
+
+              <div>
+                <p className="text-2xl font-black tracking-[-.055em] leading-tight">{homeDose?.main || "Aguardando cálculo"}</p>
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">{homeCalcMessage}</p>
+              </div>
+
+              <div className="rounded-2xl bg-white/[.06] border border-white/10 p-3">
+                <p className="text-[10px] font-black uppercase tracking-[.14em] text-slate-400">Fármaco selecionado</p>
+                <p className="text-sm font-black text-white truncate mt-0.5">{selectedHomeDrug?.name || "—"}</p>
+                <p className="text-[11px] text-slate-400 truncate">{selectedHomeDrug?.className || "—"}</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-2xl bg-white/[.06] border border-white/10 p-3">
+                  <p className="text-[10px] text-slate-400 font-black uppercase">ClCr</p>
+                  <p className="text-base font-black">{homeClcr ? `${homeClcr} mL/min` : "Opcional"}</p>
+                </div>
+                <div className="rounded-2xl bg-white/[.06] border border-white/10 p-3">
+                  <p className="text-[10px] text-slate-400 font-black uppercase">Sexo</p>
+                  <p className="text-base font-black">{homeCalc.sex || "—"}</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-3 relative">
+          <div className="relative">
             <button
               type="button"
               onClick={() => setShowPatientPicker((prev) => !prev)}
               className="w-full h-10 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs font-black"
             >
-              Usar dados de um paciente
+              Usar dados de um paciente salvo
             </button>
 
             {showPatientPicker && (
@@ -5829,122 +6423,6 @@ function HomeScreen({ stats, selectedCase, visibleCases, setActiveTab, setSelect
           </div>
         </div>
       </section>
-
-      <section className="grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={() => setActiveTab("drugs")}
-          className="rounded-[1.45rem] bg-white border border-slate-200 p-4 text-left shadow-sm active:scale-[.99] transition"
-        >
-          <div className="h-11 w-11 rounded-2xl bg-slate-950 text-emerald-200 grid place-items-center mb-3"><DoseIcon size={18} /></div>
-          <p className="font-black tracking-[-.035em] text-slate-950">Fármacos</p>
-          <p className="text-xs text-slate-500 mt-0.5">Base completa</p>
-          <p className="mt-2 text-[11px] font-black text-emerald-700">{allDrugs.length} cadastrados</p>
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTab("treatments")}
-          className="rounded-[1.45rem] bg-white border border-slate-200 p-4 text-left shadow-sm active:scale-[.99] transition"
-        >
-          <div className="h-11 w-11 rounded-2xl bg-emerald-950 text-white grid place-items-center mb-3"><TreatmentIcon size={18} /></div>
-          <p className="font-black tracking-[-.035em] text-slate-950">Tratamentos</p>
-          <p className="text-xs text-slate-500 mt-0.5">Protocolos prontos</p>
-          <p className="mt-2 text-[11px] font-black text-emerald-700">{allTreatments.length} modelos</p>
-        </button>
-      </section>
-
-      <HomeExpandableLibraryCard
-        type="drugs"
-        title="Fármacos"
-        subtitle="Lista farmacológica completa com dose, via, classe e segurança"
-        count={allDrugs.length}
-        expanded={expandedCard === "drugs"}
-        onToggle={() => setExpandedCard(expandedCard === "drugs" ? null : "drugs")}
-        search={homeDrugSearch}
-        setSearch={setHomeDrugSearch}
-        category={homeDrugCategory}
-        setCategory={setHomeDrugCategory}
-        categories={drugCategories}
-      >
-        <div className="space-y-2 max-h-[520px] overflow-auto pr-1">
-          <div className="mb-2 rounded-2xl bg-emerald-50 border border-emerald-100 px-3 py-2 text-[11px] font-black text-emerald-800">
-            Mostrando {homeFilteredDrugs.length} de {allDrugs.length} fármacos cadastrados
-          </div>
-          {homeFilteredDrugs.length === 0 ? <EmptyState compact text="Nenhum fármaco encontrado." /> : homeFilteredDrugs.map((drug) => (
-            <button
-              key={drug.id}
-              type="button"
-              onClick={() => { setHomeCalc((prev) => ({ ...prev, drugId: drug.id })); setActiveTab("drugs"); }}
-              className="w-full rounded-[1.2rem] bg-white border border-slate-200 p-3 text-left flex items-center justify-between gap-3 shadow-sm"
-            >
-              <div className="min-w-0">
-                <p className="font-black text-sm truncate tracking-[-.025em]">{drug.name}</p>
-                <p className="text-[11px] text-slate-500 truncate">{drug.className} • {drug.defaultRoute}</p>
-              </div>
-              <span className="rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 px-2 py-1 text-[10px] font-black shrink-0">{getDrugCategory(drug)}</span>
-            </button>
-          ))}
-        </div>
-      </HomeExpandableLibraryCard>
-
-      <HomeExpandableLibraryCard
-        type="treatments"
-        title="Tratamentos"
-        subtitle="Protocolos por síndrome com metas, esquema e alertas"
-        count={allTreatments.length}
-        expanded={expandedCard === "treatments"}
-        onToggle={() => setExpandedCard(expandedCard === "treatments" ? null : "treatments")}
-        search={homeTreatmentSearch}
-        setSearch={setHomeTreatmentSearch}
-        category={homeTreatmentCategory}
-        setCategory={setHomeTreatmentCategory}
-        categories={treatmentCategories}
-      >
-        <div className="space-y-2 max-h-[520px] overflow-auto pr-1">
-          <div className="mb-2 rounded-2xl bg-emerald-50 border border-emerald-100 px-3 py-2 text-[11px] font-black text-emerald-800">
-            Mostrando {homeFilteredTreatments.length} de {allTreatments.length} tratamentos cadastrados
-          </div>
-          {homeFilteredTreatments.length === 0 ? <EmptyState compact text="Nenhum tratamento encontrado." /> : homeFilteredTreatments.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setActiveTab("treatments")}
-              className="w-full rounded-[1.2rem] bg-white border border-slate-200 p-3 text-left shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="font-black text-sm tracking-[-.025em] line-clamp-1">{item.condition}</p>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-2"><b>1ª linha:</b> {item.firstLine}</p>
-                </div>
-                <span className="rounded-full bg-slate-100 text-slate-600 px-2 py-1 text-[10px] font-black shrink-0">{item.category}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </HomeExpandableLibraryCard>
-
-      <div className="grid grid-cols-2 gap-3">
-        <button onClick={() => setActiveTab("new")} className="h-12 rounded-2xl bg-slate-950 text-white text-sm font-black shadow-sm">+ Novo caso</button>
-        <button onClick={() => setActiveTab("history")} className="h-12 rounded-2xl bg-white border border-slate-200 text-slate-800 text-sm font-black shadow-sm">Histórico</button>
-      </div>
-
-      {selectedCase && (
-        <div className="rounded-[1.5rem] bg-white border border-slate-200 p-4 shadow-sm">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <p className="text-[11px] font-black text-emerald-700 uppercase tracking-[.14em]">Paciente em foco</p>
-              <h3 className="font-black text-lg leading-tight tracking-[-.03em] mt-1">{selectedCase.title}</h3>
-              <p className="text-sm text-slate-500">{selectedCase.patientCode || t("noCode")} • {selectedCase.bed || t("noBed")}</p>
-            </div>
-            <PriorityPill value={selectedCase.priority} />
-          </div>
-          <div className="grid grid-cols-2 gap-2 mt-3">
-            <button onClick={() => setActiveTab("evolution")} className="h-11 rounded-2xl bg-slate-950 text-white font-black text-sm">Evoluir hoje</button>
-            <button onClick={fillCalcFromSelectedCase} className="h-11 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-800 font-black text-sm">Fármacos</button>
-          </div>
-          
-        </div>
-      )}
 
       <AppPanel title={t("lastPatients")} subtitle="Acesso rápido, sem poluir o início" compact>
         <div className="space-y-2">
@@ -6810,12 +7288,10 @@ function DrugCalculatorScreen({
             <Input type="number" inputMode="numeric" min="0" value={calcPatient.age} onChange={(e) => setCalcPatient({ ...calcPatient, age: e.target.value })} placeholder="anos" />
           </Field>
           <Field label="Sexo">
-            <Select value={calcPatient.sex} onChange={(e) => setCalcPatient({ ...calcPatient, sex: e.target.value })}>
-              <option value="">Selecionar</option>
-              <option>Feminino</option>
-              <option>Masculino</option>
-              <option>Outro / Não informado</option>
-            </Select>
+            <GenderVisualSelector
+              value={calcPatient.sex}
+              onChange={(sex) => setCalcPatient({ ...calcPatient, sex })}
+            />
           </Field>
           <Field label="Peso kg">
             <Input type="number" inputMode="decimal" min="0" step="0.1" value={calcPatient.weight} onChange={(e) => setCalcPatient({ ...calcPatient, weight: e.target.value })} placeholder="kg" />
@@ -7075,7 +7551,13 @@ function SideActionMenu({ open, activeTab, setActiveTab, setOpen, t }) {
             </div>
           </div>
         ))}
-        <button type="button" onClick={() => window.location.reload()} className="w-full h-10 rounded-2xl bg-slate-950 text-white text-xs font-black">Recarregar app</button>
+        <button
+          type="button"
+          onClick={forceReloadApp}
+          className="w-full h-10 rounded-2xl bg-slate-950 text-white text-xs font-black"
+        >
+          Recarregar app
+        </button>
       </div>
     </aside>
   );
@@ -7150,6 +7632,68 @@ function Field({ label, children, wide }) {
       <span className="block text-[11px] font-black uppercase tracking-[.14em] text-slate-500 mb-1.5">{label}</span>
       {children}
     </label>
+  );
+}
+
+function GenderVisualSelector({ value, onChange, compact = false }) {
+  const options = [
+    {
+      value: "Feminino",
+      label: "Mulher",
+      helper: "Feminino",
+      icon: "♀",
+      glow: "bg-pink-400",
+      activeClass: "bg-pink-50 border-pink-300 ring-pink-100 text-pink-800",
+      iconClass: "bg-pink-500 text-white shadow-pink-500/30",
+      inactiveClass: "bg-white border-slate-200 text-slate-500 hover:bg-pink-50 hover:border-pink-200",
+    },
+    {
+      value: "Masculino",
+      label: "Homem",
+      helper: "Masculino",
+      icon: "♂",
+      glow: "bg-blue-400",
+      activeClass: "bg-blue-50 border-blue-300 ring-blue-100 text-blue-800",
+      iconClass: "bg-blue-600 text-white shadow-blue-600/30",
+      inactiveClass: "bg-white border-slate-200 text-slate-500 hover:bg-blue-50 hover:border-blue-200",
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {options.map((option) => {
+        const active = value === option.value;
+        return (
+          <button
+            key={option.value}
+            type="button"
+            onClick={() => onChange(option.value)}
+            className={cx(
+              "relative overflow-hidden rounded-[1.25rem] border p-2.5 text-left transition active:scale-[.99]",
+              active ? `ring-4 ${option.activeClass}` : option.inactiveClass,
+              compact ? "min-h-[74px]" : "min-h-[92px]"
+            )}
+            aria-pressed={active}
+          >
+            <span className={cx("absolute -right-5 -top-5 h-16 w-16 rounded-full blur-2xl opacity-35", option.glow)} />
+            <span className="relative flex items-center gap-2">
+              <span className={cx("grid rounded-2xl place-items-center font-black shadow-lg", option.iconClass, compact ? "h-10 w-10 text-xl" : "h-12 w-12 text-2xl")}>
+                {option.icon}
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-black tracking-[-.03em] truncate">{option.label}</span>
+                <span className="block text-[10px] font-bold opacity-70 truncate">{option.helper}</span>
+              </span>
+            </span>
+            {active && (
+              <span className="absolute right-2 bottom-2 grid h-5 w-5 place-items-center rounded-full bg-white text-[11px] font-black shadow-sm">
+                ✓
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -7404,12 +7948,11 @@ function CaseForm({ form, onChange, onFiles, onRemoveAttachment, onSubmit, editi
           <Input type="number" inputMode="numeric" min="0" value={form.age} onChange={(e) => onChange("age", e.target.value)} placeholder="anos" />
         </Field>
         <Field label="Sexo">
-          <Select value={form.sex} onChange={(e) => onChange("sex", e.target.value)}>
-            <option value="">Selecionar</option>
-            <option>Feminino</option>
-            <option>Masculino</option>
-            <option>Outro / Não informado</option>
-          </Select>
+          <GenderVisualSelector
+            compact
+            value={form.sex}
+            onChange={(sex) => onChange("sex", sex)}
+          />
         </Field>
         <Field label="Peso kg">
           <Input type="number" inputMode="decimal" min="0" step="0.1" value={form.weight} onChange={(e) => onChange("weight", e.target.value)} placeholder="kg" />
@@ -7956,3 +8499,4 @@ function Toast({ message }) {
   return <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 rounded-2xl bg-slate-950 text-white shadow-2xl px-5 py-3 text-sm font-bold max-w-[90vw] text-center">{message}</div>;
 }
 
+export default App;
