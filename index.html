@@ -3,128 +3,403 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-  <title>MedCases Pro</title>
+  <title>MedCases Pro | Gestão Clínica</title>
   <meta name="theme-color" content="#062015" />
   <style>
-    :root{
-      --bg:#f5faf7;--card:#fff;--ink:#10201a;--muted:#6b7a72;--line:rgba(15,35,27,.10);
-      --green:#0f8f61;--green2:#0b6b49;--dark:#07152f;--soft:#ecfdf5;--red:#dc2626;--amber:#d97706;
-      --shadow:0 18px 48px rgba(15,35,27,.10);--radius:24px;
+    :root {
+      --bg: #f4f7f5;
+      --card: #ffffff;
+      --ink: #0f1a16;
+      --muted: #64746b;
+      --line: rgba(15, 35, 27, 0.08);
+      --green: #10b981;
+      --green-dark: #065f46;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --blue: #3b82f6;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --radius: 20px;
     }
-    *{box-sizing:border-box} html,body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    body{padding-bottom:86px}.app{max-width:480px;margin:0 auto;min-height:100vh}.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-    .topin{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;border-radius:18px;background:linear-gradient(145deg,#062015,#0f8f61);display:grid;place-items:center;color:white;box-shadow:0 12px 30px rgba(15,143,97,.24);font-weight:950}.brand h1{font-size:17px;margin:0;letter-spacing:-.05em}.brand p{font-size:11px;color:var(--muted);margin:1px 0 0;font-weight:700}.pill{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 10px;font-size:11px;font-weight:900;color:var(--green2)}
-    main{padding:16px}.hero{position:relative;overflow:hidden;border-radius:32px;background:linear-gradient(135deg,#07152f,#062015 55%,#0f8f61);color:white;padding:22px;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;right:-70px;top:-80px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.13);filter:blur(2px)}.hero>*{position:relative}.hero small{font-weight:950;text-transform:uppercase;letter-spacing:.18em;color:#bdf8df}.hero h2{margin:8px 0 8px;font-size:36px;line-height:.95;letter-spacing:-.08em}.hero p{margin:0;color:rgba(255,255,255,.78);font-size:14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.stat{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:10px;text-align:center}.stat b{display:block;font-size:20px}.stat span{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#d7ffee;font-weight:900}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 24px rgba(15,35,27,.055)}.card{padding:16px}.action{border:0;text-align:left;min-height:120px;cursor:pointer}.ico{width:44px;height:44px;border-radius:17px;background:#10201a;color:white;display:grid;place-items:center;font-weight:950;margin-bottom:12px}.card h3{margin:0;font-size:16px;letter-spacing:-.04em}.card p{margin:4px 0 0;color:var(--muted);font-size:12px;font-weight:650}.panel{overflow:hidden;margin-top:14px}.panelHead{padding:15px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.72)}.panelHead h2{margin:0;font-size:19px;letter-spacing:-.05em}.panelHead p{margin:2px 0 0;color:var(--muted);font-size:12px;font-weight:700}.panelBody{padding:16px}.btn{height:44px;border:0;border-radius:18px;background:#10201a;color:white;font-weight:950;padding:0 14px;cursor:pointer;box-shadow:0 10px 24px rgba(15,35,27,.12)}.btn.green{background:var(--green)}.btn.red{background:var(--red)}.btn.light{background:#f1fbf6;color:var(--green2);border:1px solid #d9f2e6;box-shadow:none}.btn.full{width:100%}.btn.small{height:34px;border-radius:14px;font-size:11px;padding:0 10px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.field{margin-bottom:12px}.field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.14em;font-weight:950;color:var(--muted);margin:0 0 6px}input,textarea,select{width:100%;border:1px solid #dfe8e2;background:#fff;border-radius:18px;min-height:44px;padding:11px 12px;color:var(--ink);outline:none;font:inherit;font-size:14px}textarea{min-height:92px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(15,143,97,.12)}.search{position:relative}.search input{padding-left:40px}.search:before{content:"⌕";position:absolute;left:15px;top:10px;color:var(--green);font-weight:950}.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}.chip{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:950;color:var(--muted);cursor:pointer}.chip.active{background:#10201a;color:white;border-color:#10201a}.list{display:grid;gap:10px}.item{border:1px solid var(--line);background:#fff;border-radius:20px;padding:13px;cursor:pointer}.item.active{border-color:var(--green);box-shadow:0 0 0 4px rgba(15,143,97,.12)}.item h4{margin:0;font-size:15px;letter-spacing:-.03em}.item p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.35}.tag{display:inline-flex;align-items:center;border-radius:999px;background:#f1fbf6;color:var(--green2);border:1px solid #d9f2e6;padding:5px 8px;font-size:10px;font-weight:950;margin:0 5px 5px 0}.danger{background:#fff1f2!important;border-color:#fecdd3!important;color:#9f1239!important}.amber{background:#fffbeb!important;border-color:#fde68a!important;color:#92400e!important}.blue{background:#eff6ff!important;border-color:#bfdbfe!important;color:#1d4ed8!important}.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini .box{border:1px solid var(--line);background:#f8faf9;border-radius:18px;padding:10px}.mini .box span{display:block;font-size:10px;color:var(--muted);font-weight:950;text-transform:uppercase}.mini .box b{font-size:14px}.tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line)}.tabsIn{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:8px}.tab{border:0;background:transparent;border-radius:16px;padding:8px 2px;color:var(--muted);font-size:9px;font-weight:950;cursor:pointer}.tab b{display:block;font-size:14px;margin-bottom:2px}.tab.active{background:#10201a;color:white}.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 50% -10%,rgba(15,143,97,.22),transparent 34%),linear-gradient(180deg,#fbfffd,#edf7f1)}.loginBox{width:100%;max-width:400px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.9);border-radius:32px;box-shadow:var(--shadow);padding:20px}.empty{text-align:center;color:var(--muted);padding:30px;border:1px dashed var(--line);border-radius:22px;background:#f8faf9}.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:99;background:#10201a;color:white;padding:12px 18px;border-radius:18px;box-shadow:var(--shadow);font-size:13px;font-weight:850;max-width:90%;text-align:center}.hidden{display:none!important}.photo{width:100%;max-height:260px;object-fit:contain;border-radius:18px;background:#10201a}.report{font-family:Arial,sans-serif;color:#0f172a;background:white;padding:30px}.report h1{color:#064e3b}.reportSec{border:1px solid #e2e8f0;border-radius:14px;padding:12px;margin:10px 0}.reportSec h2{font-size:13px;text-transform:uppercase;color:#047857}.voiceOn{animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.55}}
-    @media print{body{background:white;padding:0}.top,.tabs,.noPrint{display:none!important}.app{max-width:none}.panel,.card,.hero{box-shadow:none}}
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { 
+      margin: 0; 
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+      background: var(--bg); 
+      color: var(--ink); 
+      line-height: 1.5;
+      padding-bottom: 90px;
+    }
+
+    .app { max-width: 500px; margin: 0 auto; min-height: 100vh; background: var(--bg); }
+
+    /* Header */
+    .top { 
+      position: sticky; top: 0; z-index: 100; 
+      background: rgba(255, 255, 255, 0.8); 
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid var(--line);
+      padding: 12px 16px;
+    }
+    .top-in { display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { 
+      width: 40px; height: 40px; border-radius: 12px; 
+      background: linear-gradient(135deg, var(--green-dark), var(--green)); 
+      display: grid; place-items: center; color: white; font-weight: 900;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    .brand h1 { font-size: 18px; margin: 0; letter-spacing: -0.02em; }
+    .brand p { font-size: 11px; margin: 0; color: var(--muted); font-weight: 600; }
+
+    /* Hero & Cards */
+    main { padding: 16px; }
+    .hero { 
+      background: linear-gradient(135deg, #062015 0%, #065f46 100%);
+      border-radius: 24px; padding: 24px; color: white; margin-bottom: 20px;
+      position: relative; overflow: hidden;
+    }
+    .hero h2 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.03em; }
+    .hero p { font-size: 14px; opacity: 0.9; margin: 0; }
+    
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+    .stat { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 12px; text-align: center; }
+    .stat b { display: block; font-size: 18px; }
+    .stat span { font-size: 9px; text-transform: uppercase; opacity: 0.8; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card { 
+      background: var(--card); border: 1px solid var(--line); padding: 16px;
+      border-radius: var(--radius); cursor: pointer; transition: transform 0.2s;
+    }
+    .card:active { transform: scale(0.97); }
+    .ico { font-size: 24px; margin-bottom: 8px; }
+    .card h3 { font-size: 15px; margin: 0; }
+    .card p { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+
+    /* Forms & Inputs */
+    .panel { background: var(--card); border-radius: var(--radius); border: 1px solid var(--line); margin-top: 16px; overflow: hidden; }
+    .panel-h { padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .panel-h h2 { font-size: 17px; margin: 0; }
+    .panel-b { padding: 16px; }
+
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    input, textarea, select { 
+      width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; 
+      font-size: 14px; outline: none; transition: border 0.2s;
+    }
+    input:focus, textarea:focus { border-color: var(--green); ring: 2px var(--green); }
+    
+    .btn { 
+      padding: 12px 20px; border-radius: 14px; border: none; font-weight: 700; 
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-primary { background: var(--ink); color: white; width: 100%; }
+    .btn-light { background: #f1f5f9; color: var(--ink); font-size: 13px; }
+    .btn-red { background: #fee2e2; color: var(--red); }
+
+    /* Tabs Navigation */
+    .tabs { 
+      position: fixed; bottom: 0; left: 0; right: 0; 
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+      border-top: 1px solid var(--line); display: flex; justify-content: space-around;
+      padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+      z-index: 100;
+    }
+    .tab { background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .tab.active { color: var(--green); }
+    .tab i { font-size: 20px; font-style: normal; }
+
+    /* List Items */
+    .item { padding: 12px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 8px; cursor: pointer; position: relative; }
+    .item.active { border-color: var(--green); background: #f0fdf4; }
+    .tag { font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: 800; background: #e2e8f0; margin-right: 4px; }
+    .tag.danger { background: #fee2e2; color: var(--red); }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--ink); color: white; padding: 12px 24px; border-radius: 50px; font-size: 13px; z-index: 1000; box-shadow: var(--shadow); }
+
+    /* Helpers */
+    .row { display: flex; gap: 12px; }
+    .row > * { flex: 1; }
+    .hidden { display: none; }
+    .voice-pulse { animation: pulse 1.5s infinite; background: var(--red) !important; color: white !important; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+    @media print { .tabs, .top, .no-print { display: none !important; } body { padding: 0; background: white; } }
   </style>
 </head>
 <body>
+
 <div id="root"></div>
+
 <script>
-const DBKEY='medcases_pro_v4';
-const seedDrugs=[
-{id:'paracetamol',n:'Paracetamol',cat:'Analgésicos',cls:'Analgésico / antipirético',via:'VO / IV',dose:'500–1000 mg a cada 6h. Pediatria: 10–15 mg/kg/dose.',max:'Máx adulto habitual 4 g/dia; menor em hepatopatia/álcool.',renal:'Geralmente seguro no rim; cautela em DRC grave.',prep:'IV: solução pronta ou conforme apresentação; não exceder dose diária.',ea:['Hepatotoxicidade','Náuseas','Rash raro'],int:['Álcool aumenta risco hepático','Varfarina pode elevar INR'],warn:'Checar dose total diária e função hepática.'},
-{id:'dipirona',n:'Dipirona / Metamizol',cat:'Analgésicos',cls:'Analgésico / antipirético',via:'VO / IV / IM',dose:'500–1000 mg por dose em adultos. Pediatria: 10–15 mg/kg/dose.',max:'Seguir dose máxima do protocolo local.',renal:'Cuidado em insuficiência renal/hepática importante.',prep:'IV lenta; pode ser diluída em SF 0,9% conforme protocolo.',ea:['Hipotensão','Alergia/anafilaxia','Agranulocitose rara'],int:['Álcool','Ciclosporina'],warn:'Evitar alergia prévia a pirazolonas.'},
-{id:'ibuprofeno',n:'Ibuprofeno',cat:'Analgésicos',cls:'AINE',via:'VO',dose:'400–600 mg a cada 6–8h se não houver contraindicação.',max:'Máx comum 2400 mg/dia.',renal:'Evitar em DRC, desidratação, IC descompensada ou tríplice golpe renal.',prep:'VO com alimento; evitar em sangramento/úlcera ativa.',ea:['Dispepsia','Sangramento GI','IRA','Retenção hídrica'],int:['IECA/BRA + diurético','Anticoagulantes','Lítio'],warn:'Risco renal e sangramento.'},
-{id:'morfina',n:'Morfina',cat:'Analgésicos',cls:'Opioide forte',via:'VO / IV / SC',dose:'2–10 mg IV titulados conforme dor e resposta clínica.',max:'Sem teto fixo; limitada por sedação/depressão respiratória.',renal:'Metabólitos acumulam na insuficiência renal.',prep:'IV lenta, diluir conforme protocolo; ter naloxona disponível.',ea:['Depressão respiratória','Sedação','Constipação','Hipotensão'],int:['Benzodiazepínicos','Álcool','Outros opioides'],warn:'Monitorar FR, SatO2 e nível de consciência.'},
-{id:'tramadol',n:'Tramadol',cat:'Analgésicos',cls:'Opioide fraco / analgésico central',via:'VO / IV / IM',dose:'50–100 mg a cada 6–8h.',max:'Máx 400 mg/dia; menor em idosos/DRC.',renal:'Ajustar se ClCr <30.',prep:'IV lenta; cautela com sedativos e serotoninérgicos.',ea:['Náuseas','Tontura','Convulsões','Síndrome serotoninérgica'],int:['ISRS/IRSN/IMAO','Benzodiazepínicos'],warn:'Evitar epilepsia mal controlada.'},
-{id:'ceftriaxona',n:'Ceftriaxona',cat:'Antibióticos',cls:'Cefalosporina de 3ª geração',via:'IV / IM',dose:'1–2 g IV/IM a cada 24h; até 4 g/dia em casos selecionados.',max:'Máx habitual 4 g/dia.',renal:'Geralmente sem ajuste renal isolado; cautela hepatorrenal grave.',prep:'Reconstituir conforme bula; IV diluída em SF/SG conforme protocolo.',ea:['Diarreia','Rash','Anafilaxia','Colestase'],int:['Cálcio IV em neonatos','Varfarina'],warn:'Checar alergia beta-lactâmicos e culturas.'},
-{id:'azitromicina',n:'Azitromicina',cat:'Antibióticos',cls:'Macrolídeo',via:'VO / IV',dose:'500 mg 1x/dia por 3–5 dias em muitas indicações.',max:'Máx comum 500 mg/dia.',renal:'Cautela em disfunção renal/hepática grave.',prep:'IV nunca em bolus; infundir conforme protocolo.',ea:['Náuseas','Diarreia','QT prolongado'],int:['Amiodarona/quinolonas','Digoxina','Varfarina'],warn:'Evitar QT longo e hipocalemia.'},
-{id:'ciprofloxacino',n:'Ciprofloxacino',cat:'Antibióticos',cls:'Quinolona',via:'VO / IV',dose:'500–750 mg VO 12/12h ou 400 mg IV 12/12h.',max:'Máx VO comum 1500 mg/dia.',renal:'Ajustar se ClCr reduzido.',prep:'VO longe de leite/ferro/antiácidos; IV em infusão.',ea:['Tendinite/ruptura','QT prolongado','Neuropatia'],int:['Antiácidos/ferro','Tizanidina','Amiodarona'],warn:'Cautela em idosos, aneurisma e uso de corticoide.'},
-{id:'metronidazol',n:'Metronidazol',cat:'Antibióticos',cls:'Nitroimidazólico',via:'VO / IV',dose:'400–500 mg a cada 8–12h.',max:'Até 4 g/dia em situações específicas.',renal:'Cautela em insuficiência renal terminal.',prep:'IV geralmente solução pronta; evitar álcool.',ea:['Gosto metálico','Náuseas','Neuropatia'],int:['Álcool','Varfarina','Lítio'],warn:'Evitar álcool durante e 72h após.'},
-{id:'vancomicina',n:'Vancomicina',cat:'Antibióticos',cls:'Glicopeptídeo',via:'IV',dose:'15–20 mg/kg por dose, ajustar por rim e níveis.',max:'Guiar por peso, rim e monitorização.',renal:'Ajuste obrigatório e risco de nefrotoxicidade.',prep:'Infundir lentamente para evitar reação homem vermelho.',ea:['Nefrotoxicidade','Reação homem vermelho','Ototoxicidade rara'],int:['Aminoglicosídeos','Anfotericina B','Diuréticos de alça'],warn:'Monitorar creatinina e nível sérico quando aplicável.'},
-{id:'furosemida',n:'Furosemida',cat:'Cardiovascular',cls:'Diurético de alça',via:'IV / VO',dose:'20–40 mg IV inicial; ajustar conforme congestão e diurese.',max:'Individualizar com eletrólitos, PA e diurese.',renal:'Pode precisar dose maior na DRC, com monitorização.',prep:'IV lenta; evitar infusão rápida por ototoxicidade.',ea:['Hipocalemia','Hiponatremia','Desidratação','Hipotensão'],int:['Digoxina','AINEs','Aminoglicosídeos'],warn:'Controlar K+, Mg2+, creatinina e PA.'},
-{id:'dobutamina',n:'Dobutamina',cat:'Cardiovascular',cls:'Inotrópico beta-1',via:'IV bomba',dose:'2,5–20 mcg/kg/min em infusão contínua.',max:'Titular por PA, FC, perfusão, lactato e diurese.',renal:'Sem ajuste simples por rim.',prep:'Diluir em SF/SG conforme concentração do serviço; bomba obrigatória.',ea:['Taquicardia','Arritmias','Isquemia','Hipotensão'],int:['Betabloqueadores','Catecolaminas'],warn:'Ambiente monitorizado.'},
-{id:'noradrenalina',n:'Noradrenalina',cat:'Cardiovascular',cls:'Vasopressor alfa-1 predominante',via:'IV bomba',dose:'0,05–1 mcg/kg/min titulada para PAM.',max:'Titular conforme perfusão e protocolo.',renal:'Excesso pode causar isquemia.',prep:'Preferir acesso central; identificar como vasopressor.',ea:['Isquemia periférica','Arritmias','Extravasamento com necrose'],int:['IMAO/tricíclicos','Outros vasopressores'],warn:'Extravasamento exige manejo imediato.'},
-{id:'adrenalina',n:'Adrenalina / Epinefrina',cat:'Cardiovascular',cls:'Vasopressor / inotrópico',via:'IM / IV',dose:'Anafilaxia: 0,3–0,5 mg IM. PCR: 1 mg IV 3–5 min.',max:'Sem teto em PCR; conforme protocolo.',renal:'Sem ajuste usual.',prep:'Conferir concentração 1:1000 IM vs 1:10000 IV/PCR.',ea:['Taquicardia','Arritmias','HAS','Ansiedade'],int:['Betabloqueadores','Tricíclicos'],warn:'Erro de concentração pode ser fatal.'},
-{id:'digoxina',n:'Digoxina',cat:'Cardiovascular',cls:'Glicosídeo cardíaco',via:'VO / IV',dose:'0,125–0,25 mg/dia; individualizar por idade, rim e nível.',max:'Guiar por resposta, digoxinemia e toxicidade.',renal:'Ajuste obrigatório na insuficiência renal.',prep:'IV lenta; checar FC, ECG e eletrólitos.',ea:['Arritmias','Náuseas','Xantopsia','Bloqueio AV'],int:['Amiodarona','Furosemida por hipocalemia','Verapamil'],warn:'Janela terapêutica estreita.'},
-{id:'amiodarona',n:'Amiodarona',cat:'Cardiovascular',cls:'Antiarrítmico classe III',via:'VO / IV',dose:'PCR FV/TVSP: 300 mg IV; manutenção VO comum 100–200 mg/dia.',max:'Conforme ACLS/protocolo.',renal:'Não requer ajuste renal simples.',prep:'IV geralmente em SG 5%, monitorização ECG e PA.',ea:['Fibrose pulmonar','Tireoidopatias','Hepatotoxicidade','QT'],int:['Varfarina','Digoxina','Betabloqueadores'],warn:'Monitorar tireoide, fígado, pulmão e ECG.'},
-{id:'adenosina',n:'Adenosina',cat:'Cardiovascular',cls:'Antiarrítmico para TPSV',via:'IV bólus rápido',dose:'6 mg inicial; se necessário 12 mg.',max:'12 mg por dose em protocolo padrão.',renal:'Sem ajuste.',prep:'Veia calibrosa + flush imediato de SF.',ea:['Rubor','Dispneia','Dor torácica','Pausa transitória'],int:['Cafeína/teofilina antagonizam','Dipiridamol potencializa'],warn:'Monitorização cardíaca obrigatória.'},
-{id:'enoxaparina',n:'Enoxaparina',cat:'Antitrombóticos',cls:'HBPM anticoagulante',via:'SC',dose:'Tratamento comum: 1 mg/kg 12/12h.',max:'Ajustar por peso, rim e sangramento.',renal:'ClCr <30 costuma exigir ajuste ou HNF.',prep:'SC abdominal, não massagear.',ea:['Sangramento','Hematoma','HIT','Anemia'],int:['AAS/clopidogrel','AINEs','Anticoagulantes'],warn:'Checar plaquetas, Hb e creatinina.'},
-{id:'varfarina',n:'Varfarina',cat:'Antitrombóticos',cls:'Antagonista vitamina K',via:'VO',dose:'2,5–10 mg/dia ajustado por INR/RNI.',max:'Guiada por INR; alvo depende da indicação.',renal:'Pode ser usada na DRC com monitorização.',prep:'Horário fixo; controlar dieta/interações.',ea:['Sangramento','Necrose de pele rara','Teratogenicidade'],int:['Antibióticos','AINEs','Vitamina K'],warn:'Não tem efeito anticoagulante pleno imediato.'},
-{id:'clopidogrel',n:'Clopidogrel',cat:'Antitrombóticos',cls:'Antiagregante P2Y12',via:'VO',dose:'75 mg/dia; ataque 300–600 mg conforme contexto.',max:'Conforme SCA/angioplastia.',renal:'Sem ajuste simples; monitorar sangramento.',prep:'VO; avaliar cirurgia próxima.',ea:['Sangramento','Dispepsia','Rash','PTT rara'],int:['Omeprazol','AINEs','Anticoagulantes'],warn:'Risco de sangramento e interação com IBP.'},
-{id:'ondansetrona',n:'Ondansetrona',cat:'Antieméticos',cls:'Antagonista 5-HT3',via:'VO / IV / IM',dose:'4–8 mg a cada 8–12h.',max:'24–32 mg/dia conforme contexto.',renal:'Geralmente seguro no rim.',prep:'IV lenta; cautela QT.',ea:['Cefaleia','Constipação','QT prolongado'],int:['Amiodarona','Quinolonas','Macrolídeos'],warn:'Cuidado com QT longo e hipocalemia.'},
-{id:'metoclopramida',n:'Metoclopramida',cat:'Antieméticos',cls:'Antiemético / procinético',via:'VO / IV / IM',dose:'10 mg a cada 8h por menor tempo possível.',max:'30 mg/dia em muitos protocolos.',renal:'Reduzir dose em IR relevante.',prep:'IV lenta; observar acatisia/distonia.',ea:['Sonolência','Acatisia','Distonia','Discinesia tardia'],int:['Antipsicóticos','Levodopa','Sedativos'],warn:'Evitar em Parkinson e obstrução/perfuração GI.'},
-{id:'omeprazol',n:'Omeprazol',cat:'Gastro',cls:'IBP',via:'VO / IV',dose:'20–40 mg/dia antes da refeição.',max:'Varia conforme indicação.',renal:'Sem ajuste simples.',prep:'VO antes do café; IV conforme frasco.',ea:['Cefaleia','Diarreia','Hipomagnesemia crônica','B12 baixa'],int:['Clopidogrel','Varfarina','Fármacos pH-dependentes'],warn:'Reavaliar uso prolongado.'},
-{id:'metformina',n:'Metformina',cat:'Endócrino',cls:'Biguanida antidiabética',via:'VO',dose:'500 mg 1–2x/dia inicialmente; titular.',max:'2000–2550 mg/dia.',renal:'Contraindicada se ClCr <30; reduzir/avaliar 30–45.',prep:'VO com alimento; suspender em sepse/choque/hipóxia/IRA.',ea:['Diarreia','Náuseas','B12 baixa','Acidose lática rara'],int:['Contraste iodado','Álcool','Nefrotóxicos'],warn:'Suspender em instabilidade clínica.'},
-{id:'insulina_regular',n:'Insulina regular',cat:'Endócrino',cls:'Insulina ação curta',via:'SC / IV',dose:'Dose conforme glicemia/esquema; IV em emergências.',max:'Individualizada.',renal:'Necessidade pode cair na DRC.',prep:'IV em bomba conforme protocolo; monitorar glicemia e K+.',ea:['Hipoglicemia','Hipocalemia','Ganho de peso'],int:['Betabloqueadores mascaram hipoglicemia','Corticoides'],warn:'Monitorar glicemia capilar.'},
-{id:'sulfato_magnesio',n:'Sulfato de magnésio',cat:'Antídotos / Eletrólitos',cls:'Eletrólito / anticonvulsivante',via:'IV / IM',dose:'Torsades: 2 g IV. Eclâmpsia: 4 g ataque + 1–2 g/h.',max:'Eclâmpsia: até 40 g/24h conforme protocolo.',renal:'Risco de toxicidade se ClCr <30.',prep:'Monitorar reflexos, FR e diurese.',ea:['Hipotensão','Perda de reflexos','Depressão respiratória'],int:['Bloqueadores cálcio','BNM'],warn:'Antídoto da toxicidade: gluconato de cálcio.'},
-{id:'midazolam',n:'Midazolam',cat:'Anestesia / Sedação',cls:'Benzodiazepínico',via:'IV / IM / VO',dose:'Sedação: 1–5 mg IV titulados.',max:'Guiar por RASS/Ramsay.',renal:'Metabólitos podem acumular.',prep:'Monitorar via aérea, FR, PA e sedação.',ea:['Depressão respiratória','Hipotensão','Delirium'],int:['Opioides','Álcool','Inibidores CYP3A4'],warn:'Antídoto: flumazenil, com cautela.'},
-{id:'propofol',n:'Propofol',cat:'Anestesia / Sedação',cls:'Anestésico geral / sedativo',via:'IV',dose:'Indução 1,5–2,5 mg/kg; manutenção 4–12 mg/kg/h.',max:'Limitado por estabilidade hemodinâmica.',renal:'Sem ajuste.',prep:'Via aérea e monitorização; frasco tem risco bacteriano.',ea:['Hipotensão','Apneia','Dor à injeção','Síndrome infusão'],int:['Opioides','Depressores SNC'],warn:'Pode causar hipotensão acentuada.'},
-{id:'cetamina',n:'Cetamina',cat:'Anestesia / Sedação',cls:'Anestésico dissociativo',via:'IV / IM',dose:'Analgesia 0,1–0,5 mg/kg; indução 1–2 mg/kg IV.',max:'Conforme necessidade clínica.',renal:'Sem ajuste.',prep:'Monitorização; pode aumentar PA/FC e salivação.',ea:['Sialorreia','Alucinações','Hipertensão','Nistagmo'],int:['Teofilina','Hipotensores'],warn:'Mantém drive respiratório melhor, mas exige monitorização.'},
-{id:'levetiracetam',n:'Levetiracetam',cat:'Neurologia',cls:'Anticonvulsivante',via:'VO / IV',dose:'1000–3000 mg/dia divididos.',max:'3000 mg/dia.',renal:'Ajuste obrigatório por ClCr.',prep:'VO/IV conforme apresentação.',ea:['Irritabilidade','Agressividade','Sonolência','Astenia'],int:['Poucas interações'],warn:'Boa opção em polifarmácia.'},
-{id:'pregabalina',n:'Pregabalina',cat:'Neurologia',cls:'Dor neuropática / anticonvulsivante',via:'VO',dose:'75–300 mg 12/12h; titular conforme resposta.',max:'600 mg/dia.',renal:'Ajuste obrigatório por ClCr.',prep:'VO; evitar retirada abrupta.',ea:['Sonolência','Tontura','Edema','Ganho de peso'],int:['Opioides/benzodiazepínicos aumentam sedação'],warn:'Cuidado em idosos e pós-operatório.'},
-{id:'sertralina',n:'Sertralina',cat:'Psiquiatria',cls:'ISRS',via:'VO',dose:'50–200 mg/dia.',max:'200 mg/dia.',renal:'Sem ajuste.',prep:'VO em horário fixo.',ea:['Diarreia','Disfunção sexual','Sudorese','Hiponatremia'],int:['IMAO','Tramadol','Varfarina'],warn:'Risco serotoninérgico com tramadol/IMAO.'},
-{id:'litio',n:'Carbonato de lítio',cat:'Psiquiatria',cls:'Estabilizador do humor',via:'VO',dose:'600–1200 mg/dia ajustado por litemia.',max:'Guiado por nível sérico.',renal:'Excreção renal; ajuste e monitorização obrigatórios.',prep:'Monitorar litemia, TSH e creatinina.',ea:['Tremor','Poliúria','Hipotireoidismo','Neurotoxicidade'],int:['AINEs','Tiazídicos','IECA/BRA'],warn:'Janela terapêutica estreita.'},
-{id:'espironolactona',n:'Espironolactona',cat:'Cardiovascular',cls:'Antagonista da aldosterona',via:'VO',dose:'25–50 mg/dia na IC.',max:'50 mg/dia IC; maior em ascite conforme protocolo.',renal:'Contraindicada se ClCr <30 ou K+ alto.',prep:'Controlar K+ e creatinina no início.',ea:['Hipercalemia','Ginecomastia','IRA'],int:['IECA/BRA/ARNI','AINEs','Suplementos K+'],warn:'Hipercalemia pode ser fatal.'},
-{id:'sacubitril_valsartana',n:'Sacubitril + Valsartana',cat:'Cardiovascular',cls:'ARNI',via:'VO',dose:'24/26 a 97/103 mg 12/12h.',max:'97/103 mg 12/12h.',renal:'Reduzir dose inicial se ClCr <30.',prep:'Aguardar 36h após IECA.',ea:['Hipotensão','Hipercalemia','Angioedema'],int:['IECA contraindicado simultâneo','AINEs'],warn:'Nunca associar com IECA.'},
-{id:'empagliflozina',n:'Empagliflozina',cat:'Endócrino',cls:'Inibidor SGLT2',via:'VO',dose:'10–25 mg 1x/dia.',max:'25 mg/dia.',renal:'Não iniciar abaixo de limites do protocolo/indicação.',prep:'Suspender antes de grandes cirurgias/doença aguda.',ea:['Infecção genital','Poliúria','Cetoacidose euglicêmica'],int:['Diuréticos','Insulina'],warn:'Benefício em IC/DRC, mas cuidado com desidratação.'}
+// --- BANCO DE DADOS E ESTADO ---
+const DB_NAME = 'MedCases_Pro_Storage';
+const INITIAL_DRUGS = [
+  { id: 'furo1', n: 'Furosemida', cat: 'Cardio', cls: 'Diurético de Alça', dose: '20-40mg IV/VO', warn: 'Checar K+ e PA.', ea: ['Hipocalemia', 'Hipotensão'] },
+  { id: 'norad1', n: 'Noradrenalina', cat: 'UTI', cls: 'Vasopressor', dose: '0.05-1.0 mcg/kg/min', warn: 'Acesso central obrigatório.', ea: ['Arritmia', 'Isquemia periférica'] },
+  { id: 'ceft1', n: 'Ceftriaxona', cat: 'ATB', cls: 'Cefalosporina 3ªG', dose: '1-2g IV q24h', warn: 'Ajuste renal não necessário.', ea: ['Diarreia', 'Rash'] }
 ];
-const seedTx=[
-{id:'choque_cardiogenico',cat:'Emergência / UTI',cond:'Choque cardiogênico',first:'Dobutamina; se hipotenso, noradrenalina + dobutamina',scheme:'Dobutamina titulada por perfusão. Noradrenalina se PAM baixa. Tratar causa base rapidamente.',mon:'PAM, FC, ECG, lactato, diurese, congestão e eco à beira-leito.',warn:'Inotrópicos aumentam arritmia e consumo de O2.',drugs:['dobutamina','noradrenalina']},
-{id:'anafilaxia',cat:'Emergência',cond:'Choque anafilático',first:'Adrenalina IM imediata',scheme:'Adrenalina IM 0,3–0,5 mg adulto; O2, volume, via aérea e repetir se necessário.',mon:'SatO2, PA, broncoespasmo, edema de via aérea e recorrência bifásica.',warn:'Anti-histamínico/corticoide não substituem adrenalina.',drugs:['adrenalina']},
-{id:'sepse',cat:'Infectologia / UTI',cond:'Sepse / choque séptico',first:'Antibiótico precoce + volume + noradrenalina se choque',scheme:'Coletar culturas se não atrasar; antibiótico em até 1h se choque; controle de foco.',mon:'Lactato, PAM, diurese, culturas, SOFA/qSOFA, função renal/hepática.',warn:'Controle de foco é tão importante quanto antibiótico.',drugs:['noradrenalina','ceftriaxona','metronidazol','vancomicina']},
-{id:'tvp_tep',cat:'Hematologia',cond:'TVP / TEP estável',first:'DOAC ou HBPM conforme contexto',scheme:'Paciente estável: DOAC se sem contraindicação. Gravidez/DRC grave/intervenção: HBPM ou HNF.',mon:'Sangramento, Hb, plaquetas, rim, risco de TEP maciço.',warn:'TEP instável com choque muda para HNF + fibrinólise/reperfusão.',drugs:['enoxaparina','varfarina']},
-{id:'icfer',cat:'Cardiovascular',cond:'IC com fração de ejeção reduzida estável',first:'ARNI/BRA/IECA + beta-bloqueador + MRA + iSGLT2',scheme:'Introduzir pilares conforme PA, K+, rim, congestão e estabilidade clínica.',mon:'PA, K+, creatinina, sintomas, congestão e adesão.',warn:'Não iniciar/titular agressivo em choque, IRA, hipercalemia ou hipotensão.',drugs:['sacubitril_valsartana','espironolactona','empagliflozina','furosemida']},
-{id:'tpsv',cat:'Cardiovascular',cond:'Taquicardia paroxística supraventricular regular',first:'Manobras vagais → adenosina',scheme:'Se estável: vagal; adenosina 6 mg bólus rápido + flush, depois 12 mg se necessário.',mon:'ECG contínuo, PA, sintomas, QRS, diagnóstico diferencial.',warn:'Cuidado em asma grave e WPW com FA irregular.',drugs:['adenosina']},
-{id:'asma',cat:'Respiratória',cond:'Crise asmática moderada/grave',first:'Salbutamol inalatório + ipratrópio + corticoide sistêmico',scheme:'Broncodilatador repetido/nebulização; O2; corticoide precoce; MgSO4 se grave.',mon:'SatO2, FR, fala, uso musculatura acessória, PFE/gasometria se grave.',warn:'Silêncio auscultatório e fadiga são sinais de gravidade extrema.',drugs:['sulfato_magnesio']},
-{id:'dor_neuropatica',cat:'Neurologia / Dor',cond:'Dor neuropática',first:'Pregabalina ou gabapentina; duloxetina/amitriptilina conforme perfil',scheme:'Iniciar baixo e titular; ajustar por rim; associar reabilitação e tratar causa.',mon:'Sonolência, edema, quedas, resposta analgésica, humor e sono.',warn:'Cuidado com opioides/benzodiazepínicos e idosos.',drugs:['pregabalina']},
-{id:'diabetes_ic_drc',cat:'Endócrino / Cardio-renal',cond:'DM2 com IC ou DRC',first:'Metformina se possível + iSGLT2 conforme indicação',scheme:'Metformina se ClCr permite; empagliflozina/dapagliflozina para benefício cardio-renal.',mon:'HbA1c, rim, hidratação, infecção genital, cetose em doença aguda.',warn:'Suspender iSGLT2 antes de cirurgia e em doença aguda com baixa ingesta.',drugs:['metformina','empagliflozina']},
-{id:'anticoag_fa',cat:'Cardiovascular / Hemato',cond:'Fibrilação atrial com indicação de anticoagulação',first:'DOAC na maioria; varfarina se válvula mecânica/estenose mitral moderada-grave',scheme:'Calcular risco tromboembólico e hemorrágico; ajustar por rim, idade e peso.',mon:'Sangramento, Hb, rim, adesão e interações.',warn:'Varfarina exige INR e ponte em cenários específicos.',drugs:['varfarina','enoxaparina']}
-];
-const interactions=[
-['furosemida','digoxina','Alto','Hipocalemia aumenta muito risco de intoxicação digitálica.','Monitorar K+, Mg2+, ECG, creatinina e sintomas.'],['ibuprofeno','enoxaparina','Alto','AINE + anticoagulante aumenta sangramento GI/sistêmico.','Evitar; considerar alternativa analgésica.'],['ibuprofeno','varfarina','Alto','AINE + varfarina aumenta sangramento.','Evitar; controlar INR/Hb se inevitável.'],['clopidogrel','omeprazol','Moderado','Omeprazol pode reduzir ativação do clopidogrel.','Considerar pantoprazol conforme protocolo.'],['varfarina','amiodarona','Alto','Amiodarona aumenta efeito da varfarina e INR.','Reduzir/ajustar e controlar INR.'],['digoxina','amiodarona','Alto','Amiodarona aumenta níveis de digoxina.','Reduzir dose e monitorar ECG/níveis.'],['amiodarona','ondansetrona','Alto','Ambos prolongam QT.','Evitar ou monitorar ECG e eletrólitos.'],['tramadol','sertralina','Alto','Aumenta risco de síndrome serotoninérgica e convulsões.','Evitar ou monitorar estreitamente.'],['metformina','ibuprofeno','Moderado','AINE pode precipitar injúria renal e aumentar risco em paciente instável.','Monitorar rim; suspender metformina se IRA/choque.'],['espironolactona','sacubitril_valsartana','Moderado/Alto','Associação pode causar hipercalemia e piora renal.','Monitorar K+ e creatinina.'],['espironolactona','ibuprofeno','Alto','AINE aumenta risco de IRA e hipercalemia.','Evitar.'],['empagliflozina','furosemida','Moderado','Aumenta risco de desidratação/hipotensão.','Monitorar volemia, PA e função renal.']
-];
-let state=load();
-function load(){let s=null;try{s=JSON.parse(localStorage.getItem(DBKEY)||'null')}catch(e){};return s||{user:null,cases:[sampleCase()],drugs:seedDrugs,tx:seedTx,tab:'home',selCase:null,selDrug:'furosemida',toast:null,lang:'pt'}}
-function save(){localStorage.setItem(DBKEY,JSON.stringify(state))}
-function uid(p='id'){return p+'_'+Math.random().toString(36).slice(2,10)}
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function sampleCase(){return{id:'case_demo',createdAt:new Date().toISOString(),owner:'Demo',patientCode:'PX-1042',title:'Insuficiência cardíaca descompensada',age:'68',sex:'Masculino',weight:'78',height:'171',bed:'UTI 03',priority:'Alto',diagnosis:'IC com fração de ejeção reduzida, descompensada por congestão.',history:'Dispneia progressiva, ortopneia, edema de MMII. PA 145/92, FC 108, SatO2 91%.',currentMeds:'Furosemida, espironolactona',treatment:'Oxigênio se necessário, furosemida IV, controle de eletrólitos, função renal e otimização de terapia de IC.',exams:'ECG, RX tórax, BNP, creatinina, Na, K, eco.',evolutions:[{id:'ev1',date:new Date().toISOString().slice(0,10),s:'Melhora parcial da dispneia.',v:'PA 132/84, FC 96, SatO2 94%, diurese presente.',e:'Crepitações bibasais menores, edema ++/4+.',l:'Creatinina 1.1, K 3.7.',c:'Manter diurese e controle de eletrólitos.',r:'Boa resposta inicial.'}],photos:[],labs:[]}}
-function toast(m){state.toast=m;render();setTimeout(()=>{state.toast=null;render()},2400)}
-function setTab(t){state.tab=t;save();render()}function selectedCase(){return state.cases.find(c=>c.id==state.selCase)||state.cases[0]}function selectedDrug(){return state.drugs.find(d=>d.id==state.selDrug)||state.drugs[0]}
-function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function firstNum(s){let m=String(s||'').replace(',','.').match(/[0-9]+(\.[0-9]+)?/);return m?Number(m[0]):0}
-function clcr(p){let cr=Number(String(p.cr||p.creatinine||'').replace(',','.')),age=+p.age,w=+p.weight;if(!cr||!age||!w)return null;let v=((140-age)*w)/(72*cr);if((p.sex||'').startsWith('F'))v*=.85;return Math.round(v*10)/10}
-function calcDose(d,p){let w=+p.weight||0;if(!d)return '—';if(/mcg\/kg\/min/i.test(d.dose)&&w){let a=d.dose.match(/([0-9]+[,.]?[0-9]*)\s*[–-]\s*([0-9]+[,.]?[0-9]*)\s*mcg\/kg\/min/i);if(a)return `${Math.round(w*Number(a[1].replace(',','.'))*10)/10}–${Math.round(w*Number(a[2].replace(',','.'))*10)/10} mcg/min`}
-if(/mg\/kg/i.test(d.dose)&&w){let n=firstNum(d.dose);if(n)return `${Math.round(w*n*10)/10} mg por dose`}
-return d.dose}
-function riskClass(r){return norm(r).includes('alto')?'danger':norm(r).includes('moderado')?'amber':'blue'}
-function checkInteractions(drugId, medsText){let meds=String(medsText||'').split(/[,;\n]/).map(x=>x.trim()).filter(Boolean);let alerts=[];meds.forEach(m=>{let md=state.drugs.find(d=>norm(m).includes(norm(d.n).split(' ')[0])||norm(d.n).includes(norm(m)));if(!md||md.id==drugId)return;interactions.forEach(r=>{if((r[0]==drugId&&r[1]==md.id)||(r[1]==drugId&&r[0]==md.id))alerts.push({med:m,risk:r[2],txt:r[3],act:r[4]})})});return alerts}
-function app(){if(!state.user)return login();return `<div class="app"><header class="top noPrint"><div class="topin"><div class="brand"><div class="logo">✚</div><div><h1>MedCases Pro</h1><p>${esc(state.user.name)} • ${state.user.role}</p></div></div><button class="pill" onclick="logout()">Sair</button></div></header><main>${screen()}</main>${tabs()}${state.toast?`<div class="toast">${esc(state.toast)}</div>`:''}</div>`}
-function login(){return `<div class="login"><div class="loginBox"><div class="brand" style="margin-bottom:18px"><div class="logo">✚</div><div><h1>MedCases Pro</h1><p>História clínica • Fármacos • Fotos • Áudio</p></div></div><div class="field"><label>Nome</label><input id="lgName" placeholder="Dr. Rodrigues" value="Dr. Rodrigues"></div><div class="field"><label>Perfil</label><select id="lgRole"><option>Médico</option><option>Admin</option><option>Estudante</option></select></div><button class="btn green full" onclick="doLogin()">Entrar no app</button><div class="item" style="margin-top:14px"><b>Ativo no HTML:</b><p>Banco local, fármacos, interações, doses, áudio, fotos, OCR de laboratório, evoluções, relatórios e backup.</p></div></div>${state.toast?`<div class="toast">${esc(state.toast)}</div>`:''}</div>`}
-function doLogin(){state.user={name:val('lgName')||'Usuário',role:val('lgRole')||'Médico'};save();render()}function logout(){state.user=null;save();render()}
-function tabs(){let items=[['home','⌂','Início'],['case','+','Caso'],['hist','▤','Hist'],['evo','↻','Evol'],['drugs','Rx','Fárm'],['base','DB','Base']];return `<nav class="tabs noPrint"><div class="tabsIn">${items.map(i=>`<button class="tab ${state.tab==i[0]?'active':''}" onclick="setTab('${i[0]}')"><b>${i[1]}</b>${i[2]}</button>`).join('')}</div></nav>`}
-function screen(){return ({home:homeScreen,case:caseScreen,hist:histScreen,evo:evoScreen,drugs:drugScreen,base:baseScreen}[state.tab]||homeScreen)()}
-function homeScreen(){let c=selectedCase();return `<section class="hero"><small>Clinical Workspace</small><h2>MedCases</h2><p>App completo em HTML puro para GitHub: casos, história clínica, evolução, base farmacológica, áudio, fotos, laboratório e relatórios.</p><div class="stats"><div class="stat"><b>${state.cases.length}</b><span>Casos</span></div><div class="stat"><b>${state.drugs.length}</b><span>Fármacos</span></div><div class="stat"><b>${state.tx.length}</b><span>TTO</span></div><div class="stat"><b>${state.cases.reduce((a,c)=>a+(c.evolutions?.length||0),0)}</b><span>Evol</span></div></div></section><div class="grid2" style="margin-top:14px"><button class="card action" onclick="newCase()"><div class="ico">+</div><h3>Novo caso</h3><p>História clínica completa</p></button><button class="card action" onclick="setTab('drugs')"><div class="ico">Rx</div><h3>Fármacos</h3><p>Dose, segurança e interação</p></button><button class="card action" onclick="setTab('evo')"><div class="ico">↻</div><h3>Evolução</h3><p>Seguimento diário</p></button><button class="card action" onclick="setTab('base')"><div class="ico">DB</div><h3>Base</h3><p>Importar/exportar dados</p></button></div>${c?`<section class="panel"><div class="panelHead"><div><h2>Paciente em foco</h2><p>${esc(c.patientCode||'Sem código')} • ${esc(c.bed||'Sem leito')}</p></div><span class="tag">${esc(c.priority||'Moderado')}</span></div><div class="panelBody"><h3>${esc(c.title)}</h3><p>${esc(c.diagnosis||'')}</p><div class="mini" style="margin-top:12px"><div class="box"><span>Idade</span><b>${esc(c.age||'—')}</b></div><div class="box"><span>Peso</span><b>${esc(c.weight||'—')}</b></div><div class="box"><span>Evol</span><b>${c.evolutions?.length||0}</b></div></div><div class="row" style="margin-top:12px"><button class="btn light" onclick="setTab('evo')">Evoluir</button><button class="btn light" onclick="report('${c.id}')">Relatório</button></div></div></section>`:''}`}
-function caseScreen(){let c=state.editing?state.cases.find(x=>x.id==state.editing):{};return `<section class="panel"><div class="panelHead"><div><h2>${state.editing?'Editar caso':'Novo caso'}</h2><p>História clínica robusta com áudio, fotos e laboratório</p></div><button class="btn small light" onclick="newCase()">Limpar</button></div><div class="panelBody"><form onsubmit="saveCaseForm(event)"><div class="row"><div class="field"><label>Código</label><input id="f_patientCode" value="${esc(c.patientCode||'')}"></div><div class="field"><label>Leito</label><input id="f_bed" value="${esc(c.bed||'')}"></div></div><div class="row"><div class="field"><label>Idade</label><input id="f_age" type="number" value="${esc(c.age||'')}"></div><div class="field"><label>Sexo</label><select id="f_sex"><option ${c.sex=='Masculino'?'selected':''}>Masculino</option><option ${c.sex=='Feminino'?'selected':''}>Feminino</option><option ${c.sex=='Outro'?'selected':''}>Outro</option></select></div></div><div class="row"><div class="field"><label>Peso kg</label><input id="f_weight" type="number" step="0.1" value="${esc(c.weight||'')}"></div><div class="field"><label>Altura cm</label><input id="f_height" type="number" step="0.1" value="${esc(c.height||'')}"></div></div><div class="field"><label>Título</label><input id="f_title" value="${esc(c.title||'')}"></div><div class="field"><label>Prioridade</label><select id="f_priority"><option>Baixo</option><option ${c.priority=='Moderado'?'selected':''}>Moderado</option><option ${c.priority=='Alto'?'selected':''}>Alto</option><option ${c.priority=='Crítico'?'selected':''}>Crítico</option></select></div>${voiceBox('history','História por voz','Fale diagnóstico, HDA, exame físico ou conduta')}<div class="field"><label>Diagnóstico / hipótese</label><textarea id="f_diagnosis">${esc(c.diagnosis||'')}</textarea></div><div class="field"><label>História clínica / HDA / exame físico</label><textarea id="f_history">${esc(c.history||'')}</textarea></div><div class="field"><label>Medicações atuais</label><textarea id="f_currentMeds">${esc(c.currentMeds||'')}</textarea></div><div class="field"><label>Tratamento / conduta</label><textarea id="f_treatment">${esc(c.treatment||'')}</textarea></div><div class="field"><label>Exames</label><textarea id="f_exams">${esc(c.exams||'')}</textarea></div>${photoBox(c)}${labBox(c)}<button class="btn green full">Salvar caso</button></form></div></section>`}
-function voiceBox(target,title,sub){return `<div class="item noPrint"><h4>${title}</h4><p>${sub}</p><div class="row" style="margin-top:10px"><select id="voiceTarget"><option value="f_history">História clínica</option><option value="f_diagnosis">Diagnóstico</option><option value="f_treatment">Tratamento</option><option value="f_exams">Exames</option><option value="ev_s">Evolução - subjetivo</option><option value="ev_v">Evolução - sinais vitais</option><option value="ev_c">Evolução - conduta</option><option value="drugSearch">Buscar fármaco</option></select><button type="button" id="voiceBtn" class="btn light" onclick="toggleVoice()">🎙️ Ditado</button></div><p id="voicePreview" style="font-size:12px;color:var(--muted)">Chrome/Edge: toque, permita o microfone e fale.</p></div>`}
-function photoBox(c){let photos=c?.photos||[];return `<div class="item noPrint"><h4>Fotos e documentos</h4><p>Câmera, galeria, exames ou imagens do paciente.</p><div class="row" style="margin-top:10px"><label class="btn light" style="display:grid;place-items:center"><input type="file" accept="image/*" multiple style="display:none" onchange="addPhotos(event)">Enviar fotos</label><label class="btn light" style="display:grid;place-items:center"><input type="file" accept="image/*" capture="environment" style="display:none" onchange="addPhotos(event)">Abrir câmera</label></div><div id="photoPreview" class="list" style="margin-top:10px">${photos.map(p=>`<div class="item"><img class="photo" src="${p.data}" alt="${esc(p.name)}"><p>${esc(p.name)}</p></div>`).join('')}</div></div>`}
-function labBox(c){return `<div class="item noPrint"><h4>Laboratório por imagem / OCR</h4><p>Envia print/foto do laboratório, extrai texto e reconhece Hb, creatinina, Na, K, plaquetas etc.</p><div class="row" style="margin-top:10px"><label class="btn light" style="display:grid;place-items:center"><input type="file" accept="image/*" style="display:none" onchange="ocrImage(event)">Imagem do lab</label><button type="button" class="btn light" onclick="extractLabs()">Extrair do texto</button></div><div class="field" style="margin-top:10px"><label>Texto OCR / colar laboratório</label><textarea id="labText">${esc(c?.labText||'')}</textarea></div><div id="labResults">${renderLabs(c?.labs||[])}</div></div>`}
-function renderLabs(labs){return labs?.length?`<div class="mini">${labs.map(l=>`<div class="box"><span>${esc(l.k)}</span><b>${esc(l.v)}</b></div>`).join('')}</div>`:'<p style="font-size:12px;color:var(--muted)">Nenhum laboratório extraído.</p>'}
-let tempPhotos=[];function addPhotos(e){let files=[...e.target.files];Promise.all(files.map(f=>new Promise(res=>{let r=new FileReader();r.onload=()=>res({id:uid('ph'),name:f.name,data:r.result});r.readAsDataURL(f)}))).then(arr=>{tempPhotos=tempPhotos.concat(arr);document.getElementById('photoPreview').innerHTML=tempPhotos.map(p=>`<div class="item"><img class="photo" src="${p.data}"><p>${esc(p.name)}</p></div>`).join('');toast('Foto adicionada.')})}
-function saveCaseForm(e){e.preventDefault();let id=state.editing||uid('case');let old=state.cases.find(c=>c.id==id)||{};let c={...old,id,createdAt:old.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString(),owner:state.user.name,patientCode:val('f_patientCode'),bed:val('f_bed'),age:val('f_age'),sex:val('f_sex'),weight:val('f_weight'),height:val('f_height'),title:val('f_title'),priority:val('f_priority'),diagnosis:val('f_diagnosis'),history:val('f_history'),currentMeds:val('f_currentMeds'),treatment:val('f_treatment'),exams:val('f_exams'),labText:val('labText'),labs:window.currentLabs||old.labs||[],photos:[...(old.photos||[]),...tempPhotos],evolutions:old.evolutions||[]};state.cases=state.cases.filter(x=>x.id!=id);state.cases.unshift(c);state.selCase=id;state.editing=null;tempPhotos=[];save();toast('Caso salvo.');setTab('hist')}
-function newCase(){state.editing=null;tempPhotos=[];setTab('case')}function editCase(id){state.editing=id;setTab('case')}function delCase(id){if(confirm('Excluir este caso?')){state.cases=state.cases.filter(c=>c.id!=id);save();render()}}
-function histScreen(){let q=norm(val('searchHist')||state.histQ||'');let list=state.cases.filter(c=>!q||norm([c.title,c.patientCode,c.diagnosis,c.history,c.owner,c.bed].join(' ')).includes(q));return `<section class="panel"><div class="panelHead"><div><h2>Histórico</h2><p>Casos salvos localmente</p></div><span class="tag">${list.length}</span></div><div class="panelBody"><div class="search"><input id="searchHist" value="${esc(state.histQ||'')}" oninput="state.histQ=this.value;render()" placeholder="Buscar paciente, diagnóstico, data..."></div><div class="list" style="margin-top:12px">${list.length?list.map(c=>`<article class="item ${state.selCase==c.id?'active':''}" onclick="state.selCase='${c.id}';save();render()"><span class="tag ${c.priority=='Alto'||c.priority=='Crítico'?'danger':''}">${esc(c.priority||'Moderado')}</span><h4>${esc(c.title||'Caso sem título')}</h4><p>${esc(c.patientCode||'Sem código')} • ${esc(c.bed||'Sem leito')} • ${new Date(c.createdAt).toLocaleString('pt-BR')}</p><p><b>Dx:</b> ${esc(c.diagnosis||'—')}</p><div class="mini" style="margin-top:10px"><div class="box"><span>Idade</span><b>${esc(c.age||'—')}</b></div><div class="box"><span>Evol</span><b>${c.evolutions?.length||0}</b></div><div class="box"><span>Fotos</span><b>${c.photos?.length||0}</b></div></div><div class="row noPrint" style="margin-top:10px"><button class="btn small light" onclick="event.stopPropagation();editCase('${c.id}')">Editar</button><button class="btn small light" onclick="event.stopPropagation();report('${c.id}')">PDF/Print</button><button class="btn small red" onclick="event.stopPropagation();delCase('${c.id}')">Excluir</button></div></article>`).join(''):'<div class="empty">Nenhum caso encontrado.</div>'}</div></div></section>`}
-function evoScreen(){let c=selectedCase();return `<section class="panel"><div class="panelHead"><div><h2>Evolução diária</h2><p>Seguimento da internação</p></div><span class="tag">${c?.evolutions?.length||0}</span></div><div class="panelBody">${!c?'<div class="empty">Selecione um paciente.</div>':`<div class="item"><h4>${esc(c.title)}</h4><p>${esc(c.patientCode||'Sem código')} • ${esc(c.bed||'Sem leito')}</p></div>${voiceBox('evo','Ditado de evolução','Fale e mande para subjetivo, sinais vitais ou conduta.')}<form onsubmit="saveEvolution(event)"><div class="row"><div class="field"><label>Data</label><input id="ev_date" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Dia</label><input id="ev_day" placeholder="D2, D3..."></div></div><div class="field"><label>Subjetivo</label><textarea id="ev_s"></textarea></div><div class="field"><label>Sinais vitais / balanço</label><textarea id="ev_v"></textarea></div><div class="field"><label>Exame físico</label><textarea id="ev_e"></textarea></div><div class="field"><label>Laboratório / exames</label><textarea id="ev_l"></textarea></div><div class="field"><label>Conduta</label><textarea id="ev_c"></textarea></div><div class="field"><label>Resposta / plano</label><textarea id="ev_r"></textarea></div><button class="btn green full">Salvar evolução</button></form><div class="list" style="margin-top:14px">${(c.evolutions||[]).map(ev=>`<div class="item"><h4>${esc(ev.day||'Evolução')} • ${esc(ev.date)}</h4>${['s','v','e','l','c','r'].map(k=>ev[k]?`<p><b>${{s:'Subjetivo',v:'Sinais vitais',e:'Exame físico',l:'Labs',c:'Conduta',r:'Resposta'}[k]}:</b> ${esc(ev[k])}</p>`:'').join('')}</div>`).join('')}</div>`}</div></section>`}
-function saveEvolution(e){e.preventDefault();let c=selectedCase();if(!c)return;let ev={id:uid('ev'),date:val('ev_date'),day:val('ev_day'),s:val('ev_s'),v:val('ev_v'),e:val('ev_e'),l:val('ev_l'),c:val('ev_c'),r:val('ev_r')};c.evolutions=[ev,...(c.evolutions||[])];c.updatedAt=new Date().toISOString();save();toast('Evolução salva.');render()}
-function drugScreen(){let d=selectedDrug();let q=state.drugQ||'';let cat=state.drugCat||'Todos';let cats=['Todos',...new Set(state.drugs.map(d=>d.cat))];let filtered=state.drugs.filter(x=>(cat=='Todos'||x.cat==cat)&&(!q||norm([x.n,x.cls,x.cat,x.via,x.warn].join(' ')).includes(norm(q))));let p={age:val('calc_age')||state.calc?.age||'',sex:val('calc_sex')||state.calc?.sex||'Masculino',weight:val('calc_weight')||state.calc?.weight||'',height:val('calc_height')||state.calc?.height||'',cr:val('calc_cr')||state.calc?.cr||''};let dose=calcDose(d,p),renal=clcr(p);let meds=val('calc_meds')||state.calc?.meds||'';let alerts=checkInteractions(d?.id,meds);return `<section class="panel"><div class="panelHead"><div><h2>Fármacos</h2><p>Base, dose, preparo, interações</p></div><span class="tag">${state.drugs.length}</span></div><div class="panelBody"><div class="search"><input id="drugSearch" value="${esc(q)}" oninput="state.drugQ=this.value;render()" placeholder="Buscar: furosemida, adenosina, morfina..."></div><div class="chips" style="margin-top:10px">${cats.map(c=>`<button class="chip ${cat==c?'active':''}" onclick="state.drugCat='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div><div class="list" style="max-height:310px;overflow:auto;margin-top:8px">${filtered.map(x=>`<div class="item ${d.id==x.id?'active':''}" onclick="state.selDrug='${x.id}';save();render()"><h4>${esc(x.n)}</h4><p>${esc(x.cls)} • ${esc(x.via)}</p><span class="tag">${esc(x.cat)}</span></div>`).join('')}</div></div></section><section class="panel"><div class="panelHead"><div><h2>Calculadora</h2><p>Dose por paciente + função renal</p></div><span class="tag">${esc(d?.via||'')}</span></div><div class="panelBody"><div class="row"><div class="field"><label>Idade</label><input id="calc_age" type="number" value="${esc(p.age)}" oninput="saveCalc()"></div><div class="field"><label>Sexo</label><select id="calc_sex" onchange="saveCalc()"><option ${p.sex=='Masculino'?'selected':''}>Masculino</option><option ${p.sex=='Feminino'?'selected':''}>Feminino</option></select></div></div><div class="row"><div class="field"><label>Peso kg</label><input id="calc_weight" type="number" step="0.1" value="${esc(p.weight)}" oninput="saveCalc()"></div><div class="field"><label>Creatinina</label><input id="calc_cr" type="number" step="0.1" value="${esc(p.cr)}" oninput="saveCalc()"></div></div><div class="field"><label>Medicações atuais</label><textarea id="calc_meds" oninput="saveCalc()">${esc(meds)}</textarea></div><div class="hero" style="border-radius:24px;padding:18px"><small>Dose sugerida</small><h2 style="font-size:25px">${esc(dose||'—')}</h2><p>${esc(d?.n||'')} • ClCr: ${renal?renal+' mL/min':'não calculado'}</p></div>${alerts.length?`<div class="list" style="margin-top:12px">${alerts.map(a=>`<div class="item ${riskClass(a.risk)}"><h4>Risco ${esc(a.risk)} • ${esc(a.med)}</h4><p><b>Interação:</b> ${esc(a.txt)}</p><p><b>Conduta:</b> ${esc(a.act)}</p></div>`).join('')}</div>`:`<div class="item" style="margin-top:12px"><h4>Nenhuma interação importante encontrada na base local.</h4><p>Isso não exclui interações reais. Conferir protocolo institucional/bula.</p></div>`}<div class="item" style="margin-top:12px"><h4>Preparo / administração</h4><p>${esc(d?.prep||'Conferir apresentação e protocolo.')}</p></div><div class="item amber"><h4>Alerta obrigatório</h4><p>${esc(d?.warn||'Validar antes de prescrever.')}</p></div><div class="item"><h4>Efeitos adversos</h4><p>${(d?.ea||[]).map(esc).join(' • ')}</p></div><div class="item"><h4>Interações relevantes</h4><p>${(d?.int||[]).map(esc).join(' • ')}</p></div></div></section>${txScreenMini()}`}
-function saveCalc(){state.calc={age:val('calc_age'),sex:val('calc_sex'),weight:val('calc_weight'),cr:val('calc_cr'),meds:val('calc_meds')};save()}
-function txScreenMini(){let q=state.txQ||'';let list=state.tx.filter(t=>!q||norm([t.cond,t.cat,t.first,t.scheme].join(' ')).includes(norm(q)));return `<section class="panel"><div class="panelHead"><div><h2>Tratamentos rápidos</h2><p>Protocolos por síndrome</p></div><span class="tag">${list.length}</span></div><div class="panelBody"><div class="search"><input value="${esc(q)}" oninput="state.txQ=this.value;render()" placeholder="Buscar: choque, sepse, IC, asma..."></div><div class="list" style="margin-top:12px">${list.map(t=>`<div class="item"><span class="tag">${esc(t.cat)}</span><h4>${esc(t.cond)}</h4><p><b>1ª linha:</b> ${esc(t.first)}</p><p><b>Esquema:</b> ${esc(t.scheme)}</p><p><b>Monitorar:</b> ${esc(t.mon)}</p><p class="danger" style="border-radius:14px;padding:8px"><b>Alerta:</b> ${esc(t.warn)}</p><div>${(t.drugs||[]).map(id=>{let d=state.drugs.find(x=>x.id==id);return d?`<button class="btn small light" onclick="state.selDrug='${d.id}';state.tab='drugs';save();render()">${esc(d.n)}</button>`:''}).join(' ')}</div></div>`).join('')}</div></div></section>`}
-function baseScreen(){return `<section class="panel"><div class="panelHead"><div><h2>Base de dados</h2><p>Adicionar fármacos, tratamentos e backup</p></div><span class="tag">DB</span></div><div class="panelBody"><div class="grid2"><button class="btn light" onclick="exportBackup()">Exportar backup</button><label class="btn light" style="display:grid;place-items:center"><input type="file" accept=".json" style="display:none" onchange="importBackup(event)">Importar backup</label></div><div class="item" style="margin-top:12px"><h4>Novo fármaco por texto</h4><p>Campos: Nome, Classe, Categoria, Via, Dose, Renal, Alerta, Preparo, EA, Interações.</p><textarea id="newDrugText" placeholder="Nome: Pregabalina\nClasse: Dor neuropática\nDose: 75 mg 12/12h..."></textarea><button class="btn green full" style="margin-top:8px" onclick="addDrugText()">Adicionar fármaco</button></div><div class="item"><h4>Novo tratamento por texto</h4><p>Campos: Síndrome, Categoria, Primeira linha, Esquema, Monitorização, Alerta, Fármacos.</p><textarea id="newTxText" placeholder="Síndrome: Crise asmática\nPrimeira linha: Salbutamol + ipratrópio + corticoide..."></textarea><button class="btn green full" style="margin-top:8px" onclick="addTxText()">Adicionar tratamento</button></div><div class="mini"><div class="box"><span>Fármacos</span><b>${state.drugs.length}</b></div><div class="box"><span>Tratamentos</span><b>${state.tx.length}</b></div><div class="box"><span>Casos</span><b>${state.cases.length}</b></div></div><button class="btn red full" style="margin-top:12px" onclick="if(confirm('Resetar base local?')){localStorage.removeItem(DBKEY);location.reload()}">Resetar app</button></div></section>`}
-function val(id){let el=document.getElementById(id);return el?el.value:''}
-function parseField(txt,names){let lines=String(txt).split('\n');for(let n of names){let l=lines.find(x=>norm(x).startsWith(norm(n)+':'));if(l)return l.split(':').slice(1).join(':').trim()}return''}
-function addDrugText(){let t=val('newDrugText');if(!t.trim())return toast('Cole o texto do fármaco.');let name=parseField(t,['Nome','Nombre','Fármaco','Farmaco'])||t.split('\n')[0]||'Fármaco novo';let d={id:'custom_'+uid(),n:name,cat:parseField(t,['Categoria'])||'Personalizado',cls:parseField(t,['Classe','Clase'])||'Classe personalizada',via:parseField(t,['Via','Vía'])||'—',dose:parseField(t,['Dose','Dosis'])||'Individualizar.',max:parseField(t,['Máximo','Maximo'])||'Revisar.',renal:parseField(t,['Renal','Rim'])||'Revisar função renal.',prep:parseField(t,['Preparo','Preparación'])||'Conferir apresentação.',ea:(parseField(t,['EA','Efeitos adversos','Efectos adversos'])||'Revisar EA').split(',').map(x=>x.trim()),int:(parseField(t,['Interações','Interacciones'])||'Revisar interações').split(',').map(x=>x.trim()),warn:parseField(t,['Alerta','Atenção','Warning'])||'Validar protocolo.'};state.drugs.unshift(d);state.selDrug=d.id;save();toast('Fármaco adicionado.');render()}
-function addTxText(){let t=val('newTxText');if(!t.trim())return toast('Cole o texto do tratamento.');let cond=parseField(t,['Síndrome','Sindrome','Tratamento','Tratamiento'])||t.split('\n')[0]||'Tratamento novo';let drugNames=(parseField(t,['Fármacos','Farmacos','Medicamentos'])||'').split(',').map(x=>x.trim()).filter(Boolean);let ids=drugNames.map(n=>{let d=state.drugs.find(x=>norm(x.n).includes(norm(n))||norm(n).includes(norm(x.n)));return d?.id}).filter(Boolean);state.tx.unshift({id:'tx_'+uid(),cat:parseField(t,['Categoria'])||'Personalizado',cond,first:parseField(t,['Primeira linha','Primera línea','1ª linha'])||'Revisar protocolo.',scheme:parseField(t,['Esquema','Plano'])||t,mon:parseField(t,['Monitorização','Monitorización'])||'Monitorar resposta e segurança.',warn:parseField(t,['Alerta','Warning'])||'Validar institucionalmente.',drugs:ids});save();toast('Tratamento adicionado.');render()}
-async function ocrImage(e){let f=e.target.files[0];if(!f)return;toast('Carregando OCR...');try{await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');let r=await Tesseract.recognize(f,'por+spa+eng');document.getElementById('labText').value=r.data.text||'';extractLabs();toast('OCR concluído.')}catch(err){toast('OCR falhou. Cole o texto manualmente.')}}
-function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`))return res();let s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.body.appendChild(s)})}
-function extractLabs(){let t=val('labText');let defs=[['Hb',['hemoglobina','hb']],['Hto',['hematocrito','hematócrito','hto']],['Leuco',['leucocitos','leucócitos','wbc']],['Plaquetas',['plaquetas','plt']],['Creatinina',['creatinina','creat']],['Ureia',['ureia','urea','bun']],['Na+',['sodio','sódio','na ']],['K+',['potassio','potássio','k ']],['Glicose',['glicose','glucose','glicemia']],['PCR',['pcr','crp']],['INR',['inr','rni']],['Lactato',['lactato']]];let labs=[];defs.forEach(d=>{let line=t.split('\n').find(l=>d[1].some(a=>norm(l).includes(norm(a))));if(line){let m=line.replace(',','.').match(/[0-9]+(\.[0-9]+)?/);if(m)labs.push({k:d[0],v:m[0]})}});window.currentLabs=labs;document.getElementById('labResults').innerHTML=renderLabs(labs);toast(labs.length?`Extraídos ${labs.length} parâmetros.`:'Nenhum parâmetro reconhecido.')}
-let recog=null;function toggleVoice(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Reconhecimento de voz não disponível neste navegador.');let btn=document.getElementById('voiceBtn');if(recog){recog.stop();recog=null;btn?.classList.remove('voiceOn');return}recog=new SR();recog.lang='pt-BR';recog.interimResults=true;recog.continuous=false;let final='';recog.onresult=e=>{let txt='';for(let i=e.resultIndex;i<e.results.length;i++){let tr=e.results[i][0].transcript;if(e.results[i].isFinal)final+=tr+' ';else txt+=tr}let p=document.getElementById('voicePreview');if(p)p.textContent=(final+txt).trim()};recog.onend=()=>{let target=val('voiceTarget');let el=document.getElementById(target);if(el&&final.trim())el.value=(el.value?el.value+'\n':'')+final.trim();recog=null;btn?.classList.remove('voiceOn')};recog.start();btn?.classList.add('voiceOn')}
-function report(id){let c=state.cases.find(x=>x.id==id);if(!c)return;let w=window.open('','_blank');w.document.write(`<html><head><title>Relatório MedCases</title><style>body{margin:0;background:#e5e7eb;font-family:Arial}.report{max-width:800px;margin:24px auto;background:white;padding:32px}.head{background:#064e3b;color:white;padding:28px;border-radius:20px}h1{margin:0}.sec{border:1px solid #e2e8f0;border-radius:16px;padding:14px;margin:12px 0}.sec h2{font-size:13px;text-transform:uppercase;color:#047857}.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.box{background:#f8fafc;border-radius:12px;padding:8px}@media print{body{background:white}.report{margin:0;max-width:none}}</style></head><body><div class="report"><div class="head"><h1>MedCases — História Clínica</h1><p>${new Date().toLocaleString('pt-BR')} • ${esc(c.owner||'')}</p></div><div class="sec"><h2>Identificação</h2><p><b>Código:</b> ${esc(c.patientCode)} • <b>Idade:</b> ${esc(c.age)} • <b>Sexo:</b> ${esc(c.sex)} • <b>Peso:</b> ${esc(c.weight)} kg • <b>Leito:</b> ${esc(c.bed)}</p></div><div class="sec"><h2>Caso</h2><h3>${esc(c.title)}</h3><p><b>Diagnóstico:</b> ${esc(c.diagnosis)}</p><p>${esc(c.history).replace(/\n/g,'<br>')}</p></div><div class="sec"><h2>Tratamento</h2><p>${esc(c.treatment).replace(/\n/g,'<br>')}</p></div><div class="sec"><h2>Exames</h2><p>${esc(c.exams).replace(/\n/g,'<br>')}</p>${renderLabs(c.labs||[])}</div><div class="sec"><h2>Evoluções</h2>${(c.evolutions||[]).map(ev=>`<div class="sec"><b>${esc(ev.day||'Evolução')} • ${esc(ev.date)}</b><p>${esc([ev.s,ev.v,ev.e,ev.l,ev.c,ev.r].filter(Boolean).join('\n')).replace(/\n/g,'<br>')}</p></div>`).join('')||'Sem evoluções.'}</div></div><script>window.onload=()=>setTimeout(()=>window.print(),300)<\/script></body></html>`);w.document.close()}
-function exportBackup(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='medcases-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Backup exportado.')}
-function importBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let data=JSON.parse(r.result);if(!data.drugs||!data.cases)throw 0;state=data;save();toast('Backup importado.');render()}catch(err){toast('Arquivo inválido.')}};r.readAsText(f)}
-function render(){document.getElementById('root').innerHTML=app()}render();
+
+let state = {
+  user: JSON.parse(localStorage.getItem('mc_user')) || null,
+  tab: 'home',
+  cases: JSON.parse(localStorage.getItem('mc_cases')) || [],
+  drugs: JSON.parse(localStorage.getItem('mc_drugs')) || INITIAL_DRUGS,
+  selCaseId: null,
+  editingCase: null,
+  toast: null,
+  isRecording: false
+};
+
+// --- FUNÇÕES DE UTILIDADE ---
+const save = () => {
+  localStorage.setItem('mc_cases', JSON.stringify(state.cases));
+  localStorage.setItem('mc_drugs', JSON.stringify(state.drugs));
+  localStorage.setItem('mc_user', JSON.stringify(state.user));
+};
+
+const showToast = (msg) => {
+  state.toast = msg; render();
+  setTimeout(() => { state.toast = null; render(); }, 2500);
+};
+
+const navigate = (tab) => { state.tab = tab; render(); window.scrollTo(0,0); };
+
+const getSelCase = () => state.cases.find(c => c.id === state.selCaseId) || state.cases[0];
+
+// --- LÓGICA DE NEGÓCIO ---
+const handleLogin = (e) => {
+  e.preventDefault();
+  state.user = { name: document.getElementById('u_name').value, role: 'Médico' };
+  save(); render();
+};
+
+const saveCase = (e) => {
+  e.preventDefault();
+  const formData = {
+    id: state.editingCase || 'c_' + Date.now(),
+    title: document.getElementById('c_title').value,
+    patient: document.getElementById('c_patient').value,
+    age: document.getElementById('c_age').value,
+    dx: document.getElementById('c_dx').value,
+    history: document.getElementById('c_hx').value,
+    plan: document.getElementById('c_plan').value,
+    updated: new Date().toISOString()
+  };
+
+  if (state.editingCase) {
+    state.cases = state.cases.map(c => c.id === state.editingCase ? formData : c);
+  } else {
+    state.cases.unshift(formData);
+  }
+  
+  state.editingCase = null;
+  state.selCaseId = formData.id;
+  save(); showToast('Caso clínico salvo!'); navigate('home');
+};
+
+// --- RECONHECIMENTO DE VOZ ---
+const startVoice = (targetId) => {
+  const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Speech) return showToast('Voz não suportada neste navegador.');
+
+  const recognition = new Speech();
+  recognition.lang = 'pt-BR';
+  state.isRecording = true; render();
+
+  recognition.onresult = (event) => {
+    const text = event.results[0][0].transcript;
+    document.getElementById(targetId).value += (document.getElementById(targetId).value ? ' ' : '') + text;
+    state.isRecording = false; render();
+  };
+  
+  recognition.onerror = () => { state.isRecording = false; render(); };
+  recognition.start();
+};
+
+// --- INTERFACE (UI) ---
+const LoginView = () => `
+  <div style="padding:40px 20px; text-align:center;">
+    <div class="logo" style="margin: 0 auto 20px; width:60px; height:60px; font-size:24px;">✚</div>
+    <h2>MedCases Pro</h2>
+    <p style="color:var(--muted)">Sua central de condutas e casos</p>
+    <form onsubmit="handleLogin(event)" style="margin-top:30px; text-align:left;">
+      <div class="field">
+        <label>Nome do Profissional</label>
+        <input id="u_name" required placeholder="Ex: Dr. Silva">
+      </div>
+      <button class="btn btn-primary">Entrar no App</button>
+    </form>
+  </div>
+`;
+
+const HomeView = () => {
+  const cases = state.cases;
+  return `
+    <section class="hero">
+      <h2>Olá, ${state.user.name}</h2>
+      <p>Você tem ${cases.length} casos ativos hoje.</p>
+      <div class="stats">
+        <div class="stat"><b>${cases.length}</b><span>Casos</span></div>
+        <div class="stat"><b>${state.drugs.length}</b><span>Fármacos</span></div>
+        <div class="stat"><b>0</b><span>Plantões</span></div>
+        <div class="stat"><b>100%</b><span>Offline</span></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="card" onclick="state.editingCase=null; navigate('edit')">
+        <div class="ico">📝</div>
+        <h3>Novo Caso</h3>
+        <p>Admitir paciente</p>
+      </div>
+      <div class="card" onclick="navigate('drugs')">
+        <div class="ico">💊</div>
+        <h3>Drogas</h3>
+        <p>Doses e Alertas</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-h"><h2>Pacientes Recentes</h2></div>
+      <div class="panel-b">
+        ${cases.length ? cases.map(c => `
+          <div class="item" onclick="state.selCaseId='${c.id}'; navigate('details')">
+            <b>${c.patient}</b>
+            <p style="font-size:12px">${c.title} • ${c.age} anos</p>
+          </div>
+        `).join('') : '<p style="text-align:center; color:var(--muted)">Nenhum caso salvo.</p>'}
+      </div>
+    </div>
+  `;
+};
+
+const DetailsView = () => {
+  const c = getSelCase();
+  if (!c) return navigate('home');
+  return `
+    <div class="panel">
+      <div class="panel-h">
+        <h2>${c.patient}</h2>
+        <button class="btn btn-light" onclick="state.editingCase='${c.id}'; navigate('edit')">Editar</button>
+      </div>
+      <div class="panel-b">
+        <p><b>Diagnóstico:</b> ${c.dx}</p>
+        <hr style="border:0; border-top:1px solid var(--line); margin:16px 0;">
+        <p><b>História:</b><br>${c.history}</p>
+        <div style="background:#f8fafc; padding:12px; border-radius:12px; margin-top:12px;">
+          <b style="color:var(--green-dark)">Conduta / Plano:</b><br>${c.plan}
+        </div>
+        <button class="btn btn-red" style="margin-top:20px; width:100%" onclick="deleteCase('${c.id}')">Excluir Caso</button>
+      </div>
+    </div>
+  `;
+};
+
+const EditView = () => {
+  const c = state.editingCase ? state.cases.find(x => x.id === state.editingCase) : {};
+  return `
+    <div class="panel">
+      <div class="panel-h"><h2>${state.editingCase ? 'Editar Caso' : 'Nova Admissão'}</h2></div>
+      <div class="panel-b">
+        <form onsubmit="saveCase(event)">
+          <div class="field"><label>Iniciais / Nome do Paciente</label><input id="c_patient" value="${c.patient || ''}" required></div>
+          <div class="row">
+            <div class="field"><label>Idade</label><input id="c_age" type="number" value="${c.age || ''}"></div>
+            <div class="field"><label>Hipótese/Título</label><input id="c_title" value="${c.title || ''}" placeholder="Ex: IC Descompensada"></div>
+          </div>
+          <div class="field"><label>Diagnóstico Principal</label><input id="c_dx" value="${c.dx || ''}"></div>
+          
+          <div class="field">
+            <label style="display:flex; justify-content:space-between">
+              História Clínica 
+              <span style="color:var(--blue); cursor:pointer" onclick="startVoice('c_hx')">🎙️ Ditar</span>
+            </label>
+            <textarea id="c_hx" rows="4">${c.history || ''}</textarea>
+          </div>
+
+          <div class="field">
+            <label style="display:flex; justify-content:space-between">
+              Plano Terapêutico
+              <span style="color:var(--blue); cursor:pointer" onclick="startVoice('c_plan')">🎙️ Ditar</span>
+            </label>
+            <textarea id="c_plan" rows="4">${c.plan || ''}</textarea>
+          </div>
+
+          <button class="btn btn-primary ${state.isRecording ? 'voice-pulse' : ''}">
+            ${state.isRecording ? 'Ouvindo...' : 'Salvar Registro Clínico'}
+          </button>
+        </form>
+      </div>
+    </div>
+  `;
+};
+
+const DrugView = () => `
+  <div class="panel">
+    <div class="panel-h"><h2>Guia de Fármacos</h2></div>
+    <div class="panel-b">
+      <input type="text" placeholder="Buscar droga..." style="margin-bottom:12px" oninput="filterDrugs(this.value)">
+      <div id="drugList">
+        ${state.drugs.map(d => `
+          <div class="item">
+            <span class="tag">${d.cat}</span> <b>${d.n}</b>
+            <p style="font-size:12px; margin:4px 0;">Dose: ${d.dose}</p>
+            <p class="tag danger" style="display:inline-block; margin:0">⚠️ ${d.warn}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </div>
+`;
+
+// --- CORE RENDERING ---
+const deleteCase = (id) => {
+  if(confirm('Deseja excluir este caso permanentemente?')) {
+    state.cases = state.cases.filter(c => c.id !== id);
+    save(); navigate('home');
+  }
+};
+
+const render = () => {
+  const root = document.getElementById('root');
+  if (!state.user) { root.innerHTML = LoginView(); return; }
+
+  let content = '';
+  switch(state.tab) {
+    case 'home': content = HomeView(); break;
+    case 'edit': content = EditView(); break;
+    case 'details': content = DetailsView(); break;
+    case 'drugs': content = DrugView(); break;
+  }
+
+  root.innerHTML = `
+    <div class="app">
+      <header class="top">
+        <div class="top-in">
+          <div class="brand">
+            <div class="logo">✚</div>
+            <div><h1>MedCases Pro</h1><p>${state.user.name}</p></div>
+          </div>
+          <button class="btn btn-light" onclick="localStorage.clear(); location.reload();">Sair</button>
+        </div>
+      </header>
+      <main>${content}</main>
+      <nav class="tabs">
+        <button class="tab ${state.tab==='home'?'active':''}" onclick="navigate('home')"><i>🏠</i>Início</button>
+        <button class="tab ${state.tab==='edit'?'active':''}" onclick="state.editingCase=null; navigate('edit')"><i>➕</i>Novo</button>
+        <button class="tab ${state.tab==='drugs'?'active':''}" onclick="navigate('drugs')"><i>💊</i>Drogas</button>
+      </nav>
+      ${state.toast ? `<div class="toast">${state.toast}</div>` : ''}
+    </div>
+  `;
+};
+
+// Inicialização
+render();
 </script>
 </body>
 </html>
